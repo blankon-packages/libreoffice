@@ -279,7 +279,6 @@ Description: office productivity suite -- spreadsheet
 Package: libreofficeVER-impress
 Architecture: %OOO_ARCHS%
 Depends: libreofficeVER-core (= ${binary:Version}),
- libreofficeVER-draw (= ${binary:Version}),
  ${shlibs:Depends},
  ${misc:Depends}
 Description: office productivity suite -- presentation
