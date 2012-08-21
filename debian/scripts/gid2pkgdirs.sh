@@ -66,6 +66,7 @@ mv ./usr/share/mimelnk/application/* \
 #done
 for i in ./usr/share/applications/*.desktop; do \
 	if [ "`basename $i`" = "libreoffice-startcenter.desktop" ]; then p=libreoffice-common; \
+	elif [ "`basename $i`" = "libreoffice-xsltfilter.desktop" ]; then p=libreoffice-common; \
 	elif [ "`basename $i`" = "libreoffice-binfilter.desktop" ]; then p=libreoffice-filter-binfilter; else \
 	p=`basename $i .desktop`; fi
 	mkdir -p pkg/$p/usr/share/applications
@@ -135,7 +136,9 @@ for l in `echo $OOO_LANGS_LIST`; do
         create_package_directory gid_Module_Langpack_Basis_`echo $l | sed -e s/-/_/g`   pkg/libreoffice-l10n-$l
         create_package_directory gid_Module_Langpack_Brand_`echo $l | sed -e s/-/_/g`   pkg/libreoffice-l10n-$l
         create_package_directory gid_Module_Langpack_Resource_`echo $l | sed -e s/-/_/g`        pkg/libreoffice-l10n-$l
-        create_package_directory gid_Module_Helppack_Help_`echo $l | sed -e s/-/_/g`    pkg/libreoffice-help-$l
+	if [ -f gid_Module_Helppack_Help_`echo $l | sed -e s/-/_/g` ]; then
+        	create_package_directory gid_Module_Helppack_Help_`echo $l | sed -e s/-/_/g`    pkg/libreoffice-help-$l
+	fi
         if [ -f gid_Module_Optional_Binfilter ]; then
                 if [ "$l" = "en-US" ]; then
                         create_package_directory gid_Module_Langpack_Binfilter_en_US    pkg/libreoffice-filter-binfilter

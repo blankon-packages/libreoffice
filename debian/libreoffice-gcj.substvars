@@ -1,4 +1,0 @@
-misc:Depends=libgcj-common (>> 1:4.1.1-13)
-shlibs:Depends=libc6 (>= 2.2.5), libgcc1 (>= 1:4.1.1), libgcj-bc (>= 4.6.3-1~), zlib1g (>= 1:1.1.4)
-java:Depends=
-java:Recommends=

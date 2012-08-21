@@ -1,14 +1,64 @@
-libreoffice (1:3.5.4-7blankon2) rote; urgency=low
+libreoffice (1:3.6.1~rc1-2blankon1) rote; urgency=low
 
-  * Drop depends libreofficedraw from libreoffice impress
+  * Rebranding debian/rules.
+  * Drop libreoffice-draw - deppends impres
 
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Wed, 08 Aug 2012 10:00:18 +0700
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Tue, 21 Aug 2012 07:59:11 +0700
 
-libreoffice (1:3.5.4-7blankon1) rote; urgency=low
+libreoffice (1:3.6.1~rc1-2) experimental; urgency=low
 
-  * rebranding debian/rules 
+  * debian/rules:
+    - revert "build-depend against libpng-dev instead of libpng12-dev"
+      as it breaks on the buildds which install the libpng from experimental
+      (fails GTK3 pkg-config test) (reopens: #662411)
+    - fix build and install targets to prevent build-arch be called under
+      fakeroot, thanks rleigh for the hints
 
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sat, 04 Aug 2012 08:18:05 +0700
+ -- Rene Engelhard <rene@debian.org>  Sat, 18 Aug 2012 11:09:34 +0200
+
+libreoffice (1:3.6.1~rc1-1) experimental; urgency=low
+
+  [ Rene Engelhard ]
+  * new upstream release candidate
+    - fixes splashscreen location in multi-monitor setups
+      (closes: #657444, #431473)
+    - caches fontconfig font substitutions (closes: #631308)
+    - fixes dot handling in KDE File Picker (closes: #645946)
+
+  * debian/patches/build-dont-run-checks.diff: as name says
+
+  * debian/rules:
+    - new conditionals for: doxygen, libcdr, liblcms2
+    - remove liblucene2-java stuff; now clucene is used
+    - build-depend on libxml2-utils, xmllint now needed
+    - build-depend on liboost-date-time-date, we now link to boost...
+    - build-depend against libpng-dev instead of libpng12-dev
+      (closes: #662411)
+    - remove squeeze-backports stuff, add wheezy-backports
+    - install upstreams README(_en-US) (closes: #676340)
+    - clean up some warnings:
+      + readd /usr/lib/`dpkg-architecture -qDEB_HOST_MULTIARCH`/libfakeroot
+        to LD_LIBRARY_PATH for dh_shlibdeps
+      + don't run jh_depends -i/-a, use -p for each package, otherwise it
+        gets confused by help.jar/s*.jar which is just zips, no "real" jar
+    - switch to default-jdk, b-d on default-jdk (>= 1:1.7-48) on ia64 and
+      check for "OpenJDK" in tests yes/no clause for JDK=default
+    - add ENABLE_HELP conditional now that we have --without-help; also
+      add the new --disable-extensions and --disable-database-connectivity to
+      their respective places
+    - split build into build-{arch,indep}
+    - use generic python3.pc instead of pythonX.Y(mu).pc
+  * debian/uno-libs3.symbols: update 
+  * debian/libreoffice-common.links.in:
+    - s/libreofficeoasis/libreoffice-oasis/, thanks Jakub Wilk
+      (closes: #683784) 
+  * debian/shell-lib-extensions.sh, debian/rules,
+    debian/libreoffice-common.lintian.overrides.in: unopkg sync not
+    necessary anymore; remove. javasettingsunopkginstall.xml also gone
+  * debian/*.p*.in, debian/*.triggers.in: remove obsolete triggers and
+    sync_extensions calls (closes: #677146)
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 15 Aug 2012 13:52:20 +0200
 
 libreoffice (1:3.5.4-7) unstable; urgency=high
 
