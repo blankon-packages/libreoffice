@@ -67,8 +67,7 @@ mv ./usr/share/mimelnk/application/* \
 for i in ./usr/share/applications/*.desktop; do \
 	if [ "`basename $i`" = "libreoffice-startcenter.desktop" ]; then p=libreoffice-common; \
 	elif [ "`basename $i`" = "libreoffice-xsltfilter.desktop" ]; then p=libreoffice-common; \
-	elif [ "`basename $i`" = "libreoffice-binfilter.desktop" ]; then p=libreoffice-filter-binfilter; else \
-	p=`basename $i .desktop`; fi
+	else p=`basename $i .desktop`; fi
 	mkdir -p pkg/$p/usr/share/applications
 	mv $i \
 		pkg/$p/usr/share/applications
@@ -85,7 +84,6 @@ create_package_directory gid_Module_Root_Files_Images           pkg/libreoffice-
 create_package_directory gid_Module_Oo_Linguistic               pkg/libreoffice-common
 create_package_directory gid_Module_Optional_Xsltfiltersamples  pkg/libreoffice-common
 create_package_directory gid_Module_Optional_Javafilter         pkg/libreoffice-common
-create_package_directory gid_Module_Optional_Binfilter          pkg/libreoffice-filter-binfilter
 create_package_directory gid_Module_Optional_Grfflt             pkg/libreoffice-draw
 create_package_directory gid_Module_Prg_Calc_Bin                pkg/libreoffice-calc
 create_package_directory gid_Module_Prg_Math_Bin                pkg/libreoffice-math
@@ -99,7 +97,8 @@ create_package_directory gid_Module_Brand_Prg_Draw              pkg/libreoffice-
 create_package_directory gid_Module_Brand_Prg_Wrt               pkg/libreoffice-writer
 create_package_directory gid_Module_Brand_Prg_Impress           pkg/libreoffice-impress
 create_package_directory gid_Module_Brand_Prg_Base              pkg/libreoffice-base
-create_package_directory gid_Module_Optional_Pyuno              pkg/python-uno
+create_package_directory gid_Module_Optional_Pyuno              pkg/python3-uno
+create_package_directory gid_Module_Optional_Pyuno_LibreLogo	pkg/libreoffice-librelogo
 create_package_directory gid_Module_Optional_Extensions_Script_Provider_For_Python		pkg/libreoffice-script-provider-python
 create_package_directory gid_Module_Optional_Gnome              pkg/libreoffice-gnome
 create_package_directory gid_Module_Optional_Kde                pkg/libreoffice-kde
@@ -116,7 +115,7 @@ create_package_directory gid_Module_Optional_Extensions_Script_Provider_For_Java
 create_package_directory gid_Module_Optional_Extensions_MEDIAWIKI	pkg/libreoffice-wiki-publisher
 create_package_directory gid_Module_Optional_Extensions_MINIMIZER	pkg/libreoffice-presentation-minimizer
 create_package_directory gid_Module_Optional_Extensions_MySQLConnector  pkg/libreoffice-mysql-connector
-create_package_directory gid_Module_Optional_Extensions_PDFIMPORT	pkg/libreoffice-pdfimport
+create_package_directory gid_Module_Pdfimport     pkg/libreoffice-pdfimport
 create_package_directory gid_Module_Optional_Extensions_PRESENTER_SCREEN	pkg/libreoffice-presenter-console
 create_package_directory gid_Module_Optional_Extensions_REPORTDESIGN	pkg/libreoffice-report-builder
 create_package_directory gid_Module_Optional_PostgresqlSdbc     pkg/libreoffice-sdbc-postgresql
@@ -139,13 +138,6 @@ for l in `echo $OOO_LANGS_LIST`; do
 	if [ -f gid_Module_Helppack_Help_`echo $l | sed -e s/-/_/g` ]; then
         	create_package_directory gid_Module_Helppack_Help_`echo $l | sed -e s/-/_/g`    pkg/libreoffice-help-$l
 	fi
-        if [ -f gid_Module_Optional_Binfilter ]; then
-                if [ "$l" = "en-US" ]; then
-                        create_package_directory gid_Module_Langpack_Binfilter_en_US    pkg/libreoffice-filter-binfilter
-                else
-                        create_package_directory gid_Module_Langpack_Binfilter_`echo $l | sed -e s/-/_/g`    pkg/libreoffice-l10n-$l
-                fi
-        fi
         # some help files are in _Langpack_{Writer,Impress,...}_<lang>
         # move them from -l10n to -help
         if [ "$l" = "en-US" ]; then d=en; else d=$l; fi
@@ -160,7 +152,7 @@ mkdir -p $OODESTDIR/pkg/libreoffice-core/$OOINSTBASE/program; \
 fi &&
 ( cd pkg/libreoffice-common/$OOINSTBASE/program
   find -maxdepth 1 \
-     -regex '\./\(.*\.so.*\|.*\.bin\|pagein\|nsplugin\|kdefilepicker\|msfontextract\|.*\.rdb\|javaldx\|oosplash\|uri-encode\)' \
+     -regex '\./\(.*\.so.*\|.*\.bin\|pagein\|nsplugin\|kdefilepicker\|msfontextract\|.*\.rdb\|javaldx\|oosplash\|uri-encode\|xpdfimport\|ui-previewer\)' \
      -exec mv {} $OODESTDIR/pkg/libreoffice-core/$OOINSTBASE/program \;
 );
 

@@ -1,3 +1,71 @@
+libreoffice (1:4.0.1~rc1-2blankon1) suroboyo; urgency=low
+
+  * New Upstream Release
+  * Drop arch only amd64,i386
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sun, 03 Mar 2013 07:47:51 +0700
+
+libreoffice (1:4.0.1~rc1-2) experimental; urgency=low
+
+  * debian/rules:
+    - add correct build-dep on cpp-4.7... 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 24 Feb 2013 09:04:59 +0100
+
+libreoffice (1:4.0.1~rc1-1) experimental; urgency=low
+
+  * new upstream release candidate
+    - removes "Impress Remote" menu option unless in experimental mode.
+      (closes: #700728)
+
+  * debian/patches/debian-hardened-buildflags.diff: only set CPPFLAGS here now
+
+  * debian/rules:
+    - use /usr/share/dpkg/buildflags.mk for C(XX)FLAGS, LDFLAGS now that LO
+      honours those from the env in configure. Remove manual passing to make. 
+    - conditionalize pyuno build/install more so that we can build only
+      python-uno on wheezy-backports. Bit obscure, but...
+    - explicitly use cpp-4.7 as cpp 4.8 would fail
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 19 Feb 2013 18:46:05 +0100
+
+libreoffice (1:4.0.0-1) experimental; urgency=low
+
+  * new upstream release
+    - contains new driver for mozab (mork). Automatically enabled thus
+      this closes: #321099
+    - now has a basic(!) gnumeric import in experimental mode
+      (closes: #595708)
+    - supports IFERROR (closes: #662798)
+
+  * debian/control.in:
+    - make -impress suggest bluez (for impress remote control)
+    - make libreoffice depend on / -common recommend python(3)-uno for the
+      new python-based wizards 
+  * debian/rules:
+    - add new conditionals for new dependencies: liblangtag, liborcus,
+      libmspub, (u)cpp; remove them for gone saxon, librsvg, db
+    - enable sdrmeote on all archs; b-d on libbluetooth-dev on where we
+      enable bluetooth (!kfreebsd-*)
+    - use gstreamer1.0
+    - use --disable-dependency-tracking instead of gb_FULLDEPS= and
+      --enable-hardlink-deliver instead of gb_Deliver_HARDLINK=T
+    - python3 is default now; reverse logic (use python3 per default and
+      and build python2 in a extra step)
+    - add option to build with --enable-mergelibs, not yet enabled.
+    - remove stlport hacks for i386 - not used/needed anymore upstream
+  * debian/uno-libs3.symbols: update
+  * debian/control*.in, debian/rules, debian/scripts/gid2pkgdirs.sh: binfilter
+    is gone. yay.
+  * debian/*.mime:
+    - don't use obsolete -no-oosplash anymore, thanks Matthijs Kooijman
+      for the patch (closes: #698845)
+  * debian/copyright: update 
+  * debian/control.mozilla.in: OOo -> "old OOo and OpenDocument"
+    (closes: #699708)
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 07 Feb 2013 00:53:51 +0100
+
 libreoffice (1:3.6.1~rc1-2blankon1) suroboyo; urgency=low
 
   * Rebranding debian/rules.
