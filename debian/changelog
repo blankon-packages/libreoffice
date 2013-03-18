@@ -1,3 +1,32 @@
+libreoffice (1:4.0.2~rc1-1blankon1) suroboyo; urgency=low
+
+  * New Upstream Release 
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Mon, 18 Mar 2013 21:58:14 +0700
+
+libreoffice (1:4.0.2~rc1-1) experimental; urgency=low
+
+  * new upstream release candidate 
+
+  * merge from Ubuntu:
+    - add transitional for -presenter-console
+    - silent some lintian noise for unversioned breaks:
+      + promote Breaks to Conflicts against -binfilter as it will never return
+      + remove Breaks against -style-industrial which is long gone
+      + promote Breaks to Conflicts from langpacks against en-US
+    - remove all traces of -so52
+  * add patches from Benjamin Drung:
+    - Apply fonts package renames from ttf-foo to fonts-foo.
+    - Update machine-readable copyright Format to 1.0
+    - Standards-Version to 3.9.4 (no changes needed).
+  * debian/control.help.in:
+    - remove obsolete ${java-common-depends} Recommends
+  * debian/control*.in, debian/rules:
+    - stop building extra -emailmerge as stuff in -common (wizards) now
+      need pyuno anyway.
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 13 Mar 2013 02:07:52 +0100
+
 libreoffice (1:4.0.1~rc1-2blankon1) suroboyo; urgency=low
 
   * New Upstream Release
