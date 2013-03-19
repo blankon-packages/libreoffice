@@ -1,7 +1,8 @@
 Source: libreoffice
 Section: editors
 Priority: optional
-Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
+Maintainer: BlankOn Developers <blankon-dev@googlegroups.com>
+XSBC-Original-Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
 Uploaders: Rene Engelhard <rene@debian.org>
 Build-Depends: autoconf,
                automake,
