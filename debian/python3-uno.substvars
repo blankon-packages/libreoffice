@@ -1,0 +1,5 @@
+python3:Depends=python3 (>= 3.3~)
+shlibs:Depends=libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libpython3.3 (>= 3.3.0~b1), libstdc++6 (>= 4.1.1), uno-libs3 (>= 4.0.0~beta), ure
+java:Depends=
+java:Recommends=
+misc:Depends=
