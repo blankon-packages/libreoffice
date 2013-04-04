@@ -1,3 +1,28 @@
+libreoffice (1:4.0.2~rc2-2blankon1) suroboyo; urgency=low
+
+  * New Upstream release 
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Thu, 04 Apr 2013 09:15:56 +0700
+
+libreoffice (1:4.0.2~rc2-2) experimental; urgency=low
+
+  * debian/patches/boost-1.53.diff: backport buildfixes for boost 1.53
+    from master
+
+  * debian/rules:
+    - build-depend on libboost-dev 1.53 when building with gcc 4.8,
+      see 701310/695826 (closes: #701310)
+    - always build -dbg package if we build -subsequentcheckbase, as the
+      test depends on -dbg
+    - build against "new" libhsqldb1.8.0-java
+    - we need to build-depend on python3 even when building python3.3-uno
+      as it contains dh_python3...
+  * debian/control.in:
+    - add Breaks: on libreoffice-writer2latex/libreoffice-writer2xhtml
+      (<< 1.0.2-9) due to LO 4.0 API change
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 02 Apr 2013 00:13:23 +0200
+
 libreoffice (1:4.0.2~rc2-1blankon1) suroboyo; urgency=low
 
   * New Upstream Release 
