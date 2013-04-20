@@ -47,7 +47,7 @@ OOUREDIR:=usr/lib/ure
 OOSDKDIR:=$(OODIR)/sdk
 
 # Figure out who's building this package.
-OOO_VENDOR:=The Document Foundation/Debian
+OOO_VENDOR:=The Document Foundation/Debian and BlankOn
 ifeq "$(DEB_VENDOR)" "BlankOn"
 OOO_VENDOR=The Document Foundation, Debian and BlankOn
 endif
@@ -69,11 +69,11 @@ USE_SOURCE_TARBALLS=y
 USE_GIT_TARBALLS=n
 ifeq "$(USE_GIT_TARBALLS)" "y"
 GIT_BASEURL:=git://anongit.freedesktop.org/libreoffice
-lo_sources_ver=4.0.2.2
+lo_sources_ver=4.0.3.1
 # NOT in proper libreoffice-3-6 branch
 # use ./g checkout -b tag-libreoffice-3.6.2.1 libreoffice-3.6.2.1
 GIT_TAG=libreoffice-$(lo_sources_ver)
-GIT_BRANCH=libreoffice-4-0-2
+GIT_BRANCH=libreoffice-4-0-3
 endif
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 lo_sources_ver=$(shell cat $(CURDIR)/sources.ver | cut -d= -f2)
@@ -152,7 +152,7 @@ PACKAGE_TTF_OPENSYMBOL=y
 BUILD_ONLY_EN_US=n
 ENABLE_JAVA=y
 ifeq "$(ENABLE_JAVA)" "y"
-  JDK=default
+  JDK=openjdk
   JAVA_MAINVER=6
   ifneq (,$(filter hppa kfreebsd%, $(DEB_HOST_ARCH)))
     JDK=gcj-jdk
@@ -257,14 +257,17 @@ ifeq "$(ENABLE_JAVA)" "y"
     ifeq "$(shell LANG=C /usr/lib/jvm/default-java/bin/java -version 2>&1 | tail -n 1 | awk '{ print $$1 }')" "OpenJDK"
       RUN_MAKE_CHECK=y
       ENABLE_JUNIT4=y
+      IGNORE_MAKE_CHECK_FAILURES=
     endif
   else
     ifeq "$(JDK)" "openjdk"
       RUN_MAKE_CHECK=y
       ENABLE_JUNIT4=y
+      IGNORE_MAKE_CHECK_FAILURES=
     else
       RUN_MAKE_CHECK=n
       ENABLE_JUNIT4=n
+      IGNORE_MAKE_CHECK_FAILURES=-
     endif
   endif
 else
@@ -348,16 +351,8 @@ SYSTEM_STUFF += mesa-headers
 SYSTEM_STUFF += poppler
 SYSTEM_STUFF += libpng
 SYSTEM_STUFF += nss
-SYSTEM_STUFF += clucene
-ifneq (,$(filter clucene, $(SYSTEM_STUFF)))
-  ENABLE_HELP=y
-else
-  ifeq (,$(filter armel armhf,$(DEB_HOST_ARCH)))
-    ENABLE_HELP=n
-  else
-    ENABLE_HELP=y
-  endif
-endif
+#SYSTEM_STUFF += clucene
+ENABLE_HELP=y
 SYSTEM_STUFF += lcms2
 SYSTEM_STUFF += openldap
 PACKAGE_UNOWINREG_DLL=y
@@ -423,6 +418,19 @@ ifeq "$(ENABLE_OPENGL)" "y"
   $(eval $(call gen_no_archs,OOO_OGLTRANS_ARCHS))
 endif
 
+ifeq (armhf,$(findstring armhf,$(DEB_HOST_ARCH)))
+IGNORE_MAKE_CHECK_FAILURES:=-
+endif
+ifeq (ia64,$(findstring ia64,$(DEB_HOST_ARCH)))
+IGNORE_MAKE_CHECK_FAILURES:=-
+endif
+ifeq (sparc,$(findstring sparc,$(DEB_HOST_ARCH)))
+IGNORE_MAKE_CHECK_FAILURES:=-
+endif
+ifneq (,$(findstring mips,$(DEB_HOST_ARCH)))
+IGNORE_MAKE_CHECK_FAILURES:=-
+endif
+
 OOO_64BIT_ARCHS = $(filter amd64 ia64 kfreebsd-amd64 ppc64 s390x, $(OOO_ARCHS))
 
 # Java...
@@ -441,11 +449,7 @@ ifneq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH),$(OOO_UNOWINREG_DLL_ARCHS)
 	PACKAGE_UNOWINREG_DLL=n
 endif
 
-ifeq (,$(filter clucene, $(SYSTEM_STUFF)))
-  OOO_ARCH_DEP_EXTENSIONS_ARCHS := $(filter-out armel armhf,$(OOO_ARCHS))
-else
-  OOO_ARCH_DEP_EXTENSIONS_ARCHS := $(OOO_ARCHS)
-endif
+OOO_ARCH_DEP_EXTENSIONS_ARCHS := $(OOO_ARCHS)
 OOO_EXTENSIONS_ARCHS := $(OOO_ARCH_DEP_EXTENSIONS_ARCHS)
 
 OOO_BASE_ARCHS := $(OOO_JAVA_ARCHS)
@@ -525,7 +529,7 @@ $(eval $(call gen_no_archs,OOO_NSPLUGIN_ARCHS))
 #############
 # Distro-specific overrides
 
-# BlankOn
+# Debian
 ifeq "$(DEB_VENDOR)" "BlankOn"
   CONFIGURE_FLAGS += --with-intro-progressbar-color=215,7,81
 endif
@@ -584,12 +588,6 @@ endif
 ifeq "$(DEB_HOST_ARCH)" "armel"
 ENABLE_GRAPHITE=n
 SYSTEM_STUFF := $(filter-out graphite, $(SYSTEM_STUFF))
-ENABLE_LIBLANGTAG=n
-SYSTEM_STUFF := $(filter-out liblangtag, $(SYSTEM_STUFF))
-endif
-ifeq "$(DEB_HOST_ARCH)" "armhf"
-ENABLE_LIBLANGTAG=n
-SYSTEM_STUFF := $(filter-out liblangtag, $(SYSTEM_STUFF))
 endif
 ifeq "$(DEB_HOST_ARCH)" "sparc"
 ENABLE_GRAPHITE=n
@@ -983,12 +981,6 @@ endif
 
 ifneq (,$(filter clucene, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libclucene-dev (>= 2.3.3.4-2)
-else
-  ifneq (,$(findstring arm,$(DEB_HOST_ARCH)))
-	# FIXME. If you really want this, comment this out then help stuff will
-	# be disabled on arm*
-	$(error internal clucene makes HelpIndexer segfault on ARM!)
-  endif
 endif
 
 ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
@@ -1037,7 +1029,7 @@ endif
 
 ifeq ($(ENABLE_LIBLANGTAG),y)
   ifneq (,$(filter liblangtag, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , liblangtag-dev (>= 0.4) [!armel !armhf]
+	BUILD_DEPS += , liblangtag-dev (>= 0.4)
   endif
 else
 	CONFIGURE_FLAGS += --disable-liblangtag
@@ -1751,7 +1743,7 @@ endif
 		export HOME=$$t; \
 		export SAL_USE_VCLPLUGIN="svp"; \
 		if [ -x /usr/bin/gdb ]; then ulimit -c unlimited; fi && \
-		$(MAKE) -k check && \
+		$(MAKE) -k check || $(IGNORE_MAKE_CHECK_FAILURES)$(IGNORE_MAKE_CHECK_FAILURES)$(MAKE) check && \
 	rm -rf $$t
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))

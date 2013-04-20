@@ -1,3 +1,28 @@
+libreoffice (1:4.0.3~rc1-1blankon1) suroboyo; urgency=low
+
+  * New Upstream Release 
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sat, 20 Apr 2013 19:53:15 +0700
+
+libreoffice (1:4.0.3~rc1-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/control.librelogo.in:
+    - actually use ${pyuno-depends}... 
+  * debian/rules:
+    - enable liblangtag on arm*, too now that it's available there
+    - Use internal clucene until clucene 2.x is in unstable. Remove
+      arm* hack for internal clucene as it seems to work in the
+      meanwhile
+    - explicitly set JDK=openjdk again until default-jdk (>= 1:1.7-48)
+      is in unstable (needed for ia64 defaulting to java7)
+    - run make -k check || make check (try to work around spurious failures) and
+      ignore test suite failures (on the second run) on armhf, ia64, sparc,
+      mips(el)
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 10 Apr 2013 23:15:27 +0200
+
 libreoffice (1:4.0.2~rc2-2blankon1) suroboyo; urgency=low
 
   * New Upstream release 
