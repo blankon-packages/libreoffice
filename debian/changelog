@@ -1,8 +1,8 @@
 libreoffice (1:4.0.3~rc1-2blankon2) suroboyo; urgency=low
 
-  * debian/scripts/get_libebook_dep.sh Changes libebook.*\.so to libebook.*.so
+  * debian/scripts/get_libebook_dep.sh Changes libebook.*\.so to libebook*.so
 
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sun, 21 Apr 2013 08:51:45 +0700
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Mon, 22 Apr 2013 05:34:49 +0700
 
 libreoffice (1:4.0.3~rc1-2blankon1) suroboyo; urgency=low
 
