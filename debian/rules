@@ -356,7 +356,7 @@ ENABLE_HELP=y
 SYSTEM_STUFF += lcms2
 SYSTEM_STUFF += openldap
 PACKAGE_UNOWINREG_DLL=y
-ifeq "$(DEB_VENDOR)" "Debian"
+ifeq "$(DEB_VENDOR)" "BlankOn"
 BUILD_UNOWINREG_DLL=y
 endif
 FAKEROOT_LIBDIR=/usr/lib/$(DEB_HOST_MULTIARCH)/libfakeroot
