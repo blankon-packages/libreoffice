@@ -1,8 +1,32 @@
-libreoffice (1:4.0.3~rc1-3blankon1) suroboyo; urgency=low
+libreoffice (1:4.0.3-1blankon1) suroboyo; urgency=low
 
-  * New Upsteam updates 
+  * Impor to BlankOn
+  * debian/rules switch to BlankOn
 
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Thu, 25 Apr 2013 17:17:27 +0700
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Fri, 10 May 2013 04:56:03 +0700
+
+libreoffice (1:4.0.3-1) unstable; urgency=low
+
+  * LibreOffice 4.0.3 final (identical to rc3)
+
+  * upload to unstable
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 05 May 2013 17:55:51 +0200
+
+libreoffice (1:4.0.3~rc3-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/control.in:
+    - break zotero-libreoffice-integration (<= 3.0.11.1-26-g08fb709-1), see
+      #705998)
+    - add (commented out for now - as long we are python3.3-uno anyways) the
+      missing Provides: ${python3:Provides}
+  * debian/uno-libs3.symbols: update and cleanup - use (symver) instead
+    of *@...
+  * debian/copyright: mention gbuild (and its makefiles) are MPL-2.0
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 02 May 2013 21:06:26 +0200
 
 libreoffice (1:4.0.3~rc1-3) experimental; urgency=low
 
@@ -12,43 +36,12 @@ libreoffice (1:4.0.3~rc1-3) experimental; urgency=low
 
  -- Rene Engelhard <rene@debian.org>  Sun, 21 Apr 2013 17:14:49 +0200
 
-libreoffice (1:4.0.3~rc1-2blankon1) suroboyo; urgency=low
-
-  * New Upstream Updates 
-
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Thu, 25 Apr 2013 17:05:16 +0700
-
 libreoffice (1:4.0.3~rc1-2) experimental; urgency=low
 
   * brown paper bag release
   * fix make -k check || make check rule
 
  -- Rene Engelhard <rene@debian.org>  Fri, 19 Apr 2013 17:47:59 +0200
-
-libreoffice (1:4.0.3~rc1-2blankon2) suroboyo; urgency=low
-
-  * debian/scripts/get_libebook_dep.sh Changes libebook.*\.so to libebook*.so
-
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Mon, 22 Apr 2013 05:34:49 +0700
-
-libreoffice (1:4.0.3~rc1-2blankon1) suroboyo; urgency=low
-
-  * New Upstream Updates 
-
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sun, 21 Apr 2013 08:36:24 +0700
-
-libreoffice (1:4.0.3~rc1-2) experimental; urgency=low
-
-  * brown paper bag release
-  * fix make -k check || make check rule
-
- -- Rene Engelhard <rene@debian.org>  Fri, 19 Apr 2013 17:47:59 +0200
-
-libreoffice (1:4.0.3~rc1-1blankon1) suroboyo; urgency=low
-
-  * New Upstream Release 
-
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sat, 20 Apr 2013 19:53:15 +0700
 
 libreoffice (1:4.0.3~rc1-1) experimental; urgency=low
 
@@ -69,12 +62,6 @@ libreoffice (1:4.0.3~rc1-1) experimental; urgency=low
 
  -- Rene Engelhard <rene@debian.org>  Wed, 10 Apr 2013 23:15:27 +0200
 
-libreoffice (1:4.0.2~rc2-2blankon1) suroboyo; urgency=low
-
-  * New Upstream release 
-
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Thu, 04 Apr 2013 09:15:56 +0700
-
 libreoffice (1:4.0.2~rc2-2) experimental; urgency=low
 
   * debian/patches/boost-1.53.diff: backport buildfixes for boost 1.53
@@ -93,12 +80,6 @@ libreoffice (1:4.0.2~rc2-2) experimental; urgency=low
       (<< 1.0.2-9) due to LO 4.0 API change
 
  -- Rene Engelhard <rene@debian.org>  Tue, 02 Apr 2013 00:13:23 +0200
-
-libreoffice (1:4.0.2~rc2-1blankon1) suroboyo; urgency=low
-
-  * New Upstream Release 
-
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Tue, 02 Apr 2013 15:34:39 +0700
 
 libreoffice (1:4.0.2~rc2-1) experimental; urgency=low
 
@@ -134,12 +115,6 @@ libreoffice (1:4.0.2~rc2-1) experimental; urgency=low
 
  -- Rene Engelhard <rene@debian.org>  Tue, 26 Mar 2013 14:01:34 +0100
 
-libreoffice (1:4.0.2~rc1-1blankon1) suroboyo; urgency=low
-
-  * New Upstream Release 
-
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Mon, 18 Mar 2013 21:58:14 +0700
-
 libreoffice (1:4.0.2~rc1-1) experimental; urgency=low
 
   * new upstream release candidate 
@@ -163,13 +138,6 @@ libreoffice (1:4.0.2~rc1-1) experimental; urgency=low
 
  -- Rene Engelhard <rene@debian.org>  Wed, 13 Mar 2013 02:07:52 +0100
 
-libreoffice (1:4.0.1~rc1-2blankon1) suroboyo; urgency=low
-
-  * New Upstream Release
-  * Drop arch only amd64,i386
-
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sun, 03 Mar 2013 07:47:51 +0700
-
 libreoffice (1:4.0.1~rc1-2) experimental; urgency=low
 
   * debian/rules:
@@ -191,6 +159,7 @@ libreoffice (1:4.0.1~rc1-1) experimental; urgency=low
     - conditionalize pyuno build/install more so that we can build only
       python-uno on wheezy-backports. Bit obscure, but...
     - explicitly use cpp-4.7 as cpp 4.8 would fail
+    - use $(OOVER) instead of hardcoded 3.6 for the README...
 
  -- Rene Engelhard <rene@debian.org>  Tue, 19 Feb 2013 18:46:05 +0100
 
@@ -231,12 +200,178 @@ libreoffice (1:4.0.0-1) experimental; urgency=low
 
  -- Rene Engelhard <rene@debian.org>  Thu, 07 Feb 2013 00:53:51 +0100
 
-libreoffice (1:3.6.1~rc1-2blankon1) suroboyo; urgency=low
+libreoffice (1:3.6.5-1) experimental; urgency=low
 
-  * Rebranding debian/rules.
-  * Drop libreoffice-draw - deppends impres
+  * LibreOffice 3.6.5 release (idential to rc2)
 
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Tue, 21 Aug 2012 07:59:11 +0700
+  * debian/rules:
+    - stop using lsb_release -cs, parse dpkg-parsechangelog instead.
+      avoids the base-files issue.
+  * debian/libreoffice-common.triggers.in, debian/rules:
+    - fix trigger to actually be in effect
+    - enable tr,vi help, fully translated according to
+      https://gerrit.libreoffice.org/1895
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 28 Jan 2013 21:29:19 +0100
+
+libreoffice (1:3.6.5~rc2-1) experimental; urgency=low
+
+  * new upstream release candidate
+     - fixes --view (closes: #697723)
+
+  * debian/rules:
+    - make -help-en-us break "the others" to work around 682838
+      (closes: #682838) 
+    - temporarily remove wheezy backport conditionals as base-files would make
+      us think we should build for wheezy right now
+    - fix gdb helper installation; use upstreams install-gdb-printers
+  * debian/rules, debian/*.triggers.in, debian/libreoffice-common.postinst.in:
+    - re-introduce @OODIR@/share/extensions trigger as we still need to tell
+      LO to sync if a subdir inside share/extension *changes*, but "touch" is
+      enough now
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 16 Jan 2013 14:25:29 +0100
+
+libreoffice (1:3.6.4-1) experimental; urgency=low
+
+  * LibreOffice 3.6.4 release (identical to rc3) 
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 04 Dec 2012 23:23:10 +0100
+
+libreoffice (1:3.6.4~rc3-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/patches/poppler_0_21_x.diff: moove from poppler_0_21_0.diff; fix
+    build with 0.21.1 again
+  * debian/patches/bigendian-utext-mixup.diff: backport from libreoffice-3-6
+    branch to fix ooxml regression test failure
+
+  * debian/rules:
+    - don't rely on dictionaries submodule. unused.
+  * debian/control.in:
+    - remove obsolete Pre-Depends on ure  (>= 1.5.1+OOo3.1.1-15)
+      (by the way closes: #693626)
+  * debian/control.mozilla.in, debian/rules: rename
+    mozilla-libreoffice -> browser-plugin-libreoffice
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 28 Nov 2012 18:40:27 +0100
+
+libreoffice (1:3.6.4~rc1-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/patches/poppler_0_21_0.diff: fix build of sdext with poppler
+    0.21.0
+
+  * merge from Ubuntu:
+    - fix quoting of PYTHON_{CFLAGS,LIBS} (Matthias Klose) 
+  * debian/rules:
+    - mention CVE-2012-4233 in 1:3.6.1~rc2-1's changelog
+    - re-enable mozilla plugin
+    - actually make python version-switching work
+  * debian/control.in:
+    - recommend fonts-liberation instead of ttf-liberation
+      (closes: #691949)
+  * debian/libreoffice-core.bug-control:
+    - report-with: fonts-opensymbol instead of transitional ttf-opensymbol
+  * debian/libreoffice-{core,gtk3}.bug-script.in: 
+    - find out whether we have Experimental features enabled
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 16 Nov 2012 22:20:37 +0100
+
+libreoffice (1:3.6.3~rc2-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/patches/soffice-bashisms.diff: fix bashism in soffice for
+    valgrinding (closes: #690717)
+  * debian/patches/he-lucida-sans-unicode.diff: Update default Hebrew font
+    from Lucida Sans to Lucida Sans Unicode, thanks Lior Kaplan
+  * debian/patches/ure-no-etc-opt-ure.diff: exclude /etc/opt/ure from ure
+    search paths (closes: #677601)
+
+  * debian/rules:
+    - fix upstream README(_en-US) install for binary-indep packages
+    - fix typo in finding gcj dir detection, thanks Rico Tzschichholz
+    - don't add version from librsvg*.shlibs (as for libebook) as we
+      dlopen() it anyway.
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 26 Oct 2012 15:47:02 +0200
+
+libreoffice (1:3.6.3~rc1-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  [ Rene Engelhard ]
+  * debian/patches/sensible-lomua.diff: add patch from Dave Steele to
+    make senddoc.sh default to standard mailto handler (closes: #687228)
+
+  * debian/rules:
+    - try again with gcc 4.6 for mips* since apparently testtools/smoketest
+      now work..
+    - document truth and remove alpha from supported architectures
+    - exclude .desktop from dh_link call to get absolute symlinks
+      (closes: #690336)
+
+  [ Bjoern Michaelsen ]
+  * make metapackage explicit in short description 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 14 Oct 2012 17:07:23 +0200
+
+libreoffice (1:3.6.2~rc1-1) experimental; urgency=low
+
+  * new upstream release candidate
+    - waits for InternalIPC::ProcessingDone in oosplash (closes: #681185)
+
+  * debian/patches/disable-flaky-unoapi-tests.diff: disable flaky
+    toolkit and sc.ScAccessible* unoapi tests
+  * debian/patches/gcj-safe-jni-h-include.diff: add missing -I...
+  * debian/control.in:
+    - make -core break libreoffice-common (<< 1:3.6.1~rc1) as "unopkg sync"
+      ran in the triggers is gone (closes: #686666)
+  * debian/rules:
+    - fix native-jars dependeny to depend on install-common ... 
+    - ... but as this doesn't build then disable it for now...
+    - hack around broken "*" directory in debian/tmp/pkg on kfreebsd-*
+      extremely slowing down the install target...
+    - use xz compression for all binary packages (closes: #687041) 
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 14 Sep 2012 11:01:04 +0200
+
+libreoffice (1:3.6.1-1) experimental; urgency=low
+
+  * LibreOffice 3.6.1 final release (identical to rc2)
+
+  * debian/rules:
+    - work around possible failure install-common target with missing
+      ca-XV .dirs/.install...
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 27 Aug 2012 18:47:58 +0200
+
+libreoffice (1:3.6.1~rc2-1) experimental; urgency=low
+
+  * new upstream release candidate
+    - fixes CVE-2012-4233 / HTB23106
+
+  * debian/patches/debian-debug.diff: patch new gb_SYMBOLS in unxgcc.mk to
+    make ENABLE_SYMBOLS=SMALL (-g1) working again..
+  * debian/patches/debian/patches/kfrebsd-add-missing-P_SEP.diff: fix Java build
+    on kfreebsd (non-broken CLASSPATH)
+
+  * src/2ab442d169156f34c379c968f3f482dd-zlib-1.2.7.tar.bz2: remove
+    zlib-1.2.7/doc/rfc195{0,1,2}.txt (closes: #685133)
+
+  * debian/rules:
+    - save some space/build time: build only with en-US in build-arch first
+      and build sdext/mysqlc (localized help/descriptions) manually with all
+      languages after make check; remove buildd special-casing for
+      languages
+  * debian/control.fonts.in: remove ttf-opensymbol transitional package 
+  * debian/control.in:
+    - remove obsolete sharutils, po-debconf and wget | curl build-deps
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 23 Aug 2012 22:34:27 +0200
 
 libreoffice (1:3.6.1~rc1-2) experimental; urgency=low
 
@@ -251,7 +386,6 @@ libreoffice (1:3.6.1~rc1-2) experimental; urgency=low
 
 libreoffice (1:3.6.1~rc1-1) experimental; urgency=low
 
-  [ Rene Engelhard ]
   * new upstream release candidate
     - fixes splashscreen location in multi-monitor setups
       (closes: #657444, #431473)
