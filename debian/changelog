@@ -1,8 +1,9 @@
 libreoffice (1:4.0.3-2blankon1) suroboyo; urgency=low
 
   * New Upstream Updates 
+  * debian/scripts/get_libebook_dep.sh libebook*.so*
 
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sun, 12 May 2013 09:39:45 +0700
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sun, 12 May 2013 19:08:13 +0700
 
 libreoffice (1:4.0.3-2) unstable; urgency=low
 
