@@ -166,7 +166,11 @@ USE_LIBHYPHEN=y
 LIBALTLINUXHYPH_MINVER= (>= 0.1.1-11)
 LIBHYPHEN_MINVER= (>= 2.4)
 SYSTEM_STUFF += boost
-BOOST_VERSION=default
+ifeq "$(WHEEZY_BACKPORT)" "y"
+  BOOST_VERSION=default
+else
+  BOOST_VERSION=1.53
+endif
 ifeq "$(BOOST_VERSION)" "default"
   ifeq "$(SYSTEM_GCC_VERSION)" "4.8"
     # see 701310/695826
@@ -353,7 +357,7 @@ ENABLE_HELP=y
 SYSTEM_STUFF += lcms2
 SYSTEM_STUFF += openldap
 PACKAGE_UNOWINREG_DLL=y
-ifeq "$(DEB_VENDOR)" "BlankOn"
+ifeq "$(DEB_VENDOR)" "Debian"
 BUILD_UNOWINREG_DLL=y
 endif
 FAKEROOT_LIBDIR=/usr/lib/$(DEB_HOST_MULTIARCH)/libfakeroot
@@ -2140,6 +2144,12 @@ endif
 		mv $$i debian/uno-libs3/$(OOUREDIR)/lib; \
 		ln -sf /$(OOUREDIR)/lib/`basename $$i` debian/uno-libs3/usr/lib/`basename $$i`; \
 	done
+	# we also need libxmlreader.so and libreg.so.3 (libuno_cppuhelpergcc3.so.3 needs it)
+	# and libstore.so.3 (libreg.so.3 needs it)
+	for i in libxmlreader.so libreg.so.3 libstore.so.3; do \
+		mv debian/ure/$(OOUREDIR)/lib/$$i \
+			debian/uno-libs3/$(OOUREDIR)/lib; \
+	done
 
 ifeq "$(BUILD_KDE)" "y"
 	# install files for KDEs "create new" ...
@@ -2962,9 +2972,10 @@ ifneq (,$(filter redland, $(SYSTEM_STUFF)))
 	# which quickly can get outdated
 	perl -pi -e 's/(shlibs.*$$)/$$1, $(shell cat /var/lib/dpkg/info/$(shell dpkg -S /usr/lib/`objdump -p $(PKGDIR)-core/$(OODIR)/program/libunordf*.so | grep NEEDED | grep librdf | awk '{ print $$2 }'` | cut -d: -f1).shlibs | awk '{ print $$3,$$4,$$5 }')/' $(PKGDIR)-core.substvars
 endif
-	# don't make uno-libs3 depend on ure...
+	# Clean up .substvars values added by uno-libs3.symbols (adds uno-libs3, ure):
+	# 1) don't make uno-libs3 depend on ure...
 	perl -pi -e 's/, ure$$//' debian/uno-libs3.substvars
-	# .. and prevent ure to depend on itself..
+	# 2) and prevent ure to depend on itself..
 	perl -pi -e 's/, ure \(.*\)$$//' debian/ure.substvars
 ifeq "$(ENABLE_JAVA)" "y"
 	LD_LIBRARY_PATH="$(FAKEROOT_LIBDIR):debian/uno-libs3/$(OOUREDIR)/lib:debian/ure/$(OOUREDIR)/lib:$(PKGDIR)-core/$(OODIR)/program" \
