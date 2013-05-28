@@ -1,9 +1,43 @@
-libreoffice (1:4.0.3-2blankon1) suroboyo; urgency=low
+libreoffice (1:4.1.0~beta1-1blankon1) suroboyo; urgency=low
 
-  * New Upstream Updates 
-  * debian/scripts/get_libebook_dep.sh libebook*.so*
+  * Impor to suroboyo 
 
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sun, 12 May 2013 19:08:13 +0700
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Tue, 28 May 2013 18:41:44 +0700
+
+libreoffice (1:4.1.0~beta1-1) experimental; urgency=low
+
+  * new upstream beta release
+
+  * debian/rules, control.sdk.in:
+    - dmake finally gone
+  * debian/rules:
+    - add new conditionals: libmwaw, libodfgen, harfbuzz, mariadb
+      (use MySQL instead of MariaDB, though as long as we need mysqlcppconn
+      anyway)
+    - build with explicit --enable-python=system
+    - enable the tightended binutils build-dep, we're in experimental anyway
+      and need orcus and mdds from experimental, too
+    - enable system-clucene again
+    - temporarily disable cleandupes for -l10n-* as it's broken right nwo
+  * debian/uno-libs3.symbols: update
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 23 May 2013 10:15:45 +0200
+
+libreoffice (1:4.0.3-3) unstable; urgency=low
+
+  * debian/patches/uno-executables-link-to-xmlreader.diff: fix
+    sp2bv/regcomp/regsingleton/uno-skeletonmaker build on
+    mips(el) by linking explicitly with libxmlreader.so with sids gcc without
+    experimentals binutils.
+
+  * debian/control.in, debian/rules:  
+    - depend on fonts-dejavu instead of ttf-dejavu (closes: #708062) 
+    - prepare build-depending on experimentals binutils on mips(el), thanks
+      Aurelien Jarno for the hint
+  * debian/copyright:
+    - mention swext/mediawiki/src/filter/odt2mediawiki.xsl copyright/license 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 20 May 2013 18:19:56 +0200
 
 libreoffice (1:4.0.3-2) unstable; urgency=low
 
@@ -25,13 +59,6 @@ libreoffice (1:4.0.3-2) unstable; urgency=low
     David Kalnischkies - see also #707578)
 
  -- Rene Engelhard <rene@debian.org>  Sat, 11 May 2013 01:20:03 +0200
-
-libreoffice (1:4.0.3-1blankon1) suroboyo; urgency=low
-
-  * Impor to BlankOn
-  * debian/rules switch to BlankOn
-
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Fri, 10 May 2013 04:56:03 +0700
 
 libreoffice (1:4.0.3-1) unstable; urgency=low
 

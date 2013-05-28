@@ -1,11 +1,9 @@
-no-minimaltoc.diff
 debian-opt.diff
 gcj-safe-jni-h-include.diff
 jurt-soffice-location.diff
 split-evoab.diff
 debian-debug.diff
 #rhino-build-optional.diff
-disable-dynamic-list-cpp.diff
 fix-system-lpsolve-build.diff
 install-fixes.diff
 #mention-java-common-package.diff
@@ -26,7 +24,9 @@ ignore-sc_cellrangesbase-fails.diff
 build-dont-run-checks.diff
 disable-flaky-unoapi-tests.diff
 dont-touch-urd.diff
-system-psql-no-krb5-gssapi-check.diff
 wheezy-backports-python.diff
 fix-internal-hsqldb-build.diff
-boost-1.53.diff
+disable-sw_python.diff
+#uno-executables-link-to-xmlreader.diff
+disable-calc-perf-test.diff
+revert-d256dbede60533369d1aac64cca34721183f6a8a.diff
