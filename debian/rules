@@ -37,9 +37,6 @@ export gb_SHELL:=$(SHELL)
 
 SYSTEM_GCC_VERSION = $(shell gcc --version | sed -n '/^gcc/s/.*\(.\..\)\..$$/\1/p')
 
-# Debian buildds run as user `buildd', other are using /CurrentlyBuilding
-ON_BUILDD := $(shell if [ "`whoami`" = buildd -o -f /CurrentlyBuilding ] || echo $(CURDIR) | grep -q \/build\/buildd; then echo y; else echo n; fi)
-
 PKGDIR:=debian/libreoffice
 OODIRNAME=libreoffice
 OODIR:=usr/lib/$(OODIRNAME)
@@ -73,7 +70,7 @@ lo_sources_ver=$(shell grep AC_INIT $(SOURCE_TREE)/configure.ac | grep documentf
 # NOT in proper libreoffice-3-6 branch
 # use ./g checkout -b tag-libreoffice-3.6.2.1 libreoffice-3.6.2.1
 GIT_TAG=libreoffice-$(lo_sources_ver)
-GIT_BRANCH=libreoffice-4-1
+GIT_BRANCH=libreoffice-4-1-0
 endif
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 lo_sources_ver=$(shell cat $(CURDIR)/sources.ver | cut -d= -f2)
@@ -116,6 +113,8 @@ BUILD_DEPS=\
     zip,\
     zlib1g-dev\
 
+
+CHECKTARGET:=check
 # These are components which can be built from internal copies, or used from the
 # distribution. See configure --help for valid values (--with-system-<value>).
 SYSTEM_STUFF = dicts
@@ -131,8 +130,7 @@ endif
 # uses pythonX.Y directly (and the dh_pycentral-created dependencies allow
 # also the non-working default python then) - see e.g. #587402. Also
 # note we are NOT working with python < 2.6 anymore!
-# Also note that you need to adapt all package names...
-PYTHON_VERSION=3.3
+PYTHON_VERSION=current
 ifeq "$(PYTHON_VERSION)" "current"
   PYTHON=python3
 export PYTHON=python3
@@ -153,7 +151,7 @@ BUILD_ONLY_EN_US=n
 ENABLE_JAVA=y
 ifeq "$(ENABLE_JAVA)" "y"
   JDK=openjdk
-  JAVA_MAINVER=6
+  JAVA_MAINVER=7
   ifneq (,$(filter hppa kfreebsd%, $(DEB_HOST_ARCH)))
     JDK=gcj-jdk
   endif
@@ -173,7 +171,7 @@ else
   BOOST_VERSION=1.53
 endif
 ifeq "$(BOOST_VERSION)" "default"
-  ifeq "$(SYSTEM_GCC_VERSION)" "4.8"
+  ifeq "$(shell dpkg --compare-versions $(SYSTEM_GCC_VERSION) ge 4.8 && echo true)" "true"
     BOOST_MINVER= (>= 1.53)
   else
     BOOST_MINVER= (>= 1.38)
@@ -187,7 +185,6 @@ endif
 SYSTEM_STUFF += mdds
 SYSTEM_STUFF += vigra
 USE_EXTERNAL_CXXLIBS=y
-#SYSTEM_STUFF += sablot
 SYSTEM_STUFF += mythes
 SYSTEM_STUFF += icu
 ICU_MINVER= (>= 4.6)
@@ -204,7 +201,7 @@ CAIRO_FONTS_PATCH=y
 BUILD_KDE=y
 # not ported to KDE 4
 ENABLE_KDEAB=n
-ifeq "$(SYSTEM_GCC_VERSION)" "4.7"
+ifeq "$(shell dpkg --compare-versions $(SYSTEM_GCC_VERSION) ge 4.7 && echo true)" "true"
 # < 4.8 fails with gcc 4.7, see #667911
 QT_MINVER= (>= 4:4.8)
 else
@@ -329,8 +326,6 @@ SYSTEM_STUFF += harfbuzz
 ALLOC=system
 SYSTEM_STUFF += libexttextcat
 SYSTEM_STUFF += cppunit
-ENABLE_LIBRSVG=y
-SYSTEM_LIBRSVG=y
 # when we have a package we want to have to be installed on older things with some older
 # C++ ABI (like it was the case with libreoffice2), we need to set this. Don't touch
 # otherwise
@@ -358,12 +353,12 @@ SYSTEM_STUFF += mesa-headers
 SYSTEM_STUFF += poppler
 SYSTEM_STUFF += libpng
 SYSTEM_STUFF += nss
-SYSTEM_STUFF += clucene
+#SYSTEM_STUFF += clucene
 ENABLE_HELP=y
 SYSTEM_STUFF += lcms2
 SYSTEM_STUFF += openldap
 PACKAGE_UNOWINREG_DLL=y
-ifeq "$(DEB_VENDOR)" "Debian"
+ifeq "$(DEB_VENDOR)" "BlankOn"
 BUILD_UNOWINREG_DLL=y
 endif
 FAKEROOT_LIBDIR=/usr/lib/$(DEB_HOST_MULTIARCH)/libfakeroot
@@ -400,9 +395,7 @@ ifeq "$(shell echo $(DEB_VERSION_UPSTREAM) | grep -E '(alpha|beta)'; echo $$?)" 
 CONFIGURE_FLAGS += --enable-release-build
 endif
 
-ifneq ($(ON_BUILDD),y)
 CONFIGURE_FLAGS += --enable-verbose
-endif
 
 CONFIGURE_FLAGS += --with-alloc=$(ALLOC)
 
@@ -534,11 +527,9 @@ OOO_NSPLUGIN_ARCHS=
 endif
 $(eval $(call gen_no_archs,OOO_NSPLUGIN_ARCHS))
 
-# see uno-executables-link-to-xmlreader.diff. That workaround is not needed
-# with said binutils. Thanks Aurelien Jarno for the hint.
 ifneq "$(WHEEZY_BACKPORT)" "y"
   ifneq (,$(findstring mips, $(OOO_ARCHS)))
-BUILD_DEPS += , binutils (>= 2.23) [mips mipsel]
+BUILD_DEPS += , binutils (>= 2.23) [mips mipsel], libc6 (>= 2.17-6) [mips mipsel]
   endif
 endif
 
@@ -559,6 +550,14 @@ CONFIGURE_FLAGS += $(foreach i, $(SYSTEM_STUFF),--with-system-$(i))
 
 CC_PREFIX:=$(shell gcc -dumpmachine)-
 
+#	BUILD_DEPS += , gcc-4.6 [!i386 !amd64 !kfreebsd-i386 !kfreebsd-amd64] ,g++-4.6 [!i386 !amd64 !kfreebsd-i386 !kfreebsd-amd64]
+#ifeq (,$(findstring i386,$(DEB_HOST_ARCH)))
+#  ifeq (,$(findstring amd64,$(DEB_HOST_ARCH)))
+#    ifneq "$(SYSTEM_GCC_VERSION)" "4.6"
+#	GCC_VERSION := 4.6
+#    endif
+#  endif
+#endif
 ifneq "$(GCC_VERSION)" ""
   ifneq "$(SYSTEM_GCC_VERSION)" "$(GCC_VERSION)"
     BUILD_DEPS += , gcc-$(GCC_VERSION), g++-$(GCC_VERSION)
@@ -595,26 +594,16 @@ ifneq "$(ENABLE_MINIMIZER)" "y"
 endif
 	BUILD_DEPS += , libpoppler-dev (>= 0.8.0), libpoppler-private-dev, libpoppler-cpp-dev
 
-# fails their tests
-ifeq "$(DEB_HOST_ARCH)" "armel"
-ENABLE_GRAPHITE=n
-SYSTEM_STUFF := $(filter-out graphite, $(SYSTEM_STUFF))
-endif
-ifeq "$(DEB_HOST_ARCH)" "sparc"
-ENABLE_GRAPHITE=n
-SYSTEM_STUFF := $(filter-out graphite, $(SYSTEM_STUFF))
-endif
-
 ifeq "$(ENABLE_GRAPHITE)" "y"
   ifneq (,$(filter graphite, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libgraphite2-dev (>= 0.9.3) [!armel !sparc]
+	BUILD_DEPS += , libgraphite2-dev (>= 0.9.3)
   endif
 else
 	CONFIGURE_FLAGS += --disable-graphite
 endif
 
 ifneq (,$(filter harfbuzz, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libharfbuzz-dev
+	BUILD_DEPS += , libharfbuzz-dev (>= 0.9.18)
 endif
 
 ifneq (,$(filter libexttextcat, $(SYSTEM_STUFF)))
@@ -688,17 +677,19 @@ ifneq "$(WHEEZY_BACKPORT)" "y"
 PYMAJOR:=$(shell $(PYTHON) -c "import sys; print (sys.version_info[0])")
 PYMINOR:=$(shell $(PYTHON) -c "import sys; print (sys.version_info[1])")
 PYMINORPLUS1:=$(shell $(PYTHON) -c "import sys; print (sys.version_info[1]+1)")
-PYTHON_SITE:=debian/python3.3-uno/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+PYTHON_SITE:=debian/python3-uno/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+ifeq "$(ENABLE_PYTHON2)" "y"
 PY2MAJOR:=$(shell $(PYTHON2) -c "import sys; print sys.version_info[0]")
 PY2MINOR:=$(shell $(PYTHON2) -c "import sys; print sys.version_info[1]")
 PY2MINORPLUS1:=$(shell $(PYTHON2) -c "import sys; print sys.version_info[1]+1")
 PYTHON2_SITE:=debian/python-uno/$(shell $(PYTHON2) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+endif
 else
 PYMAJOR:=$(shell $(PYTHON2) -c "import sys; print (sys.version_info[0])")
 PYMINOR:=$(shell $(PYTHON2) -c "import sys; print (sys.version_info[1])")
 PYMINORPLUS1:=$(shell $(PYTHON2) -c "import sys; print (sys.version_info[1]+1)")
-# YES, really! python3.3-uno. see "OMG!" below :-)
-PYTHON_SITE:=debian/python3.3-uno/$(shell $(PYTHON2) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
+# YES, really! python3-uno. see "OMG!" below :-)
+PYTHON_SITE:=debian/python3-uno/$(shell $(PYTHON2) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
 PYTHON:=$(PYTHON2)
 endif
 
@@ -712,7 +703,7 @@ ifeq "$(ENABLE_PYTHON)" "y"
 	BUILD_DEPS += , python (>= 2.6.6-3+squeeze4)
 	# for dh_python3
 	BUILD_DEPS += , python3
-	DBG_DBG_SUGGESTS+= , python-dbg
+	DBG_DBG_SUGGESTS+= , $(PYTHON)-dbg
   ifneq "$(WHEEZY_BACKPORT)" "y"
 	BUILD_DEPS += , $(PYTHON)-dev (>= 3.3)
     ifeq "$(ENABLE_PYTHON2)" "y"
@@ -769,7 +760,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	#ISOS=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
 	ISOS:=en-US af ar as ast be bg bn br bs ca ca-XV cs cy da de dz el \
 	  en-GB en-ZA eo es et eu fa fi fr ga gl gu he hi hr hu id is it ja \
-	  ka km ko ku lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
+	  ka kk km ko ku lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr ss st sv \
 	  ta te tg th tn tr ts ug uk uz ve vi xh zh-CN zh-TW zu
     ifeq "$(ENABLE_HELP)" "n"
@@ -782,7 +773,7 @@ ifneq "$(BUILD_ONLY_EN_US)" "y"
 	#LANGPACKISOS:=$(shell $(SOURCE_TREE)/bin/lo-xlate-lang -i all')
 	LANGPACKISOS:=en-US af ar as ast be bg bn br bs ca ca-XV cs cy da de dz el \
 	  en-GB en-ZA eo es et eu fa fi fr ga gl gu he hi hr hu id is it ja \
-	  ka km ko ku lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
+	  ka kk km ko ku lt lv mk mn ml mr nb ne nl nn nr nso oc om or \
 	  pa-IN pl pt pt-BR ro ru rw si sk sl sr ss st sv \
 	  ta te tg th tn tr ts ug uk uz ve vi xh zh-CN zh-TW zu
   endif
@@ -820,19 +811,21 @@ ifeq "$(ENABLE_JAVA)" "y"
   ifeq "$(JDK)" "gcj-jdk"
 	JAVA_HOME=/usr/lib/jvm/java-gcj
 	BUILD_DEPS += , gcj-jdk$(OOO_NO_JAVA_ARCHS)
+	DEBHELPER_OPTIONS += -Nlibreoffice-dev-doc
+	PACKAGE_SDK_DOCS = n
   endif
   ifeq "$(JDK)" "openjdk"
     ifeq "$(JAVA_MAINVER)" "6"
-	BUILD_DEPS += , openjdk-$(JAVA_MAINVER)-jdk (>= 6b23~pre8-2) [$(filter-out ia64,$(filter-out $(OOO_GCJ_JDK_ARCHS),$(OOO_JAVA_ARCHS))])
-      # except on ia64, which doesn't build with 6...
-      ifneq (,$(findstring ia64,$(OOO_JAVA_ARCHS)))
-	BUILD_DEPS += , openjdk-7-jdk [ia64]
-        ifeq "$(DEB_HOST_ARCH)" "ia64"
-          JAVA_MAINVER=7
+	BUILD_DEPS += , openjdk-$(JAVA_MAINVER)-jdk (>= 6b23~pre8-2) [$(filter-out ia64 $((OOO_GCJ_JDK_ARCHS),$(filter-out $(OOO_GCJ_JDK_ARCHS),$(OOO_JAVA_ARCHS))])
+    else
+	BUILD_DEPS += , openjdk-$(JAVA_MAINVER)-jdk [$(filter-out mips mipsel $(OOO_GCJ_JDK_ARCHS),$(OOO_JAVA_ARCHS))]
+      # no 7 on mips(el)
+      ifneq (,$(findstring mips,$(OOO_JAVA_ARCHS)))
+	BUILD_DEPS += , openjdk-6-jdk (>= 6b23~pre8-2) [mips mipsel]
+        ifneq (,$(findstring mips,$(DEB_HOST_ARCH)))
+          JAVA_MAINVER=6
         endif
       endif
-    else
-	BUILD_DEPS += , openjdk-$(JAVA_MAINVER)-jdk [$(filter-out $(OOO_GCJ_JDK_ARCHS),$(OOO_JAVA_ARCHS))]
     endif
 	JAVA_HOME=/usr/lib/jvm/java-$(JAVA_MAINVER)-openjdk-$(DEB_HOST_ARCH)
   endif
@@ -971,9 +964,15 @@ ifneq (,$(filter boost, $(SYSTEM_STUFF)))
     ifneq "$(BOOST_VERSION)" "default"
 	BUILD_DEPS += , libboost$(BOOST_VERSION)-dev $(BOOST_MINVER), libboost-date-time$(BOOST_VERSION)-dev $(BOOST_MINVER)
 	#BUILD_DEPS += , libboost-thread$(BOOST_VERSION)-dev, libboost-program-options$(BOOST_VERSION)-dev
+      ifeq (,$(filter orcus, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , libboost-system$(BOOST_VERSION)-dev $(BOOST_MINVER)
+      endif
     else
 	BUILD_DEPS += , libboost-dev $(BOOST_MINVER), libboost-date-time-dev $(BOOST_MINVER)
 	#BUILD_DEPS += , libboost-thread-dev, libboost-program-options-dev
+      ifeq (,$(filter orcus, $(SYSTEM_STUFF)))
+	BUILD_DEPS += , libboost-system-dev $(BOOST_MINVER)
+      endif
     endif
   endif
 endif
@@ -997,9 +996,6 @@ endif
 ifeq "$(USE_EXTERNAL_CXXLIBS)" "y"
   ifneq (,$(filter libwpd, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libwpd-dev (>= 0.9.0)
-  endif
-  ifneq (,$(filter sablot, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libsablot0-dev (>= 1.0.2-4)
   endif
   ifneq (,$(filter mythes, $(SYSTEM_STUFF)))
 	BUILD_DEPS += , libmythes-dev (>= 2:1.2)
@@ -1147,7 +1143,7 @@ else
 endif
 
 ifneq "$(ENABLE_PYTHON)" "y"
-	DEBHELPER_OPTIONS+= -Npython-uno -Npython3.3-uno -Nlibreoffice-script-provider-python
+	DEBHELPER_OPTIONS+= -Npython-uno -Npython3-uno -Nlibreoffice-script-provider-python
   ifeq "$(BUILD_ISOS)" "en-US"
 	CONFIGURE_FLAGS += --disable-python
   else
@@ -1155,10 +1151,10 @@ ifneq "$(ENABLE_PYTHON)" "y"
   endif
 else
   ifeq "$(WHEEZY_BACKPORT)" "y"
-	DEBHELPER_OPTIONS+= -Npython3.3-uno
+	DEBHELPER_OPTIONS+= -Npython3-uno
 	PYUNO_DEPENDS = python-uno
   else
-	PYUNO_DEPENDS = python3.3-uno | python3-uno (>= 4.0~) | python-uno
+	PYUNO_DEPENDS = python3-uno (>= 4.0~) | python-uno
   endif
   CONFIGURE_FLAGS += --enable-python=system
 endif
@@ -1568,9 +1564,10 @@ endif
 ifeq "$(BUILD_TEST_PACKAGE)" "y"
 	# we want the build deps as dep on subsequentcheckbase, but strip the arch
 	# specifics as we are arch-all
-	# for now we filter out the arch-specific libc0.1 and ia64, which is ugly,
-	# but better than manual bookkeeping
-	perl -pi -e "s#%BUILD_DEPS_ARCH_ALL%#$(strip $(shell echo '$(BUILD_DEPS), $(BUILD_DEPS_INDEP)'|sed -e 's/,/,\n /g'|grep -v libc0.1| grep -v ia64|sed -e 's/\[[^]]*\]//g'))#g" debian/control
+	# for now we filter out the arch-specific libc* and ia64, which is ugly,
+	# but better than manual bookkeeping. Also filter out the mips(el)-only
+	# binutils build-dep...
+	perl -pi -e "s#%BUILD_DEPS_ARCH_ALL%#$(strip $(shell echo '$(BUILD_DEPS), $(BUILD_DEPS_INDEP)'|sed -e 's/,/,\n /g'|grep -v libc0.1| grep -v libc6| grep -v ia64|grep -v binutils|sed -e 's/\[[^]]*\]//g'))#g" debian/control
 endif
 ifeq "$(BUILD_KDE)" "y"
 	perl -pi -e 's/%LO-DESKTOP-INTEGRATION%/libreoffice-gnome | libreoffice-kde/' debian/control
@@ -1796,7 +1793,7 @@ endif
 		export HOME=$$t; \
 		export SAL_USE_VCLPLUGIN="svp"; \
 		if [ -x /usr/bin/gdb ]; then ulimit -c unlimited; fi && \
-		$(MAKE) -k check || $(MAKE) check && \
+		$(MAKE) -k $(CHECKTARGET) || $(MAKE) $(CHECKTARGET) && \
 	rm -rf $$t
 
 ifneq (,$(findstring $(DEB_HOST_ARCH),$(OOO_NO_BASE_ARCHS)))
@@ -2324,11 +2321,6 @@ endif
 	mkdir -p -m755 $(PKGDIR)-base/usr/share/applications \
 	               $(PKGDIR)-core/usr/share/applications
 
-	for f in `find debian -name 'xdg/*.desktop' ! -name "*soffice.od*"`; do \
-		if ! grep -q X-KDE-Protocols $$f; then \
-			echo 'X-KDE-Protocols=file,http,smb,ftp,webdav' >> $$f; \
-		fi; \
-	done
 	sed -i -e 's/Office;/Office;Graphics;/' $(PKGDIR)-draw/$(OODIR)/share/xdg/draw.desktop
 	# invalid, according to lintian. make it shut up.
 	for i in writer calc impress draw math base; do \
@@ -2339,15 +2331,22 @@ endif
 ifeq "$(ENABLE_PYTHON)" "y"
 	# PyUNO packaging
 	install -d $(PYTHON_SITE)
-	mv debian/python3.3-uno/$(OODIR)/program/uno.py $(PYTHON_SITE)
-	mv debian/python3.3-uno/$(OODIR)/program/unohelper.py $(PYTHON_SITE)
-	touch debian/python3.3-uno/$(OODIR)/program/pythonloader.unorc
-	chmod u+w debian/python3.3-uno/$(OODIR)/program/pythonloader.unorc
+	# prepend stuff so that it works when the module is not in LOs
+	# directories but in $(PYTHON_SITE). Can't be a patch (anymore)
+	# as otherwise the python-based unittests fail miserably.
+	echo "import sys, os" > $(PYTHON_SITE)/uno.py
+	echo "sys.path.append('$(OODIR)/program')" >> $(PYTHON_SITE)/uno.py
+	echo "os.putenv('URE_BOOTSTRAP', 'vnd.sun.star.pathname:$(OODIR)/program/fundamentalrc')" >> $(PYTHON_SITE)/uno.py
+	cat debian/python3-uno/$(OODIR)/program/uno.py >> $(PYTHON_SITE)/uno.py
+	rm -f debian/python3-uno/$(OODIR)/program/uno.py
+	mv debian/python3-uno/$(OODIR)/program/unohelper.py $(PYTHON_SITE)
+	touch debian/python3-uno/$(OODIR)/program/pythonloader.unorc
+	chmod u+w debian/python3-uno/$(OODIR)/program/pythonloader.unorc
 	( echo '[Bootstrap]'; \
 	  echo 'PYTHONHOME=file:///usr/lib/python$(PYMAJOR).$(PYMINOR)' ;\
 	  echo 'PYTHONPATH=$$PYTHONHOME $$PYTHONHOME/site-packages $$PYTHONHOME/lib-dynload $$PYTHONHOME/lib-tk $$ORIGIN' \
-	) > debian/python3.3-uno/$(OODIR)/program/pythonloader.unorc
-	chmod u-w debian/python3.3-uno/$(OODIR)/program/pythonloader.unorc
+	) > debian/python3-uno/$(OODIR)/program/pythonloader.unorc
+	chmod u-w debian/python3-uno/$(OODIR)/program/pythonloader.unorc
   ifneq "$(WHEEZY_BACKPORT)" "y"
     ifeq "$(ENABLE_PYTHON2)" "y"
 	install -d $(PYTHON2_SITE)
@@ -2358,7 +2357,7 @@ ifeq "$(ENABLE_PYTHON)" "y"
 	mkdir -p debian/python-uno/$(OODIR)/program
 	mkdir -p debian/python-uno/$(OODIR)/share/registry
 	mkdir -p debian/python-uno/$(OODIR)/share/Scripts
-	cat debian/python3.3-uno/$(OODIR)/program/pythonloader.unorc \
+	cat debian/python3-uno/$(OODIR)/program/pythonloader.unorc \
 		| sed -e "s/$(PYMAJOR).$(PYMINOR)/$(PY2MAJOR).$(PY2MINOR)/" \
 		> debian/python-uno/$(OODIR)/program/pythonloader.unorc
 	for i in py2uno.so libpy2uno.so; do \
@@ -2369,11 +2368,11 @@ ifeq "$(ENABLE_PYTHON)" "y"
 	install -m644 $(SOURCE_TREE)/workdir/$(shell .  $(SOURCE_TREE)/bin/get_config_variables OUTPATH PROEXT; echo $$OUTPATH$$PROEXT)/LinkTarget/Library/libpython2loaderlo.so \
 		debian/python-uno/$(OODIR)/program/libpython2loaderlo.so
 	ln -s libpython2loaderlo.so debian/python-uno/$(OODIR)/program/libpythonloaderlo.so
-	cp debian/python3.3-uno/$(OODIR)/program/pythonloader.py \
+	cp debian/python3-uno/$(OODIR)/program/pythonloader.py \
 		debian/python-uno/$(OODIR)/program
-	cp debian/python3.3-uno/$(OODIR)/share/registry/pyuno.xcd \
+	cp debian/python3-uno/$(OODIR)/share/registry/pyuno.xcd \
 		debian/python-uno/$(OODIR)/share/registry
-	cp -r debian/python3.3-uno/$(OODIR)/share/Scripts/python \
+	cp -r debian/python3-uno/$(OODIR)/share/Scripts/python \
 		debian/python-uno/$(OODIR)/share/Scripts
     endif
   endif
@@ -2381,13 +2380,13 @@ ifeq "$(ENABLE_PYTHON)" "y"
 	rm -f debian/libreoffice-script-provider-python/$(OODIR)/share/extensions/script-provider-for-python/registration/LICENSE
   endif
 
-	mkdir -p debian/python3.3-uno/usr/share/doc/python3.3-uno
+	mkdir -p debian/python3-uno/usr/share/doc/python3-uno
 	cp -r $(SOURCE_TREE)/pyuno/demo \
-	  debian/python3.3-uno/usr/share/doc/python3.3-uno; \
+	  debian/python3-uno/usr/share/doc/python3-uno; \
 	for i in $(SOURCE_TREE)/pyuno/doc/*; do \
-		cp $$i debian/python3.3-uno/usr/share/doc/python3.3-uno; \
+		cp $$i debian/python3-uno/usr/share/doc/python3-uno; \
 	done
-	cd debian/python3.3-uno/usr/share/doc/python3.3-uno && \
+	cd debian/python3-uno/usr/share/doc/python3-uno && \
 		find . -type d -name "CVS" | xargs -r rm -rf
   ifneq "$(WHEEZY_BACKPORT)" "y"
     ifeq "$(ENABLE_PYTHON2)" "y"
@@ -2406,7 +2405,7 @@ endif
 ifeq "$(WHEEZY_BACKPORT)" "y"
 	# OMG!!
 	rm -rf debian/python-uno
-	mv debian/python3.3-uno debian/python-uno
+	mv debian/python3-uno debian/python-uno
 endif
 
 	# should be empty now, remove if there
@@ -2486,7 +2485,11 @@ else
 	# move rpt stuff into -report-builder-bin
 	rm -rf $(PKGDIR)-report-builder-bin
 	mkdir -p $(PKGDIR)-report-builder-bin/$(OODIR)/program
-	mv $(PKGDIR)-report-builder/$(OODIR)/program/librpt* \
+	# FIXME: it seems that --enable/--disable-reportbuiler affects the install
+	# location. sigh.
+	if [ -e $(PKGDIR)-core/$(OODIR)/program/librptlo.so ]; then \
+		i=core; else i=report-builder; fi; \
+	mv $(PKGDIR)-$$i/$(OODIR)/program/librpt* \
 		$(PKGDIR)-report-builder-bin/$(OODIR)/program
   endif
 endif
@@ -2922,14 +2925,14 @@ endif
 ifeq "$(WHEEZY_BACKPORT)" "y"
 	dh_python2 -ppython-uno --no-guessing-versions --no-guessing-deps
 else
-	dh_python3 -ppython3.3-uno --no-guessing-deps
+	dh_python3 -ppython3-uno --no-guessing-deps
 	# adds a python3 (>= 3.2.3-3~)
   ifeq "$(PYTHON_VERSION)" "current"
 	sed -i -e 's/python$(PYMAJOR) (>= .*)/python$(PYMAJOR) (>= 3.3~)/g' \
-		debian/python3.3-uno.substvars
+		debian/python3-uno.substvars
   else
 	sed -i -e 's/python$(PYMAJOR) (>= .*)/python$(PYMAJOR).$(PYMINOR)/g' \
-		debian/python3.3-uno.substvars
+		debian/python3-uno.substvars
   endif
   ifeq "$(ENABLE_PYTHON2)" "y"
 	dh_python2 -ppython-uno --no-guessing-versions --no-guessing-deps
@@ -3093,6 +3096,12 @@ $(STAMP_DIR)/binary-indep: $(STAMP_DIR)/install-indep debian/control $(STAMP_DIR
 ifneq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH),$(OOO_JAVA_ARCHS)))
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 	echo "For uploads with binary-all packages, please use arches where Java is enabled!!!!!"
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+endif
+	dh_testdir
+ifneq ($(PACKAGE_SDK_DOCS),y)
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	echo "For uploads with binary-all packages, please use arches where the SDK docs are enabled!!!!"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 endif
 	dh_testdir

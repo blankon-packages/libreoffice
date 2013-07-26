@@ -10,11 +10,9 @@ Build-Conflicts: ant (= 1.8.0-1) [%OOO_GCJ_JDK_ARCHS%],
                  ant (= 1.8.0-2) [%OOO_GCJ_JDK_ARCHS%],
                  ant (= 1.8.0-3) [%OOO_GCJ_JDK_ARCHS%],
                  flex (= 2.5.34-1) [amd64],
-                 g++ (>= 4:4.7~) [!i386 !amd64 !kfreebsd-i386 !kfreebsd-amd64],
                  g++-4.6 (= 4.6.1-10),
                  g++-4.6 (= 4.6.1-11),
                  g++-4.7 (<< 4.7.1-3),
-                 gcc (>= 4:4.7~) [!i386 !amd64 !kfreebsd-i386 !kfreebsd-amd64],
                  gcj-4.2 (= 4.2.2-6),
                  gjdoc (= 0.7.8-2),
                  graphicsmagick-imagemagick-compat (<< 1.3.9~),
@@ -274,8 +272,8 @@ Suggests: libreoffice-style-crystal,
 Recommends: xfonts-mathml, ${pyuno-depends}, ${textcat-data-recommends}
 Conflicts: broffice,
            libreoffice-filter-mobiledev,
-           vlibreoffice-l10n-3.5,
-           vlibreoffice-l10n-3.6
+           libreoffice-l10n-3.5,
+           libreoffice-l10n-3.6
 Provides: libreoffice-l10n-en-us
 Breaks: libreoffice-core (<< 1:${oover}~),
         libreoffice-core (>= 1:${next-oover}~),
@@ -585,11 +583,10 @@ Description: Python-UNO bridge (support for old python 2)
  or the built in StarBasic scripting language.
  .
  This package is for compatibility with applications/libraries not ported
- to python 3 yet. Prefer python3.3-uno over this.
+ to python 3 yet. Prefer python3-uno over this.
 Homepage: http://udk.openoffice.org/python/python-bridge.html
 
-Package: python3.3-uno
-#Provides: ${python3:Provides}
+Package: python3-uno
 Section: python
 Architecture: %OOO_ARCHS%
 Enhances: libreoffice
@@ -597,9 +594,8 @@ Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends}
-Conflicts: python-uno, python3-uno (<< 1:4.0.2~rc2)
-Replaces: python3-uno (<< 1:4.0.2~rc2)
-Provides: python3-uno
+Conflicts: python-uno, python3-uno (<< 1:4.0.2~rc2), python3.3-uno
+Replaces: python3-uno (<< 1:4.0.2~rc2), python3.3-uno
 Description: Python-UNO bridge
  The Python-UNO bridge allows use of the standard LibreOffice API
  with the Python scripting language. It additionally allows
