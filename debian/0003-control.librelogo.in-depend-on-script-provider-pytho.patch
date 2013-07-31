@@ -1,0 +1,61 @@
+From a02abfa4ffef32649ade64b25d501dbfc2d6a91c Mon Sep 17 00:00:00 2001
+From: Rene Engelhard <rene@debian.org>
+Date: Mon, 29 Jul 2013 13:27:30 +0200
+Subject: [PATCH 3/5] control.librelogo.in: depend on -script-provider-python
+ instead of "just" ${pyuno-depends}
+
+---
+ changelog            |    5 ++++-
+ control              |    4 ++--
+ control.librelogo.in |    2 +-
+ 3 files changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/changelog b/changelog
+index 1510f68..357169f 100644
+--- a/changelog
++++ b/changelog
+@@ -4,8 +4,11 @@ libreoffice (1:4.1.0-3) unstable; urgency=low
+     - use system-clucene again now that it's in sid
+   * debian/libreoffice-common.postrm.in:
+     - add missed || true and use rm -f for javasettinsgunopkginstall.xml...
++  * debian/control.librelogo.in:
++    - apparently librelogo also needs -script-provider-python. Depend on
++      that instead of ${pyuno-depends}, thanks Bjoern Michaelsen
+ 
+- -- Rene Engelhard <rene@debian.org>  Fri, 26 Jul 2013 20:25:16 +0200
++ -- Rene Engelhard <rene@debian.org>  Mon 29 Jul 2013 13:28:36 +0200
+ 
+ libreoffice (1:4.1.0-2) unstable; urgency=low
+ 
+diff --git a/control b/control
+index 96ca62b..8b98b45 100644
+--- a/control
++++ b/control
+@@ -4570,9 +4570,9 @@ Package: libreoffice-librelogo
+ Section: misc
+ Architecture: all
+ Depends: libreoffice-core (>= 1:3.4~),
++         libreoffice-script-provider-python,
+          libreoffice-writer,
+-         ${misc:Depends},
+-         ${pyuno-depends}
++         ${misc:Depends}
+ Description: Logo-like progamming language for LibreOffice
+  LibreOffice is a full-featured office productivity suite that provides
+  a near drop-in replacement for Microsoft(R) Office.
+diff --git a/control.librelogo.in b/control.librelogo.in
+index 16a0b61..1715d29 100644
+--- a/control.librelogo.in
++++ b/control.librelogo.in
+@@ -3,7 +3,7 @@ Section: misc
+ Architecture: all
+ Depends: libreoffice-core (>= 1:3.4~),
+          libreoffice-writer,
+-         ${pyuno-depends},
++         libreoffice-script-provider-python,
+          ${misc:Depends}
+ Description: Logo-like progamming language for LibreOffice
+  LibreOffice is a full-featured office productivity suite that provides
+-- 
+1.7.10.4
+
