@@ -44,7 +44,7 @@ OOUREDIR:=usr/lib/ure
 OOSDKDIR:=$(OODIR)/sdk
 
 # Figure out who's building this package.
-OOO_VENDOR:=The Document Foundation/Debian and Blankon
+OOO_VENDOR:=The Document Foundation/Debian and BlankOn
 ifeq "$(DEB_VENDOR)" "BlankOn"
 OOO_VENDOR=The Document Foundation, Debian and BlankOn
 endif
@@ -2654,8 +2654,10 @@ endif
 	# share/uno_packages/cache...
 	rm -rf $(PKGDIR)-common/$(OODIR)/presets/uno_packages
 
-	# set PYTHONPATH in unopkg
-	perl -pi -e 's,unset XENVIRONMENT,unset XENVIRONMENT\n\nexport PYTHONPATH=\"/$(OODIR)/program\"\n\n,' \
+	# set PYTHONPATH in soffice and unopkg
+	sed -i -e 's,case "`uname -s`" in,PYTHONPATH=$$sd_prog$${PYTHONPATH+:$$PYTHONPATH}\nexport PYTHONPATH\n\ncase "`uname -s`" in,' \
+		$(PKGDIR)-common/$(OODIR)/program/soffice
+	sed -i -e 's,unset XENVIRONMENT,PYTHONPATH=$$sd_prog$${PYTHONPATH+:$$PYTHONPATH}\nexport PYTHONPATH\n\nunset XENVIRONMENT,' \
 		$(PKGDIR)-common/$(OODIR)/program/unopkg
 
 ifeq "$(PACKAGE_TTF_OPENSYMBOL)" "y"
@@ -3183,7 +3185,7 @@ endif
 ifeq "$(ENABLE_JAVA)" "y"
 	for p in $(ARCH_INDEP_PACKAGES); do \
                 if echo "$$p" | grep -q help; then continue; fi; \
-                jh_depends -v -p$$p -Xlibreoffice-gcj -Xlibreoffice-dbg \
+                jh_depends -p$$p -Xlibreoffice-gcj -Xlibreoffice-dbg \
 			-Xlibreoffice-report-builder; \
         done
 endif
