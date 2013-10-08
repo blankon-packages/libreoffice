@@ -45,7 +45,7 @@ OOSDKDIR:=$(OODIR)/sdk
 
 # Figure out who's building this package.
 OOO_VENDOR:=The Document Foundation/Debian and BlankOn
-ifeq "$(DEB_VENDOR)" "BlankOn
+ifeq "$(DEB_VENDOR)" "BlankOn"
 OOO_VENDOR=The Document Foundation, Debian and BlankOn
 endif
 export OOO_VENDOR
