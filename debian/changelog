@@ -1,3 +1,9 @@
+libreoffice (1:4.1.2-1blankon2) suroboyo; urgency=low
+
+  * Change debian-presentation-background.xcf debian-presentation.otp           
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Tue, 15 Oct 2013 21:26:47 +0700
+
 libreoffice (1:4.1.2-1blankon1) suroboyo; urgency=low
 
   * New Upstream Release
