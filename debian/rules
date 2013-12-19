@@ -564,7 +564,7 @@ endif
 # Debian WHeezy
 ifeq "$(shell dpkg-parsechangelog | grep Distribution | awk '{ print $$2 }')" "wheezy-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out libcmis libcdr clucene libmspub libmwaw libodfgen mdds liblangtag orcus harfbuzz libwpd redland, $(SYSTEM_STUFF))
+  SYSTEM_STUFF := $(filter-out libcmis libcdr clucene libmspub libmwaw libodfgen mdds liblangtag orcus harfbuzz libwpd redland libvisio, $(SYSTEM_STUFF))
   WHEEZY_BACKPORT=y
 endif
 ifeq "$(shell dpkg-parsechangelog | grep Distribution | awk '{ print $$2 }')" "UNRELEASED"
@@ -1221,9 +1221,15 @@ ifeq "$(ENABLE_JAVA)" "y"
   endif
   ifeq "$(ENABLE_SCRIPT_PROVIDER_BSH)" "y"
     ifneq (,$(filter beanshell, $(SYSTEM_STUFF)))
+      ifneq "$(WHEEZY_BACKPORT)" "y"
+	# -gcj is gone
+	BUILD_DEPS_INDEP += , libbsh-java
+	BSH_DEPENDS = libbsh-java
+      else
 	BUILD_DEPS_INDEP += , bsh (>= 2.0b4)$(OOO_NO_JAVA_ARCHS)
 	BSH_DEPENDS = bsh (>= 2.0b4)
 	JAVA_GCJ_DEPENDS += , bsh-gcj [$(OOO_GCJ_ARCHS)]
+      endif
     endif
 	CONFIGURE_FLAGS += --enable-scripting-beanshell
   else
@@ -3037,6 +3043,9 @@ ifeq "$(BUILD_KFREEBSD)" "y"
 endif
 ifeq (,$(filter icu, $(SYSTEM_STUFF)))
 	cat debian/shlibs.override.icu >> debian/shlibs.local
+endif
+ifneq (,$(filter libvisio, $(SYSTEM_STUFF)))
+	cat debian/shlibs.override.libvisio >> debian/shlibs.local
 endif
 	# we need to do it in two steps. The new dpkg-shlibdeps doesn't find
 	# /usr/lib/libgcj-bc.so when specifying -l$(GCJ_JAWT_DIR)
