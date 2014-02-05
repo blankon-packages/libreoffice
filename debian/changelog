@@ -1,3 +1,63 @@
+libreoffice (1:4.2.0~rc4-1blankon1) suroboyo; urgency=low
+
+  * New Upstream Release
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Wed, 05 Feb 2014 11:36:28 +0700
+
+libreoffice (1:4.2.0~rc4-1) UNRELEASED; urgency=low
+
+
+  * new upstream rc
+  * merge from debian and fix subsequentcheckbase
+  * update patch queue
+  * updated make-package-modules-not-suck.diff to not move libs from
+    PLAINLIBS_OOO to OOOLIBS when moving them to base (LP: #1272905)
+    - this caused the hsqldb troubles
+    - removing the hotfix patch for that, as it is now obsolete
+  * tweak -ku transitional to match packages we produce
+  * there is unfortunately evidence that PPA builders are still too small, so
+    bring back the remove objects before install hack
+  * also move the right file in install-common
+  * backport upstream patches to fix endian issues on ppc
+  * separate out -l10n source package
+  * bump upstream release candidate
+  * use system lpsolve again
+  * fix presentation minimizer transitional to accept prereleases
+  * remove discspace hack -- we should be ok now that we split out l10n
+  * use the right arch of jdk and boost
+  * skip branding on l10n packages
+  * dont propagate BUILD_PATH and LD_LIBRARY_BUILD_PATH -- they leak the build
+    env and seem to be unneeded in -l10n anyway
+  * new upstream release candidate
+    - rewrites Qt4 based nested yield mutex locking (closes: #728987, #723087)
+  * add src -> external/tarballs move already from 4.3 branch and create
+    new .orig-external tarball
+  * debian/rules:
+    - autodoc got replaced by doxygen. bump doxygen build-dep to needed
+      (>= 1.8.4-1) and disable packaging the SDK docs on wheezy-backports.
+      Run dh_doxygen
+    - build-depend on fonts-liberation when running the tests - the
+      sc_macros_tests VBA tests need Arial etc.-similar fonts
+    - add conditionals for new libs used: opencl, firebird, avahi-client,
+      vlc, libetonyek, libfreehand, libe-book; add necessary updates/bumps
+  * debian/control.in, debian/rules:
+    - split avmediagst.so into new -avmedia-backend-gstreamer and put new vlc
+      backend into a new -avmedia-backend-vcl. Recommend
+      -gstreamer | -avmedia and make metapackage depend on that, too
+  * debian/control*in, debian/rules, debian/libreoffice-base.NEWS:
+    - create new libreoffice-base-drivers - as name says. Move hsqldb and
+      firebird into own packages. Mention to people that they need
+      to install the new -sdbc-hsqldb
+ 
+ -- Rene Engelhard <rene@debian.org>  Tue, 07 Jan 2014 20:18:02 +0100
+
+libreoffice (1:4.1.4-3) UNRELEASED; urgency=low
+
+  * debian/control.ure.in:
+    - add missing second a in "additional" (closes: #734512) 
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 07 Jan 2014 20:41:08 +0100
+
 libreoffice (1:4.1.4-2blankon1) suroboyo; urgency=low
 
   * New Upstream updates 

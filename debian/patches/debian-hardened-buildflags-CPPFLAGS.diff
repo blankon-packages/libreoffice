@@ -1,8 +1,32 @@
---- a/configure.ac-old	2012-03-02 21:48:47.000000000 +0000
-+++ b/configure.ac	2012-03-02 21:51:29.000000000 +0000
-@@ -9681,6 +9687,11 @@ AC_SUBST(GSTREAMER_0_10_CFLAGS)
- AC_SUBST(GSTREAMER_0_10_LIBS)
- AC_SUBST(ENABLE_GSTREAMER_0_10)
+From: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
+Date: Sat, 9 Nov 2013 02:00:34 +0100
+Subject: [PATCH] debian-hardened-buildflags-CPPFLAGS.diff
+
+Change-Id: I2ba4dc925a66ecca5c7cc4af87224511a3bc88d9
+
+---
+ config_host.mk.in       | 1 +
+ configure.ac            | 5 +++++
+ solenv/gbuild/gbuild.mk | 2 ++
+ 3 files changed, 8 insertions(+)
+
+diff --git a/config_host.mk.in b/config_host.mk.in
+--- a/config_host.mk.in
++++ b/config_host.mk.in
+@@ -71,6 +71,7 @@ export CPPUNIT_CFLAGS=$(gb_SPACE)@CPPUNIT_CFLAGS@
+ export CPPUNIT_LIBS=$(gb_SPACE)@CPPUNIT_LIBS@
+ export CPUNAME=@CPUNAME@
+ export CDEFAULTOPT=@CDEFAULTOPT@
++export HARDEN_CPPFLAGS=@HARDEN_CPPFLAGS@
+ export CROSS_COMPILING=@CROSS_COMPILING@
+ export CURL=@CURL@
+ export CURL_CFLAGS=$(gb_SPACE)@CURL_CFLAGS@
+diff --git a/configure.ac b/configure.ac
+--- a/configure.ac
++++ b/configure.ac
+@@ -10307,6 +10307,11 @@ else
+ fi
+ AC_SUBST(ENABLE_VLC)
  
 +if test -x /usr/bin/dpkg-buildflags; then
 +	HARDEN_CPPFLAGS=`dpkg-buildflags --get CPPFLAGS 2>/dev/null`
@@ -12,26 +36,18 @@
  dnl ===================================================================
  dnl Check whether the OpenGL libraries are available
  dnl ===================================================================
---- a/config_host.mk.in-old	2012-04-06 14:17:55.164239390 +0200
-+++ b/config_host.mk.in	2012-04-06 14:18:55.440239065 +0200
-@@ -72,6 +72,7 @@
- export CPU=@CPU@
- export CPUNAME=@CPUNAME@
- export CDEFAULTOPT=@CDEFAULTOPT@
-+export HARDEN_CPPFLAGS=@HARDEN_CPPFLAGS@
- export CROSS_COMPILING=@CROSS_COMPILING@
- export CURL=@CURL@
- export CURL_CFLAGS=$(gb_SPACE)@CURL_CFLAGS@
 diff --git a/solenv/gbuild/gbuild.mk b/solenv/gbuild/gbuild.mk
-index c71cb40..f826d65 100644
 --- a/solenv/gbuild/gbuild.mk
 +++ b/solenv/gbuild/gbuild.mk
-@@ -273,6 +273,8 @@ gb_GLOBALDEFS += \
- 		ENABLE_READONLY_INSTALLSET \
+@@ -256,6 +256,8 @@ gb_GLOBALDEFS += \
+ 		ENABLE_LTO \
  	)
  
 +gb_GLOBALDEFS += $(HARDEN_CPPFLAGS)
 +
  gb_GLOBALDEFS := $(sort $(gb_GLOBALDEFS))
  
- ifeq ($(origin gb_RUNNABLE_INSTDIR),undefined)
+ gb_USER_INSTALLATION = $(call gb_Helper_make_url,$(TESTINSTALLDIR)/)
+-- 
+1.8.3.2
+

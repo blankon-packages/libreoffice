@@ -1,8 +1,34 @@
+From: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
+Date: Sat, 9 Nov 2013 02:00:26 +0100
+Subject: [PATCH] split-evoab.diff
+
+Change-Id: I6897efcbda7d38f80f92fc6d32da7198a885f98c
+
+---
+ postprocess/CustomTarget_registry.mk |  5 +++--
+ scp2/source/gnome/file_gnome.scp     | 10 ++++++++++
+ scp2/source/gnome/module_gnome.scp   |  3 +++
+ 3 files changed, 16 insertions(+), 2 deletions(-)
+
+diff --git a/postprocess/CustomTarget_registry.mk b/postprocess/CustomTarget_registry.mk
+--- a/postprocess/CustomTarget_registry.mk
++++ b/postprocess/CustomTarget_registry.mk
+@@ -335,8 +335,9 @@ ifeq ($(DISABLE_NEON),$(false))
+ postprocess_FILES_main += $(postprocess_MOD)/org/openoffice/ucb/Configuration-neon.xcu
+ endif
+ ifeq ($(ENABLE_EVOAB2),TRUE)
+-postprocess_FILES_main += $(call gb_XcuModuleTarget_get_target,connectivity/registry/evoab2)/org/openoffice/Office/DataAccess/Drivers-evoab2.xcu
+-postprocess_FILES_main += $(postprocess_MOD)/org/openoffice/Office/DataAccess-evoab2.xcu
++postprocess_XCDS += evoab.xcd
++postprocess_FILES_evoab += $(call gb_XcuModuleTarget_get_target,connectivity/registry/evoab2)/org/openoffice/Office/DataAccess/Drivers-evoab2.xcu
++postprocess_FILES_evoab += $(postprocess_MOD)/org/openoffice/Office/DataAccess-evoab2.xcu
+ postprocess_DRIVERS += evoab
+ endif
+ ifeq ($(ENABLE_JAVA),TRUE)
 diff --git a/scp2/source/gnome/file_gnome.scp b/scp2/source/gnome/file_gnome.scp
-index 68f413f..96baa6f 100644
 --- a/scp2/source/gnome/file_gnome.scp
 +++ b/scp2/source/gnome/file_gnome.scp
-@@ -34,3 +34,13 @@ File gid_File_Share_Registry_Gnome_Xcd
+@@ -25,3 +25,13 @@ File gid_File_Share_Registry_Gnome_Xcd
      Name = "gnome.xcd";
  End
  #endif
@@ -17,10 +43,9 @@ index 68f413f..96baa6f 100644
 +#endif
 +
 diff --git a/scp2/source/gnome/module_gnome.scp b/scp2/source/gnome/module_gnome.scp
-index 9f4d0b8..da58fe2 100644
 --- a/scp2/source/gnome/module_gnome.scp
 +++ b/scp2/source/gnome/module_gnome.scp
-@@ -42,6 +42,9 @@ Module gid_Module_Optional_Gnome
+@@ -33,6 +33,9 @@ Module gid_Module_Optional_Gnome
  #if (defined ENABLE_GNOMEVFS && defined ENABLE_LOCKDOWN) || defined ENABLE_GIO
        gid_File_Share_Registry_Gnome_Xcd,
  #endif
@@ -28,28 +53,8 @@ index 9f4d0b8..da58fe2 100644
 +     gid_File_Share_Registry_Evoab_Xcd,
 +#endif
        gid_File_Bin_Gnome_Open_Url,
-       gid_File_Bin_Gnome_Open_Url_Bin
-     );
-diff --git a/postprocess/CustomTarget_registry.mk b/postprocess/CustomTarget_registry.mk
-index 181c782..33f4640 100644
---- a/postprocess/CustomTarget_registry.mk
-+++ b/postprocess/CustomTarget_registry.mk
-@@ -25,6 +25,7 @@ postprocess_XCDS := \
- 	ctl.xcd \
- 	ctlseqcheck.xcd \
- 	draw.xcd \
-+	evoab.xcd \
- 	graphicfilter.xcd \
- 	impress.xcd \
- 	korea.xcd \
-@@ -327,8 +328,8 @@ ifeq ($(DISABLE_NEON),$(false))
- postprocess_FILES_main += $(postprocess_MOD)/org/openoffice/ucb/Configuration-neon.xcu
- endif
- ifeq ($(ENABLE_EVOAB2),TRUE)
--postprocess_FILES_main += $(postprocess_MOD)/org/openoffice/Office/DataAccess/Drivers-evoab2.xcu
--postprocess_FILES_main += $(postprocess_MOD)/org/openoffice/Office/DataAccess-evoab2.xcu
-+postprocess_FILES_evoab += $(postprocess_MOD)/org/openoffice/Office/DataAccess/Drivers-evoab2.xcu
-+postprocess_FILES_evoab += $(postprocess_MOD)/org/openoffice/Office/DataAccess-evoab2.xcu
- postprocess_DRIVERS += evoab
- endif
- ifeq ($(SOLAR_JAVA),TRUE)
+       gid_File_Bin_Gnome_Open_Url_Bin,
+       gid_File_Bin_XidFullscreen
+-- 
+1.8.3.2
+

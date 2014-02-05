@@ -24,7 +24,9 @@ Build-Conflicts: ant (= 1.8.0-1) [%OOO_GCJ_JDK_ARCHS%],
                  libxul-dev (= 1.8.0.13~pre070720-0etch1),
                  nvidia-glx-dev,
                  nvidia-glx-legacy-dev,
-                 qt3-dev-tools
+                 qt3-dev-tools,
+                 amd-libopencl1,
+                 nvidia-libopencl1
 Standards-Version: 3.9.4
 XS-Python-Version: @PYTHON2_VERSION@
 XS-Python3-Version: @PYTHON_VERSION_CONTROL@
@@ -45,11 +47,14 @@ Depends: fonts-sil-gentium-basic,
          libreoffice-math,
          libreoffice-report-builder-bin%OOO_NO_REPORTDESIGN_ARCHS%,
          libreoffice-writer,
+         ${avmedia-be-depends},
          ${dejavu-depends},
          ${java-common-depends},
          ${misc:Depends},
          ${pyuno-depends}
-Recommends: fonts-liberation | ttf-mscorefonts-installer, libpaper-utils
+Recommends: fonts-liberation | ttf-mscorefonts-installer,
+            libpaper-utils,
+            %LO-DESKTOP-INTEGRATION%
 Suggests: cups-bsd,
           hunspell-dictionary,
           hyphen-hyphenation-patterns,
@@ -68,8 +73,7 @@ Suggests: cups-bsd,
           unixodbc,
           ${gstreamer-plugins-suggests},
           ${java-runtime-depends},
-          ${ooo-officebean-dep},
-          %LO-DESKTOP-INTEGRATION%
+          ${ooo-officebean-dep}
 Description: office productivity suite (metapackage)
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -146,7 +150,7 @@ Depends: libreoffice-l10n-as,
          libreoffice-l10n-ta,
          libreoffice-l10n-te,
          ${misc:Depends}
-Recommends: fonts-indic
+Recommends: ttf-indic-fonts
 Description: office productivity suite -- Indic language packages
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -159,7 +163,8 @@ Architecture: %OOO_ARCHS%
 Depends: fontconfig,
          fonts-opensymbol,
          libreoffice-common (>> ${base-version}),
-         ure (>= 4.1.2~),
+         ure (>= 4.2~),
+        ${lpsolve-dep},
          ${misc:Depends},
          ${shlibs:Depends}
 Breaks: cli-uno-bridge (<< 1:3.0.0~dev300m22),
@@ -189,13 +194,13 @@ Breaks: cli-uno-bridge (<< 1:3.0.0~dev300m22),
         libreoffice-dev (<< ${binary:Version}),
         libreoffice-draw (<< ${binary:Version}),
         libreoffice-evolution (<< ${binary:Version}),
-        libreoffice-evolution (<< 1:3.4.1~),
         libreoffice-gnome (<< ${binary:Version}),
         libreoffice-gtk (<< ${binary:Version}),
         libreoffice-impress (<< ${binary:Version}),
         libreoffice-kab (<< 1:3.4.1~),
         libreoffice-kde (<< ${binary:Version}),
         libreoffice-officebean (<< ${binary:Version}),
+        libreoffice-presentation-minimizer (<< 1:4.2~),
         libreoffice-sdbc-postgresql (<< 0.8.1~),
         libreoffice-style-andromeda (<< 1:3.3.0-1),
         libreoffice-style-crystal (<< 1:3.3.0-1),
@@ -268,6 +273,7 @@ Pre-Depends: dpkg (>= 1.15.7.2~)
 Depends: libreoffice-style-default | libreoffice-style, ure, ${misc:Depends}
 Suggests: libreoffice-style-crystal,
           libreoffice-style-hicontrast,
+          libreoffice-style-human,
           libreoffice-style-oxygen,
           libreoffice-style-tango
 Recommends: xfonts-mathml, ${pyuno-depends}, ${textcat-data-recommends}
@@ -278,6 +284,7 @@ Conflicts: broffice,
 Provides: libreoffice-l10n-en-us
 Breaks: libreoffice-core (<< 1:${oover}~),
         libreoffice-core (>= 1:${next-oover}~),
+        libreoffice-emailmerge (<< 1:4.0.2~rc1),
         libreoffice-style-andromeda (<< 1:${oover}~),
         libreoffice-style-crystal (<< 1:${oover}~),
         libreoffice-style-crystal (>= 1:${next-oover}~),
@@ -285,6 +292,8 @@ Breaks: libreoffice-core (<< 1:${oover}~),
         libreoffice-style-galaxy (>= 1:${next-oover}~),
         libreoffice-style-hicontrast (<< 1:${oover}~),
         libreoffice-style-hicontrast (>= 1:${next-oover}~),
+        libreoffice-style-human (<< 1:${oover}~),
+        libreoffice-style-human (>= 1:${next-oover}~),
         libreoffice-style-oxygen (<< 1:${oover}~),
         libreoffice-style-oxygen (>= 1:${next-oover}~),
         libreoffice-style-tango (<< 1:${oover}~),
@@ -328,11 +337,12 @@ Depends: libreoffice-base-core (= ${binary:Version})%OOO_NO_BASE_ARCHS%,
          libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: libreoffice-math,
-            ${java-common-depends},
-            ${java-runtime-depends}
+Recommends: libreoffice-math
 Replaces: libreoffice-core (<< 1:3.3.2-5)
-Suggests: libreoffice-base, libreoffice-gcj
+Suggests: libreoffice-base,
+          libreoffice-gcj,
+          ${java-common-depends},
+          ${java-runtime-depends}
 Description: office productivity suite -- word processor
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -343,9 +353,9 @@ Package: libreoffice-calc
 Architecture: %OOO_ARCHS%
 Depends: libreoffice-base-core (= ${binary:Version})%OOO_NO_BASE_ARCHS%,
          libreoffice-core (= ${binary:Version}),
-         ${lpsolve-dep},
          ${misc:Depends},
          ${shlibs:Depends}
+Suggests: ${opencl-sug}
 Description: office productivity suite -- spreadsheet
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -358,6 +368,7 @@ Depends: libreoffice-core (= ${binary:Version}),
          libreoffice-draw (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
+Recommends: ${avmedia-be-depends}
 Description: office productivity suite -- presentation
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -369,6 +380,7 @@ Architecture: %OOO_ARCHS%
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
+Recommends: libreoffice-pdfimport
 Description: office productivity suite -- drawing
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -408,45 +420,24 @@ Package: libreoffice-base
 Architecture: %OOO_BASE_ARCHS%
 Section: database
 Depends: libreoffice-base-core (= ${binary:Version}),
+         libreoffice-base-drivers (= ${binary:Version}),
          libreoffice-core (= ${binary:Version}),
-         ${java-common-depends},
-         ${java-runtime-depends},
-         ${java:Depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Suggests: libmyodbc | odbc-postgresql | libsqliteodbc | tdsodbc | mdbtools,
-          libmysql-java | libpg-java | libjtds-java,
-          libreoffice-gcj,
+Suggests: libreoffice-gcj,
           libreoffice-report-builder,
           unixodbc
-Recommends: libreoffice-writer
+Recommends: libreoffice-writer, ${java-common-depends}, ${java-runtime-depends}
 Description: office productivity suite -- database
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the database component for LibreOffice.
- .
- You can extend the functionality of LibreOffice Base by installing these
- packages:
- .
-  * unixodbc: ODBC database support
-  * libmyodbc | odbc-postgresql | libsqliteodbc | tdsodbc | mdbtools: ODBC
-    drivers for:
-    - MySQL
-    - PostgreSQL
-    - SQLite
-    - MS SQL / Sybase SQL
-    - *.mdb (JET / MS Access)
-  * libmysql-java | libpg-java | libjtds-java: JDBC Drivers
-    for:
-    - MySQL
-    - PostgreSQL
-    - MS SQL Server and Sybase
 
 Package: libreoffice-style-crystal
 Architecture: all
-Enhances: libreoffice-core
 Depends: ${misc:Depends}
+Recommends: libreoffice-core
 Suggests: crystalcursors, kde-icons-crystal
 Provides: libreoffice-style
 Replaces: libreoffice-common (<< 1:3.3.0~rc4-2)
@@ -458,8 +449,8 @@ Description: office productivity suite -- Crystal symbol style
 
 Package: libreoffice-style-oxygen
 Architecture: all
-Enhances: libreoffice-core
 Depends: ${misc:Depends}
+Recommends: libreoffice-core
 Suggests: kde-icons-oxygen, oxygencursors
 Provides: libreoffice-style
 Replaces: libreoffice-common (<< 1:3.3.0~rc4-2)
@@ -471,8 +462,8 @@ Description: office productivity suite -- Oxygen symbol style
 
 Package: libreoffice-style-tango
 Architecture: all
-Enhances: libreoffice-core
 Depends: ${misc:Depends}
+Recommends: libreoffice-core
 Suggests: tango-icon-theme
 Provides: libreoffice-style
 Replaces: libreoffice-common (<< 1:3.3.0~rc4-2)
@@ -485,8 +476,8 @@ Description: office productivity suite -- Tango symbol style
 
 Package: libreoffice-style-hicontrast
 Architecture: all
-Enhances: libreoffice-core
 Depends: ${misc:Depends}
+Recommends: libreoffice-core
 Suggests: gtk2-engines
 Provides: libreoffice-style
 Replaces: libreoffice-common (<< 1:3.3.0~rc4-2)
@@ -497,9 +488,23 @@ Description: office productivity suite -- Hicontrast symbol style
  This package contains the "hicontrast" symbol style, needs to be manually
  enabled in the LibreOffice option menu.
 
+Package: libreoffice-style-sifr
+Architecture: all
+Enhances: libreoffice-core
+Depends: ${misc:Depends}
+Provides: libreoffice-style
+Description: office productivity suite -- Sifr symbol style
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the "sifr" symbol style (an adaption of the Gnome
+ symbolic theme), needs to be manually  enabled in the LibreOffice option
+ menu.
+
 Package: libreoffice-style-galaxy
 Architecture: all
 Depends: ${misc:Depends}
+Recommends: libreoffice-core
 Provides: libreoffice-style, libreoffice-style-default
 Replaces: libreoffice-common (<< 1:3.3.0~rc4-2)
 Description: office productivity suite -- Galaxy (Default) symbol style
@@ -510,15 +515,29 @@ Description: office productivity suite -- Galaxy (Default) symbol style
  MS Windows (tm) and when not using GNOME or KDE, needs to be manually
  enabled in the LibreOffice option menu.
 
+Package: libreoffice-style-human
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: libreoffice-core
+Suggests: crystalcursors, kde-icons-crystal
+Provides: libreoffice-style, libreoffice-style-default
+Description: office productivity suite -- Human symbol style
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the "human" symbol style, default style for Ubuntu.
+
 Package: libreoffice-gtk
 Architecture: %OOO_ARCHS%
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: libreoffice-style-tango
+Recommends: libreoffice-style-human | libreoffice-style-tango
 Section: gnome
 Enhances: libreoffice
-Conflicts: libgtk2.0-0 (= 2.12.10-1) [amd64]
+Conflicts: libgtk2.0-0 (= 2.12.10-1) [amd64], lo-menubar
+Provides: lo-menubar
+Replaces: lo-menubar
 Description: office productivity suite -- GTK+ integration
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -532,7 +551,7 @@ Architecture: %OOO_ARCHS%
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: libreoffice-style-tango
+Recommends: libreoffice-style-human | libreoffice-style-tango
 Section: gnome
 Enhances: libreoffice
 Description: office productivity suite -- GTK+ 3.0 integration
@@ -552,40 +571,20 @@ Depends: gconf2,
 Suggests: libreoffice-evolution
 Section: gnome
 Enhances: libreoffice
+Conflicts: libreoffice-core (<< 1:3.9999)
+Replaces: libreoffice-core (<< 1:3.9999)
 Provides: libreoffice-gtk-gnome
 Description: office productivity suite -- GNOME integration
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains the GNOME VFS support and a GConf backend.
+ This package contains the GNOME VFS support, the session installer
+ integration and a GConf backend.
  .
  You can extend the functionality of this by installing these packages:
  .
   * libreoffice-evolution: Evolution addressbook support
   * evolution
-
-Package: python-uno
-Provides: ${python:Provides}
-XB-Python-Version: ${python:Versions}
-Section: oldlibs
-Architecture: %OOO_ARCHS%
-Enhances: libreoffice
-Depends: libreoffice-core (= ${binary:Version}),
-         ${misc:Depends},
-         ${python:Depends},
-         ${shlibs:Depends}
-Breaks: libreoffice-common (<< 1:3.5~), libreoffice-core (<< 1:3.5~)
-Conflicts: python3-uno, python3.3-uno
-Description: Python-UNO bridge (support for old python 2)
- The Python-UNO bridge allows use of the standard LibreOffice API
- with the Python scripting language. It additionally allows
- others to develop UNO components in Python, thus Python UNO components
- may be run within the LibreOffice process and can be called from C++
- or the built in StarBasic scripting language.
- .
- This package is for compatibility with applications/libraries not ported
- to python 3 yet. Prefer python3-uno over this.
-Homepage: http://udk.openoffice.org/python/python-bridge.html
 
 Package: python3-uno
 Section: python
@@ -595,7 +594,7 @@ Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends}
-Conflicts: python-uno, python3-uno (<< 1:4.0.2~rc2), python3.3-uno
+Conflicts: libreoffice-common (<< 1:3.5.0), python-uno, python3-uno (<< 1:4.0.2~rc2), python3.3-uno
 Replaces: python3-uno (<< 1:4.0.2~rc2), python3.3-uno
 Description: Python-UNO bridge
  The Python-UNO bridge allows use of the standard LibreOffice API
@@ -711,3 +710,98 @@ Description: PDF Import component for LibreOffice
  This package contains a component enabling LibreOffice to import PDF
  Documents.
 
+Package: libreoffice-avmedia-backend-gstreamer
+Section: misc
+Priority: optional
+Architecture: %OOO_ARCHS%
+Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
+Replaces: libreoffice-core (<< 1:4.2~)
+Provides: libreoffice-avmedia-backend
+Description: GStreamer backend for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains a GStreamer backend for LibreOffices avmedia component
+ to play audio/video.
+
+Package: libreoffice-avmedia-backend-vlc
+Section: misc
+Priority: optional
+Architecture: %OOO_ARCHS%
+Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}, ${libvlc-dep} (>= 2.0.8)
+Provides: libreoffice-avmedia-backend
+Description: VLC backend for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains a VLC backend for LibreOffices avmedia component
+ to play audio/video.
+
+Package: libreoffice-sdbc-firebird
+Depends: libreoffice-core, ${shlibs:Depends}
+Architecture: %OOO_BASE_ARCHS%
+Section: database
+Enhances: libreoffice-base-drivers
+Description: Firebird SDBC driver for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ The Firebird SDBC Driver allows one to use the Firebird database from
+ LibreOffice without any wrapper layer such as ODBC or JDBC.
+
+Package: libreoffice-sdbc-hsqldb
+Depends: libreoffice-core, ${java-common-depends}, ${java:Depends}
+Replaces: libreoffice-base (<< 1:4.2~)
+Architecture: %OOO_JAVA_ARCHS%
+Section: database
+Enhances: libreoffice-base-drivers
+Description: HSQLDB SDBC driver for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ The HSQLDB SDBC Driver allows one to use the HSQLDB embedded database from
+ LibreOffice without any wrapper layer such as ODBC or JDBC.
+
+Package: libreoffice-base-drivers
+Depends: libreoffice-core, ${shlibs:Depends}
+Architecture: %OOO_BASE_ARCHS%
+Section: database
+Suggests: libreoffice-sdbc-postgresql | odbc-postgresql | libpg-java,
+          libreoffice-mysql-connector | libmyodbc | libmysql-java,
+          libsqliteodbc | tdsodbc | mdbtools,
+          libjtds-java,
+Recommends: libreoffice-sdbc-hsqldb [%OOO_JAVA_ARCHS%], libreoffice-sdbc-firebird
+Replaces: libreoffice-core (<< 1:4.2~), libreoffice-base (<< 1:4.2~)
+Description: Database connectvity drivers for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the database connectivity drivers used by LibreOffices
+ database functionality:
+  - ODBC
+  - JDBC
+  - dBase
+  - Calc
+  - Flat files
+  - MySQL
+ .
+ You can extend this by installing:
+ .
+  * unixodbc: ODBC database support
+  * libmyodbc | odbc-postgresql | libsqliteodbc | tdsodbc | mdbtools: ODBC
+    drivers for:
+    - MySQL
+    - PostgreSQL
+    - SQLite
+    - MS SQL / Sybase SQL
+    - *.mdb (JET / MS Access)
+  * libmysql-java | libpg-java | libjtds-java: JDBC Drivers
+    for:
+    - MySQL
+    - PostgreSQL
+    - MS SQL Server and Sybase
+  * libreoffice-sdbc-hsqldb: embedded HSQLDB SDBC Driver
+  * libreoffice-sdbc-firebird: Firebird SDBC Driver
+  * libreoffice-sdbc-postgresql: PostgreSQL SDBC Driver
+  * libreoffice-mysql-connector: "native" MySQL Connector
+ 
