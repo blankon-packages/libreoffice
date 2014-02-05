@@ -1,8 +1,9 @@
 libreoffice (1:4.2.0~rc4-1blankon1) suroboyo; urgency=low
 
   * New Upstream Release
+  * debian/control MinGW32 
 
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Wed, 05 Feb 2014 11:36:28 +0700
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Wed, 05 Feb 2014 14:52:29 +0700
 
 libreoffice (1:4.2.0~rc4-1) UNRELEASED; urgency=low
 
