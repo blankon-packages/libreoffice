@@ -2,7 +2,6 @@ Package: libreoffice-dev
 Section: devel
 Architecture: %OOO_ARCHS%
 Depends: libreoffice-core (= ${binary:Version}),
-         uno-libs3,
          ${idlc-cpp-depends},
          ${misc:Depends},
          ${shlibs:Depends}
@@ -21,7 +20,8 @@ Package: libreoffice-dev-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
-Recommends: libreoffice-dev (= ${binary:Version}), www-browser
+Recommends: libreoffice-dev (= ${binary:Version}),
+            www-browser
 Suggests: libreoffice-dtd-officedocument1.0
 Conflicts: openoffice.org-dev-doc
 Description: office productivity suite -- SDK documentation

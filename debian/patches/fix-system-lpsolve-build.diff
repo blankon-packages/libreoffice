@@ -1,30 +1,8 @@
-From: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
-Date: Sat, 9 Nov 2013 02:00:27 +0100
-Subject: [PATCH] fix-system-lpsolve-build.diff
-
-Change-Id: Ibe23717730dfb8365b738e366d083ffae9cfbe5a
-
----
- RepositoryExternal.mk | 2 +-
- configure.ac          | 3 ++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/RepositoryExternal.mk b/RepositoryExternal.mk
---- a/RepositoryExternal.mk
-+++ b/RepositoryExternal.mk
-@@ -1801,7 +1801,7 @@ endif # SYSTEM_LCMS2
- ifeq ($(SYSTEM_LPSOLVE),YES)
- 
- define gb_LinkTarget__use_lpsolve
--$(call gb_LinkTarget_add_libs,$(1),-llpsolve55)
-+$(call gb_LinkTarget_add_ldflags,$(1),-Wl$(COMMA)--no-as-needed /usr/lib/lp_solve/liblpsolve55.so -Wl$(COMMA)-rpath=/usr/lib/lp_solve)
- $(call gb_LinkTarget_add_defs,$(1),\
- 	-DSYSTEM_LPSOLVE \
- )
-diff --git a/configure.ac b/configure.ac
---- a/configure.ac
-+++ b/configure.ac
-@@ -9522,8 +9522,9 @@ if test "$with_system_lpsolve" = "yes"; then
+diff --git a/configure.ac b/configure.in
+index d9d28ff..4fcbe7c 100644
+--- libreoffice-3.5.0/configure.ac
++++ libreoffice-3.5.0/configure.ac
+@@ -8691,8 +8691,9 @@ if test "$with_system_lpsolve" = "yes"; then
      # some systems need this. Like Ubuntu....
      AC_CHECK_LIB(m, floor)
      AC_CHECK_LIB(dl, dlopen)
@@ -35,6 +13,16 @@ diff --git a/configure.ac b/configure.ac
      LIBS=$save_LIBS
      libo_MINGW_CHECK_DLL([lpsolve55])
  else
--- 
-1.8.3.2
-
+diff --git a/RepositoryExternal.mk b/RepositoryExternal.mk
+index 7688e42..c8f3fa2 100644
+--- a/RepositoryExternal.mk
++++ b/RepositoryExternal.mk
+@@ -1233,7 +1233,7 @@ endif # SYSTEM_LCMS2
+ ifeq ($(SYSTEM_LPSOLVE),YES)
+ 
+ define gb_LinkTarget__use_lpsolve
+-$(call gb_LinkTarget_add_libs,$(1),-llpsolve55)
++$(call gb_LinkTarget_add_ldflags,$(1),/usr/lib/lp_solve/liblpsolve55.so -Wl$(COMMA)-rpath=/usr/lib/lp_solve)
+ $(call gb_LinkTarget_add_defs,$(1),\
+ 	-DSYSTEM_LPSOLVE \
+ )

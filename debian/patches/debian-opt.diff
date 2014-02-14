@@ -1,29 +1,8 @@
-From: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
-Date: Sat, 9 Nov 2013 02:00:23 +0100
-Subject: [PATCH] debian-opt.diff
-
-Change-Id: I1a1e700bec24fc6de77fb9578cc9ddbcf0fa6ca2
-
----
- config_host.mk.in | 1 +
- configure.ac      | 3 +++
- 2 files changed, 4 insertions(+)
-
-diff --git a/config_host.mk.in b/config_host.mk.in
---- a/config_host.mk.in
-+++ b/config_host.mk.in
-@@ -70,6 +70,7 @@ export CPP_LIBRARY=@CPP_LIBRARY@
- export CPPUNIT_CFLAGS=$(gb_SPACE)@CPPUNIT_CFLAGS@
- export CPPUNIT_LIBS=$(gb_SPACE)@CPPUNIT_LIBS@
- export CPUNAME=@CPUNAME@
-+export CDEFAULTOPT=@CDEFAULTOPT@
- export CROSS_COMPILING=@CROSS_COMPILING@
- export CURL=@CURL@
- export CURL_CFLAGS=$(gb_SPACE)@CURL_CFLAGS@
-diff --git a/configure.ac b/configure.ac
---- a/configure.ac
-+++ b/configure.ac
-@@ -12600,6 +12600,9 @@ fi
+diff --git a/configure.ac b/configure.in
+index c0b76f8..d10222f 100644
+--- libreoffice-3.5.0/configure.ac
++++ libreoffice-3.5.0/configure.ac
+@@ -11741,6 +11780,9 @@ fi
  AC_SUBST(MPL_SUBSET)
  
  
@@ -33,6 +12,13 @@ diff --git a/configure.ac b/configure.ac
  dnl ===================================================================
  dnl Setting up the environment.
  dnl ===================================================================
--- 
-1.8.3.2
-
+--- a/config_host.mk.in-old	2012-04-06 14:08:12.755739649 +0200
++++ b/config_host.mk.in	2012-04-06 14:08:35.351739800 +0200
+@@ -71,6 +71,7 @@ export CPPUNIT_CFLAGS=$(gb_SPACE)@CPPUNIT_CFLAGS@
+ export CPPUNIT_LIBS=$(gb_SPACE)@CPPUNIT_LIBS@
+ export CPU=@CPU@
+ export CPUNAME=@CPUNAME@
++export CDEFAULTOPT=@CDEFAULTOPT@
+ export CROSS_COMPILING=@CROSS_COMPILING@
+ export CURL=@CURL@
+ export CURL_CFLAGS=$(gb_SPACE)@CURL_CFLAGS@
