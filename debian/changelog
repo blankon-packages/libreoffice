@@ -1,3 +1,41 @@
+libreoffice (1:4.2.1-1blankon0.9.0.1) suroboyo-updates; urgency=low
+
+  * New Upstream Release 
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Mon, 24 Feb 2014 12:08:35 +0700
+
+libreoffice (1:4.2.1-1) experimental; urgency=low
+
+  * new upstream release
+
+  * add src -> external/tarballs move already from 4.3 branch and create
+    new .orig-external tarball
+
+  * debian/rules:
+    - autodoc got replaced by doxygen. bump doxygen build-dep to needed
+      (>= 1.8.4-1) and disable packaging the SDK docs on wheezy-backports.
+      Run dh_doxygen
+    - build-depend on fonts-liberation when running the tests - the
+      sc_macros_tests VBA tests need Arial etc.-similar fonts
+    - add conditionals for new libs used: opencl, firebird, avahi-client,
+      vlc, libetonyek, libfreehand, libe-book, libeot, libabw; add necessary
+      updates/bumps
+    - temporarily disable cppunit _and_ junit4 (and logically also
+      autopkgtests) as it's flaky right now (hangs, ..)
+    - enable gd (scottish_gaelic) l10n
+    - temporarily use internal libmwaw, libodfgen, libetonyek, libfreehand,
+      libe-book, libabw until we have them (in a correct version) in Debian
+  * debian/control.in, debian/rules:
+    - split avmediagst.so into new -avmedia-backend-gstreamer and put new vlc
+      backend into a new -avmedia-backend-vcl. Recommend
+      -gstreamer | -avmedia and make metapackage depend on that, too
+  * debian/control*in, debian/rules, debian/libreoffice-base.NEWS:
+    - create new libreoffice-base-drivers - as name says. Move hsqldb and
+      firebird into own packages. Mention to people that they need
+      to install the new -sdbc-hsqldb
+ 
+ -- Rene Engelhard <rene@debian.org>  Thu, 20 Feb 2014 17:23:17 +0100
+
 libreoffice (1:4.1.5-1blankon0.9.0) suroboyo-updates; urgency=low
 
   * New Upstream Release

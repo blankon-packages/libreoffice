@@ -18,27 +18,28 @@ Build-Depends: ant (>= 1.7.0),
                default-jdk (>= 1:1.7-48) [ia64],
                dpkg-dev (>= 1.16.1),
                fastjar,
-               flex | flex-old,
+               firebird-dev (>= 2.5.2.26540.ds4-2),
+               flex (>= 2.3.35),
                g++-mingw-w64-i686 [i386 amd64],
                gcj-jdk [hppa ia64 s390 sparc],
                gcj-native-helper [hppa ia64 s390 sparc],
-               gdb,
                gettext,
                gperf,
                java-common (>= 0.49),
                javahelper (>= 0.37~),
-               junit4 (>= 4.8.2-2),
                kdelibs5-dev (>= 4:4.3.4),
                libarchive-zip-perl,
+               libavahi-client-dev,
                libbluetooth-dev [!kfreebsd-amd64 !kfreebsd-i386],
                libboost-date-time-dev (>= 1.49.0-4),
                libboost-dev (>= 1.49.0-4),
+               libboost-system-dev (>= 1.49.0-4),
                libc0.1 (>= 2.10.2-7) [kfreebsd-i386 kfreebsd-amd64],
                libc6 (>= 2.17-6) [mips mipsel],
                libcairo2-dev,
                libcdr-dev,
                libclucene-dev (>= 2.3.3.4-2),
-               libcmis-dev (>= 0.3.1),
+               libcmis-dev (>= 0.4.0),
                libcppunit-dev (>= 1.12),
                libcups2-dev,
                libcurl4-gnutls-dev,
@@ -47,7 +48,7 @@ Build-Depends: ant (>= 1.7.0),
                libexpat1-dev,
                libexttextcat-dev (>= 3.1.1),
                libfontconfig1-dev,
-               libfreetype6-dev,
+               libfreetype6-dev (>= 2.2.0),
                libgcj-common (>= 1:4.4.1) [hppa ia64 s390 sparc],
                libgconf2-dev,
                libgl1-mesa-dev [!armel !mips !mipsel],
@@ -69,15 +70,13 @@ Build-Depends: ant (>= 1.7.0),
                liblcms2-dev,
                libldap2-dev,
                liblpsolve55-dev (>= 5.5.0.13-5+b1),
-               libmdds-dev (>= 0.8.0),
+               libmdds-dev (>= 0.10.2),
                libmspub-dev,
-               libmwaw-dev,
                libmysqlclient-dev,
                libmysqlcppconn-dev (>= 1.1.0~r791),
                libmythes-dev (>= 2:1.2),
                libneon27-gnutls-dev,
                libnss3-dev (>= 3.12.3),
-               libodfgen-dev,
                liborbit2-dev,
                liborcus-dev (>= 0.5.0),
                libpng12-dev,
@@ -89,10 +88,11 @@ Build-Depends: ant (>= 1.7.0),
                librdf0-dev (>= 1.0.16-2),
                libsane-dev,
                libsm-dev,
-               libssl-dev,
+               libssl-dev (>= 0.9.8),
                libsuitesparse-dev (>= 1:3.4.0),
                libvigraimpex-dev,
                libvisio-dev,
+               libvlc5,
                libwpd-dev (>= 0.9.5),
                libwpg-dev (>= 0.2.0),
                libwps-dev (>= 0.2.0),
@@ -124,7 +124,7 @@ Build-Depends: ant (>= 1.7.0),
                xulrunner-dev,
                zip,
                zlib1g-dev
-Build-Depends-Indep: doxygen,
+Build-Depends-Indep: doxygen (>= 1.8.4),
                      fdupes,
                      fontforge,
                      imagemagick,
@@ -133,7 +133,7 @@ Build-Depends-Indep: doxygen,
                      libcommons-codec-java,
                      libcommons-httpclient-java,
                      libcommons-lang-java,
-                     libcommons-logging-java (>= 1.1.1-9),
+                     libcommons-logging-java,
                      libflute-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
                      libfonts-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
                      libformula-java (>= 1.1.7) [!hppa !ia64 !s390 !sparc],
@@ -143,10 +143,10 @@ Build-Depends-Indep: doxygen,
                      librepository-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
                      libsac-java [!hppa !ia64 !s390 !sparc],
                      libserializer-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
-                     libservlet3.0-java,
                      libxml-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
                      xml-core
-Build-Conflicts: ant (= 1.8.0-1) [hppa ia64 s390 sparc],
+Build-Conflicts: amd-libopencl1,
+                 ant (= 1.8.0-1) [hppa ia64 s390 sparc],
                  ant (= 1.8.0-2) [hppa ia64 s390 sparc],
                  ant (= 1.8.0-3) [hppa ia64 s390 sparc],
                  flex (= 2.5.34-1) [amd64],
@@ -165,11 +165,11 @@ Build-Conflicts: ant (= 1.8.0-1) [hppa ia64 s390 sparc],
                  libxul-dev (= 1.8.0.13~pre070720-0etch1),
                  nvidia-glx-dev,
                  nvidia-glx-legacy-dev,
+                 nvidia-libopencl1,
                  qt3-dev-tools
 Standards-Version: 3.9.4
 XS-Python-Version: current
 XS-Python3-Version: 3.3
-XS-Testsuite: autopkgtest
 Vcs-Git: https://alioth.debian.org/anonscm/git/pkg-openoffice/libreoffice.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-openoffice/libreoffice.git
 Bugs: 
@@ -187,6 +187,7 @@ Depends: fonts-sil-gentium-basic,
          libreoffice-math,
          libreoffice-report-builder-bin [!hppa !ia64 !s390 !sparc],
          libreoffice-writer,
+         ${avmedia-be-depends},
          ${dejavu-depends},
          ${java-common-depends},
          ${misc:Depends},
@@ -303,7 +304,7 @@ Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips
 Depends: fontconfig,
          fonts-opensymbol,
          libreoffice-common (>> ${base-version}),
-         ure (>= 4.1.2~),
+         ure (>= 4.2~),
          ${misc:Depends},
          ${shlibs:Depends}
 Breaks: cli-uno-bridge (<< 1:3.0.0~dev300m22),
@@ -340,6 +341,7 @@ Breaks: cli-uno-bridge (<< 1:3.0.0~dev300m22),
         libreoffice-kab (<< 1:3.4.1~),
         libreoffice-kde (<< ${binary:Version}),
         libreoffice-officebean (<< ${binary:Version}),
+        libreoffice-presentation-minimizer (<< 1:4.2~),
         libreoffice-sdbc-postgresql (<< 0.8.1~),
         libreoffice-style-andromeda (<< 1:3.3.0-1),
         libreoffice-style-crystal (<< 1:3.3.0-1),
@@ -413,6 +415,7 @@ Depends: libreoffice-style-default | libreoffice-style, ure, ${misc:Depends}
 Suggests: libreoffice-style-crystal,
           libreoffice-style-hicontrast,
           libreoffice-style-oxygen,
+          libreoffice-style-sifr,
           libreoffice-style-tango
 Recommends: xfonts-mathml, ${pyuno-depends}, ${textcat-data-recommends}
 Conflicts: broffice,
@@ -489,6 +492,7 @@ Depends: libreoffice-base-core (= ${binary:Version}),
          ${lpsolve-dep},
          ${misc:Depends},
          ${shlibs:Depends}
+Suggests: ${opencl-sug}
 Description: office productivity suite -- spreadsheet
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -501,6 +505,7 @@ Depends: libreoffice-core (= ${binary:Version}),
          libreoffice-draw (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
+Recommends: ${avmedia-be-depends}
 Suggests: bluez
 Description: office productivity suite -- presentation
  LibreOffice is a full-featured office productivity suite that provides
@@ -552,40 +557,17 @@ Package: libreoffice-base
 Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
 Section: database
 Depends: libreoffice-base-core (= ${binary:Version}),
+         libreoffice-base-drivers (= ${binary:Version}),
          libreoffice-core (= ${binary:Version}),
-         ${java-common-depends},
-         ${java-runtime-depends},
-         ${java:Depends},
          ${misc:Depends},
          ${shlibs:Depends}
-Suggests: libmyodbc | odbc-postgresql | libsqliteodbc | tdsodbc | mdbtools,
-          libmysql-java | libpg-java | libjtds-java,
-          libreoffice-gcj,
-          libreoffice-report-builder,
-          unixodbc
-Recommends: libreoffice-writer
+Suggests: libreoffice-gcj, libreoffice-report-builder, unixodbc
+Recommends: libreoffice-writer, ${java-common-depends}, ${java-runtime-depends}
 Description: office productivity suite -- database
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the database component for LibreOffice.
- .
- You can extend the functionality of LibreOffice Base by installing these
- packages:
- .
-  * unixodbc: ODBC database support
-  * libmyodbc | odbc-postgresql | libsqliteodbc | tdsodbc | mdbtools: ODBC
-    drivers for:
-    - MySQL
-    - PostgreSQL
-    - SQLite
-    - MS SQL / Sybase SQL
-    - *.mdb (JET / MS Access)
-  * libmysql-java | libpg-java | libjtds-java: JDBC Drivers
-    for:
-    - MySQL
-    - PostgreSQL
-    - MS SQL Server and Sybase
 
 Package: libreoffice-style-crystal
 Architecture: all
@@ -640,6 +622,19 @@ Description: office productivity suite -- Hicontrast symbol style
  .
  This package contains the "hicontrast" symbol style, needs to be manually
  enabled in the LibreOffice option menu.
+
+Package: libreoffice-style-sifr
+Architecture: all
+Enhances: libreoffice-core
+Depends: ${misc:Depends}
+Provides: libreoffice-style
+Description: office productivity suite -- Sifr symbol style
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the "sifr" symbol style (an adaption of the Gnome
+ symbolic theme), needs to be manually  enabled in the LibreOffice option
+ menu.
 
 Package: libreoffice-style-galaxy
 Architecture: all
@@ -855,6 +850,108 @@ Description: PDF Import component for LibreOffice
  This package contains a component enabling LibreOffice to import PDF
  Documents.
 
+Package: libreoffice-avmedia-backend-gstreamer
+Section: misc
+Priority: optional
+Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
+Replaces: libreoffice-core (<< 1:4.2~)
+Provides: libreoffice-avmedia-backend
+Description: GStreamer backend for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains a GStreamer backend for LibreOffices avmedia component
+ to play audio/video.
+
+Package: libreoffice-avmedia-backend-vlc
+Section: misc
+Priority: optional
+Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Depends: libreoffice-core,
+         ${libvlc-dep} (>= 2.0.8),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Provides: libreoffice-avmedia-backend
+Description: VLC backend for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains a VLC backend for LibreOffices avmedia component
+ to play audio/video.
+
+Package: libreoffice-sdbc-firebird
+Depends: libreoffice-core, ${shlibs:Depends}
+Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Section: database
+Enhances: libreoffice-base-drivers
+Description: Firebird SDBC driver for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ The Firebird SDBC Driver allows one to use the Firebird database from
+ LibreOffice without any wrapper layer such as ODBC or JDBC.
+
+Package: libreoffice-sdbc-hsqldb
+Depends: libreoffice-core,
+         ${java-common-depends},
+         ${java:Depends},
+         ${shlibs:Depends}
+Replaces: libreoffice-base (<< 1:4.2~)
+Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Section: database
+Enhances: libreoffice-base-drivers
+Description: HSQLDB SDBC driver for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ The HSQLDB SDBC Driver allows one to use the HSQLDB embedded database from
+ LibreOffice without any wrapper layer such as ODBC or JDBC.
+
+Package: libreoffice-base-drivers
+Depends: libreoffice-core, ${shlibs:Depends}
+Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Section: database
+Suggests: libjtds-java,
+          libreoffice-mysql-connector | libmyodbc | libmysql-java,
+          libreoffice-sdbc-postgresql | odbc-postgresql | libpg-java,
+          libsqliteodbc | tdsodbc | mdbtools
+Recommends: libreoffice-sdbc-firebird,
+            libreoffice-sdbc-hsqldb [amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386]
+Replaces: libreoffice-base (<< 1:4.2~), libreoffice-core (<< 1:4.2~)
+Description: Database connectvity drivers for LibreOffice
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the database connectivity drivers used by LibreOffices
+ database functionality:
+  - ODBC
+  - JDBC
+  - dBase
+  - Calc
+  - Flat files
+  - MySQL
+ .
+ You can extend this by installing:
+ .
+  * unixodbc: ODBC database support
+  * libmyodbc | odbc-postgresql | libsqliteodbc | tdsodbc | mdbtools: ODBC
+    drivers for:
+    - MySQL
+    - PostgreSQL
+    - SQLite
+    - MS SQL / Sybase SQL
+    - *.mdb (JET / MS Access)
+  * libmysql-java | libpg-java | libjtds-java: JDBC Drivers
+    for:
+    - MySQL
+    - PostgreSQL
+    - MS SQL Server and Sybase
+  * libreoffice-sdbc-hsqldb: embedded HSQLDB SDBC Driver
+  * libreoffice-sdbc-firebird: Firebird SDBC Driver
+  * libreoffice-sdbc-postgresql: PostgreSQL SDBC Driver
+  * libreoffice-mysql-connector: "native" MySQL Connector
+ 
 Package: libreoffice-l10n-af
 Section: localization
 Architecture: all
@@ -1665,6 +1762,37 @@ Description: office productivity suite -- Gaelic language package
  install extra dictionaries/hyphenation patterns/thesauri independently of
  the language packs.
 
+Package: libreoffice-l10n-gd
+Section: localization
+Architecture: all
+Depends: libreoffice-common,
+         locales | belocs-locales-data | locales-all,
+         ${misc:Depends}
+Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-gd
+Provides: libreoffice-l10n-${help-l10n-virtual-version}
+Suggests: hunspell-dictionary-gd | myspell-dictionary-gd,
+          hyphen-gd,
+          libreoffice-grammarcheck-gd,
+          libreoffice-help-gd,
+          mythes-gd
+Description: office productivity suite -- Scottish_gaelic language package
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the localization of LibreOffice in
+ Scottish_gaelic.
+ It contains the user interface, the templates and the autotext features.
+ (please note that not all this is available for all possible languages).
+ You can switch user interface language using the locales system.
+ .
+ Spelling dictionaries, hyphenation patterns, thesauri and help are not
+ included in this package. There are some available in separate packages
+ (myspell-*, hyphen-*, mythes-*, libreoffice-help-*)
+ .
+ If you just want to be able to spellcheck etc. in other languages, you can
+ install extra dictionaries/hyphenation patterns/thesauri independently of
+ the language packs.
+
 Package: libreoffice-l10n-gl
 Section: localization
 Architecture: all
@@ -2102,25 +2230,25 @@ Description: office productivity suite -- Korean language package
  install extra dictionaries/hyphenation patterns/thesauri independently of
  the language packs.
 
-Package: libreoffice-l10n-ku
+Package: libreoffice-l10n-kmr
 Section: localization
 Architecture: all
 Depends: libreoffice-common,
          locales | belocs-locales-data | locales-all,
          ${misc:Depends}
-Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ku
+Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-kmr
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
-Suggests: hunspell-dictionary-ku | myspell-dictionary-ku,
-          hyphen-ku,
-          libreoffice-grammarcheck-ku,
-          libreoffice-help-ku,
-          mythes-ku
-Description: office productivity suite -- Kurdish language package
+Suggests: hunspell-dictionary-kmr | myspell-dictionary-kmr,
+          hyphen-kmr,
+          libreoffice-grammarcheck-kmr,
+          libreoffice-help-kmr,
+          mythes-kmr
+Description: office productivity suite -- Kurmanji language package
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the localization of LibreOffice in
- Kurdish.
+ Kurmanji.
  It contains the user interface, the templates and the autotext features.
  (please note that not all this is available for all possible languages).
  You can switch user interface language using the locales system.
@@ -3545,6 +3673,15 @@ Description: transitional package for the LibreOffice presenter console
  This package used to contain the LibreOffice presenter console. It has been
  integrated with LibreOffice Impress 4.0. You can safely remove this package.
 
+Package: libreoffice-presentation-minimizer
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends: libreoffice-impress (>= 1:4.2.0~)
+Description: transitional package for the LibreOffice presentation minimizer
+ This package used to contain the LibreOffice presentation minimizer. It has been
+ integrated with LibreOffice Impress 4.2. You can safely remove this package.
+
 Package: libreoffice-emailmerge
 Architecture: all
 Depends: libreoffice-common (>= 1:4.0.2~rc1)
@@ -3554,6 +3691,17 @@ Description: transitional package for LibreOffices email mail merge
  This package used to contain the email merge module for LibreOffice. It has
  been integrated in libreoffice-common now.You can safely remove this
  package.
+
+Package: libreoffice-l10n-ku
+Architecture: all
+Depends: libreoffice-l10n-kmr
+Section: oldlibs
+Priority: extra
+Description: transitional package for LibreOffice Kurdish l10n
+ ku ("Kurdish") was renamed in LO 4.2 to kmr-Latn ("Kumanji"). This package is
+ a transitional package to easy transition to -l10n-kmr.
+ .
+ You can safely remove this package if -l10n-kmr is installed.
 
 Package: libreoffice-help-en-us
 Replaces: libreoffice-common (<< 1:3.0.0~dev300m28)
@@ -4081,7 +4229,8 @@ Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips
 Depends: uno-libs3 (= ${ure:Version}), ${misc:Depends}, ${shlibs:Depends}
 Suggests: java5-runtime
 Conflicts: cli-uno-bridge (<< 1:3.0.0~dev300m22)
-Replaces: libreoffice-java-common (<< 1:3.0.0~dev300m12)
+Replaces: libreoffice-common (<< 1:4.1.2~),
+          libreoffice-java-common (<< 1:3.0.0~dev300m12)
 Breaks: libreoffice-core (<< 1:4.1.2~), openoffice.org-core (<< 1:3.3~)
 Description: LibreOffice UNO runtime environment
  The Uno Runtime Environment (URE) is the well-known UNO component model
@@ -4229,30 +4378,6 @@ Description: LibreOffice component for building database reports -- libraries
  This package contains some architecture-dependent support libraries
  (librpt*.so) for the report builder component.
 
-Package: libreoffice-presentation-minimizer
-Section: misc
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
-Depends: libreoffice-core,
-         libreoffice-impress,
-         ${misc:Depends},
-         ${shlibs:Depends}
-Enhances: libreoffice-impress
-Conflicts: libreoffice-common (<< 1:3.5~),
-           libreoffice-core (<< 1:3.5~),
-           ure (<< 1.5.1+OOo3.1.1-15)
-Description: LibreOffice extension for size-efficient presentations
- LibreOffice is a full-featured office productivity suite that provides
- a near drop-in replacement for Microsoft(R) Office.
- .
- This package contains the presentation minimizer extension:
-  "The Sun Presentation Minimizer is used to reduce the file size of the
-  current presentation. Images will be compressed, and data that is no longer
-  needed will be removed.
-  The Sun Presentation Minimizer can optimize the image quality size.
-  Presentations designed for screen or projector do not require the same high
-  quality as presentations designed for print."
-Homepage: http://extensions.services.openoffice.org/project/PresentationMinimizer
-
 Package: fonts-opensymbol
 Section: fonts
 Architecture: all
@@ -4388,6 +4513,7 @@ Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x 
 Depends: libreoffice-core (>= 1:3.5.0~beta), ${misc:Depends}, ${shlibs:Depends}
 Suggests: postgresql (>= 8.4)
 Breaks: ure (<< 1.5.1+OOo3.1.1-15)
+Enhances: libreoffice-base-drivers
 Description: PostgreSQL SDBC driver for LibreOffice
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -4430,136 +4556,6 @@ Description: office productivity suite -- Evolution addressbook support
  .
  This package allows LibreOffice to access Evolution address books.
  You need to install evolution separately.
-
-Package: libreoffice-subsequentcheckbase
-Section: libs
-Priority: extra
-Architecture: all
-Depends: ant (>= 1.7.0),
-         ant-optional (>= 1.7.0),
-         autoconf,
-         automake,
-         bc,
-         bison,
-         bzip2,
-         cpp-4.7,
-         debhelper (>= 7.2.3~),
-         default-jdk,
-         doxygen,
-         dpkg-dev (>= 1.16.1),
-         fastjar,
-         flex | flex-old,
-         fontforge,
-         g++-mingw-w64-i686,
-         gdb,
-         gettext,
-         gperf,
-         java-common (>= 0.49),
-         javahelper (>= 0.37~),
-         junit4 (>= 4.8.2-2),
-         kdelibs5-dev (>= 4:4.3.4),
-         libarchive-zip-perl,
-         libbluetooth-dev,
-         libboost-date-time-dev (>= 1.49.0-4),
-         libboost-dev (>= 1.49.0-4),
-         libbsh-java,
-         libcairo2-dev,
-         libcdr-dev,
-         libclucene-dev (>= 2.3.3.4-2),
-         libcmis-dev (>= 0.3.1),
-         libcommons-codec-java,
-         libcommons-httpclient-java,
-         libcommons-lang-java,
-         libcommons-logging-java (>= 1.1.1-9),
-         libcppunit-dev (>= 1.12),
-         libcups2-dev,
-         libcurl4-gnutls-dev,
-         libdbus-glib-1-dev (>= 0.70),
-         libebook1.2-dev,
-         libexpat1-dev,
-         libexttextcat-dev (>= 3.1.1),
-         libfontconfig1-dev,
-         libfreetype6-dev,
-         libgconf2-dev,
-         libgl1-mesa-dev,
-         libglib2.0-dev (>= 2.15.0),
-         libglu1-mesa-dev,
-         libgraphite2-dev (>= 0.9.3),
-         libgstreamer-plugins-base1.0-dev,
-         libgstreamer1.0-dev,
-         libgtk-3-dev (>= 3.2~),
-         libgtk2.0-dev (>= 2.10),
-         libharfbuzz-dev (>= 0.9.18),
-         libhsqldb1.8.0-java (>> 1.8.0.10),
-         libhunspell-dev (>= 1.1.5-2),
-         libhyphen-dev (>= 2.4),
-         libice-dev,
-         libicu-dev (>= 4.6),
-         libjpeg-dev,
-         liblangtag-dev (>= 0.4),
-         liblcms2-dev,
-         libldap2-dev,
-         liblpsolve55-dev (>= 5.5.0.13-5+b1),
-         libmdds-dev (>= 0.8.0),
-         libmspub-dev,
-         libmwaw-dev,
-         libmysqlclient-dev,
-         libmysqlcppconn-dev (>= 1.1.0~r791),
-         libmythes-dev (>= 2:1.2),
-         libneon27-gnutls-dev,
-         libnss3-dev (>= 3.12.3),
-         libodfgen-dev,
-         liborbit2-dev,
-         liborcus-dev (>= 0.5.0),
-         libpng12-dev,
-         libpoppler-cpp-dev,
-         libpoppler-dev (>= 0.8.0),
-         libpoppler-private-dev,
-         libpq-dev (>= 9.0~),
-         libqt4-dev (>= 4:4.8),
-         librdf0-dev (>= 1.0.16-2),
-         libreoffice,
-         libsane-dev,
-         libservlet3.0-java,
-         libsm-dev,
-         libssl-dev,
-         libsuitesparse-dev (>= 1:3.4.0),
-         libvigraimpex-dev,
-         libvisio-dev,
-         libwpd-dev (>= 0.9.5),
-         libwpg-dev (>= 0.2.0),
-         libwps-dev (>= 0.2.0),
-         libx11-dev,
-         libxaw7-dev,
-         libxext-dev,
-         libxinerama-dev,
-         libxkbfile-dev,
-         libxml-parser-perl,
-         libxml2-dev,
-         libxml2-utils,
-         libxrandr-dev,
-         libxrender-dev,
-         libxslt1-dev,
-         libxt-dev,
-         libxtst-dev,
-         lp-solve (>= 5.5.0.13-5+b1),
-         make (>= 3.81-8.2),
-         maven-repo-helper,
-         pkg-config,
-         python (>= 2.6.6-3+squeeze4),
-         python-dev (>= 2.6),
-         python3,
-         python3-dev (>= 3.3),
-         unixodbc-dev (>= 2.2.11),
-         unzip,
-         x11proto-render-dev,
-         xsltproc,
-         xulrunner-dev,
-         zip,
-         zlib1g-dev,
-         ${misc:Depends}
-Description: LibreOffice java test libraries
- LibreOffice subsequentchecks integration test suite
 
 Package: libreoffice-librelogo
 Section: misc
