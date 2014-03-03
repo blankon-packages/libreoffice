@@ -1,8 +1,8 @@
-libreoffice (1:4.2.1-1blankon0.9.0.1) suroboyo-updates; urgency=low
+libreoffice (1:4.2.1-1blankon1) tambora; urgency=low
 
   * New Upstream Release 
 
- -- Rahman Yusri Aftian <aftian@di.blankon.in>  Mon, 24 Feb 2014 12:08:35 +0700
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Mon, 03 Mar 2014 12:02:27 +0700
 
 libreoffice (1:4.2.1-1) experimental; urgency=low
 
