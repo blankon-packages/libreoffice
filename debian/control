@@ -12,48 +12,64 @@ Build-Depends: ant (>= 1.7.0),
                binutils (>= 2.23) [mips mipsel],
                bison,
                bzip2,
-               cpp-4.7,
+               coinor-libcoinmp-dev,
+               coinor-libcoinutils-dev,
                debhelper (>= 7.2.3~),
                default-jdk,
                default-jdk (>= 1:1.7-48) [ia64],
                dpkg-dev (>= 1.16.1),
                fastjar,
-               firebird-dev (>= 2.5.2.26540.ds4-2),
+               firebird-dev (>= 2.5.2.26540.ds4-2) [!hppa !mips !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc],
                flex (>= 2.3.35),
+               fontconfig,
+               fonts-crosextra-carlito,
+               fonts-liberation,
+               g++-4.9 [hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386],
                g++-mingw-w64-i686 [i386 amd64],
-               gcj-jdk [hppa ia64 s390 sparc],
-               gcj-native-helper [hppa ia64 s390 sparc],
+               gcc-4.9 [hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386],
+               gcj-jdk [hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386],
+               gcj-native-helper [hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386],
+               gdb,
                gettext,
                gperf,
                java-common (>= 0.49),
                javahelper (>= 0.37~),
+               junit4 (>= 4.8.2-2),
                kdelibs5-dev (>= 4:4.3.4),
+               libabw-dev (>= 0.1),
                libarchive-zip-perl,
-               libavahi-client-dev,
                libbluetooth-dev [!kfreebsd-amd64 !kfreebsd-i386],
-               libboost-date-time-dev (>= 1.49.0-4),
-               libboost-dev (>= 1.49.0-4),
-               libboost-system-dev (>= 1.49.0-4),
+               libboost-date-time-dev (>= 1.55),
+               libboost-dev (>= 1.55),
+               libboost-iostreams-dev (>= 1.55),
+               libboost-system-dev (>= 1.55),
                libc0.1 (>= 2.10.2-7) [kfreebsd-i386 kfreebsd-amd64],
                libc6 (>= 2.17-6) [mips mipsel],
                libcairo2-dev,
-               libcdr-dev,
+               libcdr-dev (>= 0.1),
                libclucene-dev (>= 2.3.3.4-2),
-               libcmis-dev (>= 0.4.0),
+               libcmis-dev (>= 0.5.0),
                libcppunit-dev (>= 1.12),
                libcups2-dev,
                libcurl4-gnutls-dev,
                libdbus-glib-1-dev (>= 0.70),
+               libe-book-dev (>= 0.1.1),
                libebook1.2-dev,
+               libeot-dev,
+               libetonyek-dev (>= 0.1.1),
                libexpat1-dev,
                libexttextcat-dev (>= 3.1.1),
                libfontconfig1-dev,
+               libfreehand-dev (>= 0.1),
                libfreetype6-dev (>= 2.2.0),
-               libgcj-common (>= 1:4.4.1) [hppa ia64 s390 sparc],
+               libgcj-common (>= 1:4.4.1) [hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386],
                libgconf2-dev,
-               libgl1-mesa-dev [!armel !mips !mipsel],
+               libgl1-mesa-dev,
+               libglew-dev,
                libglib2.0-dev (>= 2.15.0),
-               libglu1-mesa-dev [!armel !mips !mipsel],
+               libglm-dev,
+               libgltf-dev (>= 0.0.1) [!armel !mips !mipsel],
+               libglu1-mesa-dev,
                libgraphite2-dev (>= 0.9.3),
                libgstreamer-plugins-base1.0-dev,
                libgstreamer1.0-dev,
@@ -64,21 +80,23 @@ Build-Depends: ant (>= 1.7.0),
                libhunspell-dev (>= 1.1.5-2),
                libhyphen-dev (>= 2.4),
                libice-dev,
-               libicu-dev (>= 4.6),
+               libicu-dev (>= 52),
                libjpeg-dev,
                liblangtag-dev (>= 0.4),
                liblcms2-dev,
                libldap2-dev,
                liblpsolve55-dev (>= 5.5.0.13-5+b1),
-               libmdds-dev (>= 0.10.2),
-               libmspub-dev,
+               libmdds-dev (>= 0.10.3),
+               libmspub-dev (>= 0.1),
+               libmwaw-dev (>= 0.3.4),
                libmysqlclient-dev,
                libmysqlcppconn-dev (>= 1.1.0~r791),
                libmythes-dev (>= 2:1.2),
                libneon27-gnutls-dev,
                libnss3-dev (>= 3.12.3),
-               liborbit2-dev,
-               liborcus-dev (>= 0.5.0),
+               libodfgen-dev (>= 0.1),
+               liborcus-dev (>= 0.7.0),
+               libpagemaker-dev,
                libpng12-dev,
                libpoppler-cpp-dev,
                libpoppler-dev (>= 0.8.0),
@@ -86,22 +104,22 @@ Build-Depends: ant (>= 1.7.0),
                libpq-dev (>= 9.0~),
                libqt4-dev (>= 4:4.8),
                librdf0-dev (>= 1.0.16-2),
+               librevenge-dev,
                libsane-dev,
                libsm-dev,
                libssl-dev (>= 0.9.8),
                libsuitesparse-dev (>= 1:3.4.0),
                libvigraimpex-dev,
-               libvisio-dev,
+               libvisio-dev (>= 0.1),
                libvlc5,
-               libwpd-dev (>= 0.9.5),
-               libwpg-dev (>= 0.2.0),
-               libwps-dev (>= 0.2.0),
+               libwpd-dev (>= 0.10),
+               libwpg-dev (>= 0.3),
+               libwps-dev (>= 0.3),
                libx11-dev,
                libxaw7-dev,
                libxext-dev,
                libxinerama-dev,
                libxkbfile-dev,
-               libxml-parser-perl,
                libxml2-dev,
                libxml2-utils,
                libxrandr-dev,
@@ -112,43 +130,42 @@ Build-Depends: ant (>= 1.7.0),
                lp-solve (>= 5.5.0.13-5+b1),
                make (>= 3.81-8.2),
                maven-repo-helper,
+               npapi-sdk-dev,
                pkg-config,
-               python (>= 2.6.6-3+squeeze4),
-               python-dev (>= 2.6),
                python3,
                python3-dev (>= 3.3),
+               ucpp,
                unixodbc-dev (>= 2.2.11),
                unzip,
                x11proto-render-dev,
                xsltproc,
-               xulrunner-dev,
                zip,
                zlib1g-dev
 Build-Depends-Indep: doxygen (>= 1.8.4),
                      fdupes,
                      fontforge,
                      imagemagick,
-                     libbase-java [!hppa !ia64 !s390 !sparc],
+                     libbase-java [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
                      libbsh-java,
                      libcommons-codec-java,
                      libcommons-httpclient-java,
                      libcommons-lang-java,
                      libcommons-logging-java,
-                     libflute-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
-                     libfonts-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
-                     libformula-java (>= 1.1.7) [!hppa !ia64 !s390 !sparc],
-                     liblayout-java (>= 0.2.10) [!hppa !ia64 !s390 !sparc],
-                     libloader-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
-                     libpentaho-reporting-flow-engine-java (>= 0.9.4) [!hppa !ia64 !s390 !sparc],
-                     librepository-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
-                     libsac-java [!hppa !ia64 !s390 !sparc],
-                     libserializer-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
-                     libxml-java (>= 1.1.6) [!hppa !ia64 !s390 !sparc],
+                     libflute-java (>= 1.1.6) [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
+                     libfonts-java (>= 1.1.6) [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
+                     libformula-java (>= 1.1.7) [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
+                     liblayout-java (>= 0.2.10) [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
+                     libloader-java (>= 1.1.6) [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
+                     libpentaho-reporting-flow-engine-java (>= 0.9.4) [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
+                     librepository-java (>= 1.1.6) [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
+                     libsac-java [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
+                     libserializer-java (>= 1.1.6) [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
+                     libxml-java (>= 1.1.6) [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
                      xml-core
 Build-Conflicts: amd-libopencl1,
-                 ant (= 1.8.0-1) [hppa ia64 s390 sparc],
-                 ant (= 1.8.0-2) [hppa ia64 s390 sparc],
-                 ant (= 1.8.0-3) [hppa ia64 s390 sparc],
+                 ant (= 1.8.0-1) [hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386],
+                 ant (= 1.8.0-2) [hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386],
+                 ant (= 1.8.0-3) [hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386],
                  flex (= 2.5.34-1) [amd64],
                  g++-4.6 (= 4.6.1-10),
                  g++-4.6 (= 4.6.1-11),
@@ -168,15 +185,15 @@ Build-Conflicts: amd-libopencl1,
                  nvidia-libopencl1,
                  qt3-dev-tools
 Standards-Version: 3.9.4
-XS-Python-Version: current
-XS-Python3-Version: 3.3
-Vcs-Git: https://alioth.debian.org/anonscm/git/pkg-openoffice/libreoffice.git
+XS-Python3-Version: 3.4
+XS-Testsuite: autopkgtest
+Vcs-Git: https://alioth.debian.org/anonscm/git/pkg-openoffice/libreoffice.git -b debian-experimental-4.4
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-openoffice/libreoffice.git
 Bugs: 
 Homepage: http://www.libreoffice.org
 
 Package: libreoffice
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Section: metapackages
 Depends: fonts-sil-gentium-basic,
          libreoffice-base,
@@ -185,7 +202,7 @@ Depends: fonts-sil-gentium-basic,
          libreoffice-draw,
          libreoffice-impress,
          libreoffice-math,
-         libreoffice-report-builder-bin [!hppa !ia64 !s390 !sparc],
+         libreoffice-report-builder-bin [!hppa !ia64 !kfreebsd-amd64 !kfreebsd-i386 !s390 !sparc],
          libreoffice-writer,
          ${avmedia-be-depends},
          ${dejavu-depends},
@@ -300,7 +317,7 @@ Description: office productivity suite -- Indic language packages
  indic languages.
 
 Package: libreoffice-core
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: fontconfig,
          fonts-opensymbol,
          libreoffice-common (>> ${base-version}),
@@ -395,7 +412,10 @@ Breaks: cli-uno-bridge (<< 1:3.0.0~dev300m22),
         myspell-sw (<< 1:3.1.0-3),
         myspell-th (<< 1:3.1.0-3),
         myspell-tl (<< 0.4-0-5)
-Conflicts: cacao-oj6-jre, libreoffice-filter-binfilter, libreoffice-unbundled
+Conflicts: cacao-oj6-jre,
+           libreoffice-filter-binfilter,
+           libreoffice-report-builder-bin [kfreebsd-i386 kfreebsd-amd64],
+           libreoffice-unbundled
 Provides: libreoffice-bundled
 Replaces: libreoffice-calc (<< 1:3.3.2-5),
           libreoffice-common (<= 1:4.0.0~beta2-1),
@@ -462,7 +482,7 @@ Description: office productivity suite -- arch-independent files
 Package: libreoffice-java-common
 Architecture: all
 Depends: libreoffice-common, ${java:Depends}, ${misc:Depends}
-Breaks: libjaxe-java (<= 3.5-2)
+Breaks: libjaxe-java (<= 3.5-2), libreoffice-accessodf (<= 0.1-4)
 Description: office productivity suite -- arch-independent Java support files
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -471,14 +491,19 @@ Description: office productivity suite -- arch-independent Java support files
  the Java support for LibreOffice (Java classes, scripts, config snippets).
 
 Package: libreoffice-writer
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-base-core (= ${binary:Version}),
          libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Recommends: libreoffice-math, ${java-common-depends}, ${java-runtime-depends}
+Recommends: libreoffice-math
 Replaces: libreoffice-core (<< 1:3.3.2-5)
-Suggests: libreoffice-base, libreoffice-gcj
+Suggests: fonts-crosextra-caladea,
+          fonts-crosextra-carlito,
+          libreoffice-base,
+          libreoffice-gcj,
+          ${java-common-depends},
+          ${java-runtime-depends}
 Description: office productivity suite -- word processor
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -486,7 +511,7 @@ Description: office productivity suite -- word processor
  This package contains the wordprocessor component for LibreOffice.
 
 Package: libreoffice-calc
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-base-core (= ${binary:Version}),
          libreoffice-core (= ${binary:Version}),
          ${lpsolve-dep},
@@ -500,7 +525,7 @@ Description: office productivity suite -- spreadsheet
  This package contains the spreadsheet component for LibreOffice.
 
 Package: libreoffice-impress
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-core (= ${binary:Version}),
          libreoffice-draw (= ${binary:Version}),
          ${misc:Depends},
@@ -514,7 +539,7 @@ Description: office productivity suite -- presentation
  This package contains the presentation component for LibreOffice.
 
 Package: libreoffice-draw
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -525,7 +550,7 @@ Description: office productivity suite -- drawing
  This package contains the drawing component for LibreOffice.
 
 Package: libreoffice-math
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: fonts-opensymbol,
          libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -537,7 +562,7 @@ Description: office productivity suite -- equation editor
  This package contains the equation editor component for LibreOffice.
 
 Package: libreoffice-base-core
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -554,7 +579,7 @@ Description: office productivity suite -- shared library
  install libreoffice-base.
 
 Package: libreoffice-base
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
 Section: database
 Depends: libreoffice-base-core (= ${binary:Version}),
          libreoffice-base-drivers (= ${binary:Version}),
@@ -563,6 +588,7 @@ Depends: libreoffice-base-core (= ${binary:Version}),
          ${shlibs:Depends}
 Suggests: libreoffice-gcj, libreoffice-report-builder, unixodbc
 Recommends: libreoffice-writer, ${java-common-depends}, ${java-runtime-depends}
+Replaces: libreoffice-common (<< 1:4.3.0~beta1)
 Description: office productivity suite -- database
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -601,7 +627,7 @@ Enhances: libreoffice-core
 Depends: ${misc:Depends}
 Suggests: tango-icon-theme
 Provides: libreoffice-style
-Replaces: libreoffice-common (<< 1:3.3.0~rc4-2)
+Replaces: libreoffice-common (<= 1:4.3.0~beta2-2)
 Description: office productivity suite -- Tango symbol style
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -650,7 +676,7 @@ Description: office productivity suite -- Galaxy (Default) symbol style
  enabled in the LibreOffice option menu.
 
 Package: libreoffice-gtk
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -667,7 +693,7 @@ Description: office productivity suite -- GTK+ integration
  under GNOME. It also contains a QuickStarter for the "notification area".
 
 Package: libreoffice-gtk3
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -682,7 +708,7 @@ Description: office productivity suite -- GTK+ 3.0 integration
  with Gtk+ 3.0 and Gtk/GNOMEish print dialog when running under GNOME.
 
 Package: libreoffice-gnome
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: gconf2,
          libreoffice-core (= ${binary:Version}),
          libreoffice-gtk,
@@ -703,39 +729,19 @@ Description: office productivity suite -- GNOME integration
   * libreoffice-evolution: Evolution addressbook support
   * evolution
 
-Package: python-uno
-Provides: ${python:Provides}
-XB-Python-Version: ${python:Versions}
-Section: oldlibs
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
-Enhances: libreoffice
-Depends: libreoffice-core (= ${binary:Version}),
-         ${misc:Depends},
-         ${python:Depends},
-         ${shlibs:Depends}
-Breaks: libreoffice-common (<< 1:3.5~), libreoffice-core (<< 1:3.5~)
-Conflicts: python3-uno, python3.3-uno
-Description: Python-UNO bridge (support for old python 2)
- The Python-UNO bridge allows use of the standard LibreOffice API
- with the Python scripting language. It additionally allows
- others to develop UNO components in Python, thus Python UNO components
- may be run within the LibreOffice process and can be called from C++
- or the built in StarBasic scripting language.
- .
- This package is for compatibility with applications/libraries not ported
- to python 3 yet. Prefer python3-uno over this.
-Homepage: http://udk.openoffice.org/python/python-bridge.html
-
 Package: python3-uno
 Section: python
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Enhances: libreoffice
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends}
 Conflicts: python-uno, python3-uno (<< 1:4.0.2~rc2), python3.3-uno
-Replaces: python3-uno (<< 1:4.0.2~rc2), python3.3-uno
+Replaces: libreoffice-common (<< 1:4.4.0~beta2),
+          libreoffice-core (= 1:4.3.0~beta1-1),
+          python3-uno (<< 1:4.0.2~rc2),
+          python3.3-uno
 Description: Python-UNO bridge
  The Python-UNO bridge allows use of the standard LibreOffice API
  with the Python scripting language. It additionally allows
@@ -745,7 +751,7 @@ Description: Python-UNO bridge
 Homepage: http://udk.openoffice.org/python/python-bridge.html
 
 Package: libreoffice-officebean
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
 Section: java
 Depends: libreoffice-core (= ${binary:Version}),
          ${java-common-depends},
@@ -840,7 +846,7 @@ Description: JavaScript script support provider for LibreOffice scripting framew
 Package: libreoffice-pdfimport
 Section: misc
 Priority: extra
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Breaks: libreoffice-common (<< 1:3.5~), libreoffice-core (<< 1:3.5~)
 Description: PDF Import component for LibreOffice
@@ -853,7 +859,7 @@ Description: PDF Import component for LibreOffice
 Package: libreoffice-avmedia-backend-gstreamer
 Section: misc
 Priority: optional
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Replaces: libreoffice-core (<< 1:4.2~)
 Provides: libreoffice-avmedia-backend
@@ -867,7 +873,7 @@ Description: GStreamer backend for LibreOffice
 Package: libreoffice-avmedia-backend-vlc
 Section: misc
 Priority: optional
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-core,
          ${libvlc-dep} (>= 2.0.8),
          ${misc:Depends},
@@ -882,7 +888,7 @@ Description: VLC backend for LibreOffice
 
 Package: libreoffice-sdbc-firebird
 Depends: libreoffice-core, ${shlibs:Depends}
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mipsel ppc64el
 Section: database
 Enhances: libreoffice-base-drivers
 Description: Firebird SDBC driver for LibreOffice
@@ -898,7 +904,7 @@ Depends: libreoffice-core,
          ${java:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-base (<< 1:4.2~)
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
 Section: database
 Enhances: libreoffice-base-drivers
 Description: HSQLDB SDBC driver for LibreOffice
@@ -910,16 +916,17 @@ Description: HSQLDB SDBC driver for LibreOffice
 
 Package: libreoffice-base-drivers
 Depends: libreoffice-core, ${shlibs:Depends}
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
 Section: database
 Suggests: libjtds-java,
           libreoffice-mysql-connector | libmyodbc | libmysql-java,
           libreoffice-sdbc-postgresql | odbc-postgresql | libpg-java,
           libsqliteodbc | tdsodbc | mdbtools
 Recommends: libreoffice-sdbc-firebird,
-            libreoffice-sdbc-hsqldb [amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386]
-Replaces: libreoffice-base (<< 1:4.2~), libreoffice-core (<< 1:4.2~)
-Description: Database connectvity drivers for LibreOffice
+            libreoffice-sdbc-hsqldb [alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386]
+Replaces: libreoffice-base (<< 1:4.3.0-3), libreoffice-core (<< 1:4.2~)
+Breaks: libreoffice-base (<< 1:4.3.0-3)
+Description: Database connectivity drivers for LibreOffice
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
@@ -955,9 +962,7 @@ Description: Database connectvity drivers for LibreOffice
 Package: libreoffice-l10n-af
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-af
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-af | myspell-dictionary-af,
@@ -986,9 +991,7 @@ Description: office productivity suite -- Afrikaans language package
 Package: libreoffice-l10n-ar
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: fonts-arabeyes,
             libreoffice-core (>> ${base-version}) | language-support-translations-ar
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -1049,9 +1052,7 @@ Description: office productivity suite -- Assamese language package
 Package: libreoffice-l10n-ast
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ast
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ast | myspell-dictionary-ast,
@@ -1080,9 +1081,7 @@ Description: office productivity suite -- Asturian language package
 Package: libreoffice-l10n-be
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-be
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-be | myspell-dictionary-be,
@@ -1111,9 +1110,7 @@ Description: office productivity suite -- Belarussian language package
 Package: libreoffice-l10n-bg
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-bg
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-bg | myspell-dictionary-bg,
@@ -1142,11 +1139,9 @@ Description: office productivity suite -- Bulgarian language package
 Package: libreoffice-l10n-bn
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
-Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-bn,
-            ttf-bengali-fonts
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
+Recommends: fonts-beng,
+            libreoffice-core (>> ${base-version}) | language-support-translations-bn
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-bn | myspell-dictionary-bn,
           hyphen-bn,
@@ -1174,9 +1169,7 @@ Description: office productivity suite -- Bengali language package
 Package: libreoffice-l10n-br
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-br
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-br | myspell-dictionary-br,
@@ -1205,9 +1198,7 @@ Description: office productivity suite -- Breton language package
 Package: libreoffice-l10n-bs
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-bs
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-bs | myspell-dictionary-bs,
@@ -1236,9 +1227,7 @@ Description: office productivity suite -- Bosnian language package
 Package: libreoffice-l10n-ca
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ca
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ca | myspell-dictionary-ca,
@@ -1267,9 +1256,7 @@ Description: office productivity suite -- Catalan language package
 Package: libreoffice-l10n-cs
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-cs
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-cs | myspell-dictionary-cs,
@@ -1298,9 +1285,7 @@ Description: office productivity suite -- Czech language package
 Package: libreoffice-l10n-cy
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-cy
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-cy | myspell-dictionary-cy,
@@ -1329,9 +1314,7 @@ Description: office productivity suite -- Welsh language package
 Package: libreoffice-l10n-da
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-da
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-da | myspell-dictionary-da,
@@ -1360,9 +1343,7 @@ Description: office productivity suite -- Danish language package
 Package: libreoffice-l10n-de
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-de
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-de | myspell-dictionary-de,
@@ -1391,9 +1372,7 @@ Description: office productivity suite -- German language package
 Package: libreoffice-l10n-dz
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: fonts-dzongkha,
             libreoffice-core (>> ${base-version}) | language-support-translations-dz
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -1423,9 +1402,7 @@ Description: office productivity suite -- Dzongkha language package
 Package: libreoffice-l10n-el
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-el
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-el | myspell-dictionary-el,
@@ -1454,9 +1431,7 @@ Description: office productivity suite -- Greek language package
 Package: libreoffice-l10n-en-gb
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-en
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-en-gb | myspell-dictionary-en-gb,
@@ -1485,9 +1460,7 @@ Description: office productivity suite -- English_british language package
 Package: libreoffice-l10n-en-za
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-en
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-en-za | myspell-dictionary-en-za,
@@ -1516,9 +1489,7 @@ Description: office productivity suite -- English_southafrican language package
 Package: libreoffice-l10n-eo
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-eo
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-eo | myspell-dictionary-eo,
@@ -1547,9 +1518,7 @@ Description: office productivity suite -- Esperanto language package
 Package: libreoffice-l10n-es
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-es
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-es | myspell-dictionary-es,
@@ -1578,9 +1547,7 @@ Description: office productivity suite -- Spanish language package
 Package: libreoffice-l10n-et
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-et
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-et | myspell-dictionary-et,
@@ -1609,9 +1576,7 @@ Description: office productivity suite -- Estonian language package
 Package: libreoffice-l10n-eu
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-eu
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-eu | myspell-dictionary-eu,
@@ -1640,9 +1605,7 @@ Description: office productivity suite -- Basque language package
 Package: libreoffice-l10n-fa
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: fonts-farsiweb,
             libreoffice-core (>> ${base-version}) | language-support-translations-fa
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -1672,9 +1635,7 @@ Description: office productivity suite -- Farsi language package
 Package: libreoffice-l10n-fi
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-fi
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-fi | myspell-dictionary-fi | libreoffice-spellcheck-fi,
@@ -1703,9 +1664,7 @@ Description: office productivity suite -- Finnish language package
 Package: libreoffice-l10n-fr
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-fr
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-fr | myspell-dictionary-fr,
@@ -1734,9 +1693,7 @@ Description: office productivity suite -- French language package
 Package: libreoffice-l10n-ga
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ga
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ga | myspell-dictionary-ga,
@@ -1765,9 +1722,7 @@ Description: office productivity suite -- Gaelic language package
 Package: libreoffice-l10n-gd
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-gd
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-gd | myspell-dictionary-gd,
@@ -1796,9 +1751,7 @@ Description: office productivity suite -- Scottish_gaelic language package
 Package: libreoffice-l10n-gl
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-gl
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-gl | myspell-dictionary-gl,
@@ -1827,11 +1780,9 @@ Description: office productivity suite -- Galician language package
 Package: libreoffice-l10n-gu
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
-Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-gu,
-            ttf-gujarati-fonts
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
+Recommends: fonts-gujr,
+            libreoffice-core (>> ${base-version}) | language-support-translations-gu
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-gu | myspell-dictionary-gu,
           hyphen-gu,
@@ -1859,9 +1810,7 @@ Description: office productivity suite -- Gujarati language package
 Package: libreoffice-l10n-he
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: culmus,
             libreoffice-core (>> ${base-version}) | language-support-translations-he
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -1891,9 +1840,7 @@ Description: office productivity suite -- Hebrew language package
 Package: libreoffice-l10n-hi
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-hi
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-hi | myspell-dictionary-hi,
@@ -1922,9 +1869,7 @@ Description: office productivity suite -- Hindi language package
 Package: libreoffice-l10n-hr
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-hr
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-hr | myspell-dictionary-hr,
@@ -1953,9 +1898,7 @@ Description: office productivity suite -- Croatian language package
 Package: libreoffice-l10n-hu
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-hu
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-hu | myspell-dictionary-hu,
@@ -1984,9 +1927,7 @@ Description: office productivity suite -- Hungarian language package
 Package: libreoffice-l10n-id
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-id
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-id | myspell-dictionary-id,
@@ -2015,9 +1956,7 @@ Description: office productivity suite -- Indonesian language package
 Package: libreoffice-l10n-is
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-is
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-is | myspell-dictionary-is,
@@ -2046,9 +1985,7 @@ Description: office productivity suite -- Icelandic language package
 Package: libreoffice-l10n-it
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-it
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-it | myspell-dictionary-it,
@@ -2077,9 +2014,7 @@ Description: office productivity suite -- Italian language package
 Package: libreoffice-l10n-ja
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ja
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ja | myspell-dictionary-ja,
@@ -2108,9 +2043,7 @@ Description: office productivity suite -- Japanese language package
 Package: libreoffice-l10n-ka
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ka
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ka | myspell-dictionary-ka,
@@ -2139,9 +2072,7 @@ Description: office productivity suite -- Georgian language package
 Package: libreoffice-l10n-kk
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-kk
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-kk | myspell-dictionary-kk,
@@ -2171,7 +2102,7 @@ Package: libreoffice-l10n-km
 Section: localization
 Architecture: all
 Depends: libreoffice-common,
-         locales (>= 2.3.5-12) | belocs-locales-data | locales-all,
+         locales (>= 2.3.5-12) | locales-all,
          ${misc:Depends}
 Recommends: fonts-khmeros,
             libreoffice-core (>> ${base-version}) | language-support-translations-km
@@ -2202,9 +2133,7 @@ Description: office productivity suite -- Khmer language package
 Package: libreoffice-l10n-ko
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ko
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ko | myspell-dictionary-ko,
@@ -2233,9 +2162,7 @@ Description: office productivity suite -- Korean language package
 Package: libreoffice-l10n-kmr
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-kmr
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-kmr | myspell-dictionary-kmr,
@@ -2264,9 +2191,7 @@ Description: office productivity suite -- Kurmanji language package
 Package: libreoffice-l10n-lt
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-lt
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-lt | myspell-dictionary-lt,
@@ -2295,9 +2220,7 @@ Description: office productivity suite -- Lithuanian language package
 Package: libreoffice-l10n-lv
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-lv
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-lv | myspell-dictionary-lv,
@@ -2326,9 +2249,7 @@ Description: office productivity suite -- Latvian language package
 Package: libreoffice-l10n-mk
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-mk
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-mk | myspell-dictionary-mk,
@@ -2357,9 +2278,7 @@ Description: office productivity suite -- Macedonian language package
 Package: libreoffice-l10n-mn
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-mn
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-mn | myspell-dictionary-mn,
@@ -2388,11 +2307,9 @@ Description: office productivity suite -- Mongolian language package
 Package: libreoffice-l10n-ml
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
-Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ml,
-            ttf-malayalam-fonts
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
+Recommends: fonts-mlym,
+            libreoffice-core (>> ${base-version}) | language-support-translations-ml
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ml | myspell-dictionary-ml,
           hyphen-ml,
@@ -2420,9 +2337,7 @@ Description: office productivity suite -- Malayalam language package
 Package: libreoffice-l10n-mr
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: fonts-deva,
             libreoffice-core (>> ${base-version}) | language-support-translations-mr
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -2452,9 +2367,7 @@ Description: office productivity suite -- Marathi language package
 Package: libreoffice-l10n-nb
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-nb
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-nb | myspell-dictionary-nb,
@@ -2483,9 +2396,7 @@ Description: office productivity suite -- Norwegian language package
 Package: libreoffice-l10n-ne
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: fonts-deva,
             libreoffice-core (>> ${base-version}) | language-support-translations-ne
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -2515,9 +2426,7 @@ Description: office productivity suite -- Nepalese language package
 Package: libreoffice-l10n-nl
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-nl
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-nl | myspell-dictionary-nl,
@@ -2546,9 +2455,7 @@ Description: office productivity suite -- Dutch language package
 Package: libreoffice-l10n-nn
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-nn
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-nn | myspell-dictionary-nn,
@@ -2608,9 +2515,7 @@ Description: office productivity suite -- Ndebele language package
 Package: libreoffice-l10n-nso
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-nso
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-nso | myspell-dictionary-nso,
@@ -2639,9 +2544,7 @@ Description: office productivity suite -- Northern_sotho language package
 Package: libreoffice-l10n-oc
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-oc
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-oc | myspell-dictionary-oc,
@@ -2670,9 +2573,7 @@ Description: office productivity suite -- Occitan language package
 Package: libreoffice-l10n-om
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-om
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-om | myspell-dictionary-om,
@@ -2704,20 +2605,20 @@ Architecture: all
 Depends: libreoffice-common,
          locales (>= 2.3.6.ds1-1) | locales-all (>= 2.3.6.ds1-1),
          ${misc:Depends}
-Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-or,
-            ttf-oriya-fonts
+Recommends: fonts-orya,
+            libreoffice-core (>> ${base-version}) | language-support-translations-or
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-or | myspell-dictionary-or,
           hyphen-or,
           libreoffice-grammarcheck-or,
           libreoffice-help-or,
           mythes-or
-Description: office productivity suite -- Oriya language package
+Description: office productivity suite -- Odia language package
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the localization of LibreOffice in
- Oriya.
+ Odia.
  It contains the user interface, the templates and the autotext features.
  (please note that not all this is available for all possible languages).
  You can switch user interface language using the locales system.
@@ -2733,11 +2634,9 @@ Description: office productivity suite -- Oriya language package
 Package: libreoffice-l10n-pa-in
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
-Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-pa,
-            ttf-punjabi-fonts
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
+Recommends: fonts-guru,
+            libreoffice-core (>> ${base-version}) | language-support-translations-pa
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-pa-in | myspell-dictionary-pa-in,
           hyphen-pa-in,
@@ -2765,9 +2664,7 @@ Description: office productivity suite -- Punjabi language package
 Package: libreoffice-l10n-pl
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-pl
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-pl | myspell-dictionary-pl,
@@ -2796,9 +2693,7 @@ Description: office productivity suite -- Polish language package
 Package: libreoffice-l10n-pt
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-pt
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-pt | myspell-dictionary-pt,
@@ -2827,9 +2722,7 @@ Description: office productivity suite -- Portuguese language package
 Package: libreoffice-l10n-pt-br
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-pt
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-pt-br | myspell-dictionary-pt-br,
@@ -2858,9 +2751,7 @@ Description: office productivity suite -- Portuguese_brazilian language package
 Package: libreoffice-l10n-ro
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ro
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ro | myspell-dictionary-ro,
@@ -2889,9 +2780,7 @@ Description: office productivity suite -- Romanian language package
 Package: libreoffice-l10n-ru
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ru
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ru | myspell-dictionary-ru,
@@ -2921,7 +2810,7 @@ Package: libreoffice-l10n-rw
 Section: localization
 Architecture: all
 Depends: libreoffice-common,
-         locales (>= 2.3.6) | belocs-locales-data | locales-all (>= 2.3.6),
+         locales (>= 2.3.6) | locales-all (>= 2.3.6),
          ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-rw
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -2951,9 +2840,7 @@ Description: office productivity suite -- Kinarwanda language package
 Package: libreoffice-l10n-si
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-si
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-si | myspell-dictionary-si,
@@ -2982,9 +2869,7 @@ Description: office productivity suite -- Sinhala language package
 Package: libreoffice-l10n-sk
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-sk
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-sk | myspell-dictionary-sk,
@@ -3013,9 +2898,7 @@ Description: office productivity suite -- Slovak language package
 Package: libreoffice-l10n-sl
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-sl
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-sl | myspell-dictionary-sl,
@@ -3045,7 +2928,7 @@ Package: libreoffice-l10n-sr
 Section: localization
 Architecture: all
 Depends: libreoffice-common,
-         locales (>= 2.3.6.ds1-5) |  belocs-locales-data | locales-all,
+         locales (>= 2.3.6.ds1-5) | locales-all,
          ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-sr
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -3076,7 +2959,7 @@ Package: libreoffice-l10n-ss
 Section: localization
 Architecture: all
 Depends: libreoffice-common,
-         locales (>= 2.3.5-12) | belocs-locales-data | locales-all,
+         locales (>= 2.3.5-12) | locales-all,
          ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ss
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -3106,9 +2989,7 @@ Description: office productivity suite -- Swazi language package
 Package: libreoffice-l10n-st
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-st
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-st | myspell-dictionary-st,
@@ -3137,9 +3018,7 @@ Description: office productivity suite -- Southern_sotho language package
 Package: libreoffice-l10n-sv
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-sv
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-sv | myspell-dictionary-sv,
@@ -3168,11 +3047,9 @@ Description: office productivity suite -- Swedish language package
 Package: libreoffice-l10n-ta
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
-Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ta,
-            ttf-tamil-fonts
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
+Recommends: fonts-taml,
+            libreoffice-core (>> ${base-version}) | language-support-translations-ta
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ta | myspell-dictionary-ta,
           hyphen-ta,
@@ -3200,11 +3077,9 @@ Description: office productivity suite -- Tamil language package
 Package: libreoffice-l10n-te
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
-Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-te,
-            ttf-telugu-fonts
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
+Recommends: fonts-telu,
+            libreoffice-core (>> ${base-version}) | language-support-translations-te
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-te | myspell-dictionary-te,
           hyphen-te,
@@ -3232,9 +3107,7 @@ Description: office productivity suite -- Telugu language package
 Package: libreoffice-l10n-tg
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-tg
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-tg | myspell-dictionary-tg,
@@ -3263,9 +3136,7 @@ Description: office productivity suite -- Tajik language package
 Package: libreoffice-l10n-th
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: fonts-thai-tlwg,
             libreoffice-core (>> ${base-version}) | language-support-translations-th
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -3296,7 +3167,7 @@ Package: libreoffice-l10n-tn
 Section: localization
 Architecture: all
 Depends: libreoffice-common,
-         locales (>= 2.3.5-12) | belocs-locales-data | locales-all,
+         locales (>= 2.3.5-12) | locales-all,
          ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-tn
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -3326,9 +3197,7 @@ Description: office productivity suite -- Tswana language package
 Package: libreoffice-l10n-tr
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-tr
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-tr | myspell-dictionary-tr | libreoffice-spellcheck-tr,
@@ -3358,7 +3227,7 @@ Package: libreoffice-l10n-ts
 Section: localization
 Architecture: all
 Depends: libreoffice-common,
-         locales (>= 2.3.5-12) | belocs-locales-data | locales-all,
+         locales (>= 2.3.5-12) | locales-all,
          ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ts
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
@@ -3388,9 +3257,7 @@ Description: office productivity suite -- Tsonga language package
 Package: libreoffice-l10n-ug
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ug
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ug | myspell-dictionary-ug,
@@ -3419,9 +3286,7 @@ Description: office productivity suite -- Uighur language package
 Package: libreoffice-l10n-uk
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-uk
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-uk | myspell-dictionary-uk,
@@ -3450,9 +3315,7 @@ Description: office productivity suite -- Ukrainian language package
 Package: libreoffice-l10n-uz
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-uz
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-uz | myspell-dictionary-uz,
@@ -3481,9 +3344,7 @@ Description: office productivity suite -- Uzbek language package
 Package: libreoffice-l10n-ve
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ve
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-ve | myspell-dictionary-ve,
@@ -3512,9 +3373,7 @@ Description: office productivity suite -- Venda language package
 Package: libreoffice-l10n-vi
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-vi
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-vi | myspell-dictionary-vi,
@@ -3543,9 +3402,7 @@ Description: office productivity suite -- Vietnamese language package
 Package: libreoffice-l10n-xh
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-xh
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-xh | myspell-dictionary-xh,
@@ -3574,9 +3431,7 @@ Description: office productivity suite -- Xhosa language package
 Package: libreoffice-l10n-zh-cn
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-zh
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-zh-cn | myspell-dictionary-zh-cn,
@@ -3605,9 +3460,7 @@ Description: office productivity suite -- Chinese_simplified language package
 Package: libreoffice-l10n-zh-tw
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-zh
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-zh-tw | myspell-dictionary-zh-tw,
@@ -3636,9 +3489,7 @@ Description: office productivity suite -- Chinese_traditional language package
 Package: libreoffice-l10n-zu
 Section: localization
 Architecture: all
-Depends: libreoffice-common,
-         locales | belocs-locales-data | locales-all,
-         ${misc:Depends}
+Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-zu
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-zu | myspell-dictionary-zu,
@@ -3664,51 +3515,13 @@ Description: office productivity suite -- Zulu language package
  install extra dictionaries/hyphenation patterns/thesauri independently of
  the language packs.
 
-Package: libreoffice-presenter-console
-Section: oldlibs
-Priority: extra
-Architecture: all
-Depends: libreoffice-impress (>= 1:4.0.0)
-Description: transitional package for the LibreOffice presenter console
- This package used to contain the LibreOffice presenter console. It has been
- integrated with LibreOffice Impress 4.0. You can safely remove this package.
-
-Package: libreoffice-presentation-minimizer
-Section: oldlibs
-Priority: extra
-Architecture: all
-Depends: libreoffice-impress (>= 1:4.2.0~)
-Description: transitional package for the LibreOffice presentation minimizer
- This package used to contain the LibreOffice presentation minimizer. It has been
- integrated with LibreOffice Impress 4.2. You can safely remove this package.
-
-Package: libreoffice-emailmerge
-Architecture: all
-Depends: libreoffice-common (>= 1:4.0.2~rc1)
-Section: oldlibs
-Priority: extra
-Description: transitional package for LibreOffices email mail merge
- This package used to contain the email merge module for LibreOffice. It has
- been integrated in libreoffice-common now.You can safely remove this
- package.
-
-Package: libreoffice-l10n-ku
-Architecture: all
-Depends: libreoffice-l10n-kmr
-Section: oldlibs
-Priority: extra
-Description: transitional package for LibreOffice Kurdish l10n
- ku ("Kurdish") was renamed in LO 4.2 to kmr-Latn ("Kumanji"). This package is
- a transitional package to easy transition to -l10n-kmr.
- .
- You can safely remove this package if -l10n-kmr is installed.
-
 Package: libreoffice-help-en-us
 Replaces: libreoffice-common (<< 1:3.0.0~dev300m28)
 Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-en
 Depends: libreoffice-l10n-en-us,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-en,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3724,6 +3537,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ca
 Depends: libreoffice-l10n-ca,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-ca,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3739,6 +3553,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-cs
 Depends: libreoffice-l10n-cs,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-cs,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3754,6 +3569,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-da
 Depends: libreoffice-l10n-da,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-da,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3769,6 +3585,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-de
 Depends: libreoffice-l10n-de,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-de,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3784,6 +3601,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-dz
 Depends: libreoffice-l10n-dz,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-dz,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3799,6 +3617,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-el
 Depends: libreoffice-l10n-el,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-el,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3814,6 +3633,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-en
 Depends: libreoffice-l10n-en-gb,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-en,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3829,6 +3649,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-es
 Depends: libreoffice-l10n-es,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-es,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3844,6 +3665,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-et
 Depends: libreoffice-l10n-et,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-et,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3859,6 +3681,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-eu
 Depends: libreoffice-l10n-eu,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-eu,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3874,6 +3697,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-fi
 Depends: libreoffice-l10n-fi,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-fi,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3889,6 +3713,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-fr
 Depends: libreoffice-l10n-fr,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-fr,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3904,6 +3729,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-gl
 Depends: libreoffice-l10n-gl,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-gl,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3919,6 +3745,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-hi
 Depends: libreoffice-l10n-hi,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-hi,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3934,6 +3761,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-hu
 Depends: libreoffice-l10n-hu,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-hu,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3949,6 +3777,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-it
 Depends: libreoffice-l10n-it,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-it,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3964,6 +3793,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ja
 Depends: libreoffice-l10n-ja,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-ja,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3979,6 +3809,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-km
 Depends: libreoffice-l10n-km,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-km,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -3994,6 +3825,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ko
 Depends: libreoffice-l10n-ko,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-ko,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4009,6 +3841,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-nl
 Depends: libreoffice-l10n-nl,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-nl,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4024,6 +3857,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-om
 Depends: libreoffice-l10n-om,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-om,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4039,6 +3873,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-pl
 Depends: libreoffice-l10n-pl,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-pl,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4054,6 +3889,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-pt
 Depends: libreoffice-l10n-pt,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-pt,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4069,6 +3905,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-pt
 Depends: libreoffice-l10n-pt-br,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-pt,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4084,6 +3921,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-ru
 Depends: libreoffice-l10n-ru,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-ru,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4100,6 +3938,7 @@ Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-sk
 Depends: libreoffice-help-cs,
          libreoffice-l10n-sk,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-sk,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4115,6 +3954,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-sl
 Depends: libreoffice-l10n-sl,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-sl,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4130,6 +3970,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-sv
 Depends: libreoffice-l10n-sv,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-sv,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4145,6 +3986,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-tr
 Depends: libreoffice-l10n-tr,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-tr,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4160,6 +4002,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-vi
 Depends: libreoffice-l10n-vi,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-vi,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4175,6 +4018,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-zh
 Depends: libreoffice-l10n-zh-cn,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-zh,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4190,6 +4034,7 @@ Architecture: all
 Section: doc
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-zh
 Depends: libreoffice-l10n-zh-tw,
+         libreoffice-style-default,
          libreoffice-writer | language-support-translations-zh,
          ${misc:Depends}
 Provides: libreoffice-help-${help-l10n-virtual-version}
@@ -4202,10 +4047,10 @@ Description: office productivity suite -- Chinese_traditional help
 
 Package: uno-libs3
 Section: libs
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: ure (<< 4.0.3-2)
-Breaks: ure (<< 4.1.2~)
+Breaks: libreoffice-core (<< 1:4.3.0~), ure (<< 4.1.2~)
 Description: LibreOffice UNO runtime environment -- public shared libraries
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.
@@ -4225,7 +4070,7 @@ Description: LibreOffice UNO runtime environment -- public shared libraries
 
 Package: ure
 Section: libs
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: uno-libs3 (= ${ure:Version}), ${misc:Depends}, ${shlibs:Depends}
 Suggests: java5-runtime
 Conflicts: cli-uno-bridge (<< 1:3.0.0~dev300m22)
@@ -4242,70 +4087,10 @@ Description: LibreOffice UNO runtime environment
  it to create any kind of application, in whatever application domain you can
  imagine.
 
-Package: browser-plugin-libreoffice
-Section: net
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
-Enhances: firefox,
-          iceape-browser,
-          iceweasel,
-          libreoffice,
-          libreoffice-core,
-          mozilla-browser
-Depends: libreoffice-core (>= 1:3.5.0~beta~), ${misc:Depends}, ${shlibs:Depends}
-Recommends: iceweasel | firefox | iceape-browser | konqueror-nsplugins,
-            libreoffice-base,
-            libreoffice-calc,
-            libreoffice-draw,
-            libreoffice-impress,
-            libreoffice-math,
-            libreoffice-writer
-Xb-Npp-Applications: ec8030f7-c20a-464f-9b0e-13a3a9e97384, 92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a
-Xb-Npp-Name: LibreOffice Plug-in
-Xb-Npp-MimeType: application/vnd.oasis.opendocument.formula,
-                 application/vnd.oasis.opendocument.graphics,
-                 application/vnd.oasis.opendocument.graphics-template,
-                 application/vnd.oasis.opendocument.presentation,
-                 application/vnd.oasis.opendocument.presentation-template,
-                 application/vnd.oasis.opendocument.spreadsheet,
-                 application/vnd.oasis.opendocument.spreadsheet-template,
-                 application/vnd.oasis.opendocument.text,
-                 application/vnd.oasis.opendocument.text-master,
-                 application/vnd.oasis.opendocument.text-template,
-                 application/vnd.oasis.opendocument.text-web,
-                 application/vnd.stardivision.calc,
-                 application/vnd.stardivision.chart,
-                 application/vnd.stardivision.draw,
-                 application/vnd.stardivision.impress,
-                 application/vnd.stardivision.impress-packed,
-                 application/vnd.stardivision.math,
-                 application/vnd.stardivision.writer,
-                 application/vnd.stardivision.writer-global,
-                 application/vnd.staroffice.writer,
-                 application/vnd.sun.xml.calc,
-                 application/vnd.sun.xml.calc.template,
-                 application/vnd.sun.xml.draw,
-                 application/vnd.sun.xml.draw.template,
-                 application/vnd.sun.xml.impress,
-                 application/vnd.sun.xml.impress.template,
-                 application/vnd.sun.xml.math,
-                 application/vnd.sun.xml.writer,
-                 application/vnd.sun.xml.writer.global,
-                 application/vnd.sun.xml.writer.template
-Breaks: mozilla-openoffice.org (<< 1:3.3.0~)
-Conflicts: mozilla-libreoffice
-Replaces: mozilla-libreoffice, mozilla-openoffice.org (<< 1:3.3.0~)
-Provides: mozilla-libreoffice
-Description: office productivity suite -- Mozilla plugin
- LibreOffice is a full-featured office productivity suite that provides
- a near drop-in replacement for Microsoft(R) Office.
- .
- This package contains a Mozilla/Netscape compatible plugin which can handle
- all old OOo and OpenDocument documents.
-
 Package: libreoffice-ogltrans
 Section: graphics
 Priority: extra
-Architecture: amd64 armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-common,
          libreoffice-core,
          libreoffice-impress,
@@ -4313,12 +4098,12 @@ Depends: libreoffice-common,
          ${shlibs:Depends}
 Enhances: libreoffice-impress
 Breaks: ure (<< 1.5.1+OOo3.1.1-15)
-Description: LibreOffice Impress extension for transitions using OpenGL
+Description: LibreOffice Impress extension for slide transitions using OpenGL
  LibreOffice is a full-featured office productivity suite that provide
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the extension making LibreOffice able to use
- OpenGL for impress transitions.
+ OpenGL for impress slide transitions.
 
 Package: libreoffice-wiki-publisher
 Section: misc
@@ -4369,7 +4154,7 @@ Description: LibreOffice component for building database reports
 
 Package: libreoffice-report-builder-bin
 Section: misc
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x
 Depends: libreoffice-base, libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Description: LibreOffice component for building database reports -- libraries
  LibreOffice is a full-featured office productivity suite that provides
@@ -4392,12 +4177,12 @@ Description: OpenSymbol TrueType font
 
 Package: libreoffice-dbg
 Section: debug
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Priority: extra
-Depends: libreoffice-core (= ${binary:Version}) | libreoffice-dev (= ${binary:Version}) | libreoffice-gnome (= ${binary:Version}) | libreoffice-kde (= ${binary:Version}) | libreoffice-calc (= ${binary:Version}) | libreoffice-base-core (= ${binary:Version}) | libreoffice-base (= ${binary:Version}) | libreoffice-impress (= ${binary:Version}) | libreoffice-draw (= ${binary:Version}) | libreoffice-writer (= ${binary:Version}) | python3-uno (= ${binary:Version}) | browser-plugin-libreoffice (= ${binary:Version}) | libreoffice-ogltrans (= ${binary:Version}),
+Depends: libreoffice-core (= ${binary:Version}) | libreoffice-dev (= ${binary:Version}) | libreoffice-gnome (= ${binary:Version}) | libreoffice-kde (= ${binary:Version}) | libreoffice-calc (= ${binary:Version}) | libreoffice-base-core (= ${binary:Version}) | libreoffice-base (= ${binary:Version}) | libreoffice-impress (= ${binary:Version}) | libreoffice-draw (= ${binary:Version}) | libreoffice-writer (= ${binary:Version}) | python3-uno (= ${binary:Version}) | libreoffice-ogltrans (= ${binary:Version}),
          ${misc:Depends}
 Recommends: ure-dbg
-Suggests: ${dbg-dbg-suggests}
+Suggests: python-six, ${dbg-dbg-suggests}
 Pre-Depends: dpkg (>= 1.15.6)
 Description: office productivity suite -- debug symbols
  LibreOffice is a full-featured office productivity suite that provides
@@ -4409,9 +4194,10 @@ Description: office productivity suite -- debug symbols
 Package: uno-libs3-dbg
 Section: debug
 Priority: extra
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: uno-libs3 (= ${ure:Version}), ${misc:Depends}
 Replaces: ure-dbg (<< 4.0.3-2)
+Suggests: python-six
 Description: LibreOffice UNO runtime environment -- public shared library debug symbols
  The Uno Runtime Environment (URE) is the well-known UNO component model
  of LibreOffice, packaged up as an individual product.
@@ -4432,7 +4218,7 @@ Description: LibreOffice UNO runtime environment -- public shared library debug 
 Package: ure-dbg
 Section: debug
 Priority: extra
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: uno-libs3-dbg (= ${ure:Version}),
          ure (= ${ure:Version}),
          ${misc:Depends}
@@ -4450,7 +4236,7 @@ Description: LibreOffice UNO runtime environment -- debug symbols
 
 Package: libreoffice-dev
 Section: devel
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-core (= ${binary:Version}),
          ${idlc-cpp-depends},
          ${misc:Depends},
@@ -4487,7 +4273,7 @@ Description: office productivity suite -- SDK documentation
  It also contains the gsicheck utility.
 
 Package: libreoffice-kde
-Architecture: amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
@@ -4495,7 +4281,9 @@ Recommends: ${kde-iconset-dep}
 Suggests: kmail, konqueror, libreoffice-kab
 Section: kde
 Enhances: libreoffice
-Replaces: libreoffice-core (= 1:3.5.0~beta2-1), openoffice.org-kde (<< 1:3.3.0~)
+Replaces: libreoffice-core (= 1:3.5.0~beta2-1),
+          libreoffice-core (= 1:4.3.0~beta1-1),
+          openoffice.org-kde (<< 1:3.3.0~)
 Description: office productivity suite -- KDE integration
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -4509,7 +4297,7 @@ Description: office productivity suite -- KDE integration
 
 Package: libreoffice-sdbc-postgresql
 Section: misc
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
 Depends: libreoffice-core (>= 1:3.5.0~beta), ${misc:Depends}, ${shlibs:Depends}
 Suggests: postgresql (>= 8.4)
 Breaks: ure (<< 1.5.1+OOo3.1.1-15)
@@ -4524,9 +4312,9 @@ Homepage: http://wiki.documentfoundation.org/PostgreSQL-SDBC
 
 Package: libreoffice-mysql-connector
 Section: misc
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
 Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
-Suggests: mysql-server (>= 5.1)
+Suggests: mariadb-server | mysql-server (>= 5.1)
 Conflicts: libreoffice-common (<< 1:3.5~),
            libreoffice-core (<< 1:3.5~),
            ure (<< 1.5.1+OOo3.1.1-15)
@@ -4539,7 +4327,7 @@ Description: MariaDB/MySQL Connector extension for LibreOffice
  database from LibreOffice without any wrapper layer such as ODBC or JDBC.
 
 Package: libreoffice-evolution
-Architecture: amd64 armel armhf i386 mips mipsel powerpc powerpcspe ppc64 s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf arm64 i386 mips mipsel powerpc powerpcspe ppc64 ppc64el s390x hppa ia64 s390 sparc kfreebsd-amd64 kfreebsd-i386
 Section: gnome
 Depends: libreoffice-base,
          libreoffice-common (>= 1:3.4.0~),
@@ -4557,6 +4345,152 @@ Description: office productivity suite -- Evolution addressbook support
  This package allows LibreOffice to access Evolution address books.
  You need to install evolution separately.
 
+Package: libreoffice-subsequentcheckbase
+Section: libs
+Priority: extra
+Architecture: all
+Depends: ant (>= 1.7.0),
+         ant-optional (>= 1.7.0),
+         autoconf,
+         automake,
+         bc,
+         bison,
+         build-essential,
+         bzip2,
+         coinor-libcoinmp-dev,
+         coinor-libcoinutils-dev,
+         debhelper (>= 7.2.3~),
+         default-jdk,
+         doxygen (>= 1.8.4),
+         dpkg-dev (>= 1.16.1),
+         fastjar,
+         firebird-dev (>= 2.5.2.26540.ds4-2),
+         flex (>= 2.3.35),
+         fontconfig,
+         fontforge,
+         fonts-crosextra-carlito,
+         fonts-liberation,
+         g++-mingw-w64-i686,
+         gdb,
+         gettext,
+         gperf,
+         java-common (>= 0.49),
+         javahelper (>= 0.37~),
+         junit4 (>= 4.8.2-2),
+         kdelibs5-dev (>= 4:4.3.4),
+         libabw-dev (>= 0.1),
+         libarchive-zip-perl,
+         libbluetooth-dev,
+         libboost-date-time-dev (>= 1.55),
+         libboost-dev (>= 1.55),
+         libboost-iostreams-dev (>= 1.55),
+         libboost-system-dev (>= 1.55),
+         libbsh-java,
+         libcairo2-dev,
+         libcdr-dev (>= 0.1),
+         libclucene-dev (>= 2.3.3.4-2),
+         libcmis-dev (>= 0.5.0),
+         libcommons-codec-java,
+         libcommons-httpclient-java,
+         libcommons-lang-java,
+         libcommons-logging-java,
+         libcppunit-dev (>= 1.12),
+         libcups2-dev,
+         libcurl4-gnutls-dev,
+         libdbus-glib-1-dev (>= 0.70),
+         libe-book-dev (>= 0.1.1),
+         libebook1.2-dev,
+         libeot-dev,
+         libetonyek-dev (>= 0.1.1),
+         libexpat1-dev,
+         libexttextcat-dev (>= 3.1.1),
+         libfontconfig1-dev,
+         libfreehand-dev (>= 0.1),
+         libfreetype6-dev (>= 2.2.0),
+         libgconf2-dev,
+         libgl1-mesa-dev,
+         libglew-dev,
+         libglib2.0-dev (>= 2.15.0),
+         libglm-dev,
+         libgltf-dev (>= 0.0.1),
+         libglu1-mesa-dev,
+         libgraphite2-dev (>= 0.9.3),
+         libgstreamer-plugins-base1.0-dev,
+         libgstreamer1.0-dev,
+         libgtk-3-dev (>= 3.2~),
+         libgtk2.0-dev (>= 2.10),
+         libharfbuzz-dev (>= 0.9.18),
+         libhsqldb1.8.0-java (>> 1.8.0.10),
+         libhunspell-dev (>= 1.1.5-2),
+         libhyphen-dev (>= 2.4),
+         libice-dev,
+         libicu-dev (>= 52),
+         libjpeg-dev,
+         liblangtag-dev (>= 0.4),
+         liblcms2-dev,
+         libldap2-dev,
+         liblpsolve55-dev (>= 5.5.0.13-5+b1),
+         libmdds-dev (>= 0.10.3),
+         libmspub-dev (>= 0.1),
+         libmwaw-dev (>= 0.3.4),
+         libmysqlclient-dev,
+         libmysqlcppconn-dev (>= 1.1.0~r791),
+         libmythes-dev (>= 2:1.2),
+         libneon27-gnutls-dev,
+         libnss3-dev (>= 3.12.3),
+         libodfgen-dev (>= 0.1),
+         liborcus-dev (>= 0.7.0),
+         libpagemaker-dev,
+         libpng12-dev,
+         libpoppler-cpp-dev,
+         libpoppler-dev (>= 0.8.0),
+         libpoppler-private-dev,
+         libpq-dev (>= 9.0~),
+         libqt4-dev (>= 4:4.8),
+         librdf0-dev (>= 1.0.16-2),
+         libreoffice,
+         librevenge-dev,
+         libsane-dev,
+         libsm-dev,
+         libssl-dev (>= 0.9.8),
+         libsuitesparse-dev (>= 1:3.4.0),
+         libvigraimpex-dev,
+         libvisio-dev (>= 0.1),
+         libvlc5,
+         libwpd-dev (>= 0.10),
+         libwpg-dev (>= 0.3),
+         libwps-dev (>= 0.3),
+         libx11-dev,
+         libxaw7-dev,
+         libxext-dev,
+         libxinerama-dev,
+         libxkbfile-dev,
+         libxml2-dev,
+         libxml2-utils,
+         libxrandr-dev,
+         libxrender-dev,
+         libxslt1-dev,
+         libxt-dev,
+         libxtst-dev,
+         lp-solve (>= 5.5.0.13-5+b1),
+         make (>= 3.81-8.2),
+         maven-repo-helper,
+         npapi-sdk-dev,
+         openjdk-7-jdk,
+         pkg-config,
+         python3,
+         python3-dev (>= 3.3),
+         ucpp,
+         unixodbc-dev (>= 2.2.11),
+         unzip,
+         x11proto-render-dev,
+         xsltproc,
+         zip,
+         zlib1g-dev,
+         ${misc:Depends}
+Description: LibreOffice java test libraries
+ LibreOffice subsequentchecks integration test suite
+
 Package: libreoffice-librelogo
 Section: misc
 Architecture: all
@@ -4564,6 +4498,7 @@ Depends: libreoffice-core (>= 1:3.4~),
          libreoffice-script-provider-python,
          libreoffice-writer,
          ${misc:Depends}
+Homepage: http://librelogo.org
 Description: Logo-like progamming language for LibreOffice
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.

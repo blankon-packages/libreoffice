@@ -1,3 +1,553 @@
+libreoffice (1:4.4.1~rc1-1blankon1) tambora; urgency=medium
+
+  * New Upstream Release
+  * Merge Whit experimental
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sun, 22 Feb 2015 11:07:32 +0000
+
+libreoffice (1:4.4.1~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/patches/hppa-is-32bit.diff: as name says; don't assume hppa is
+    64bit, as it isn't in Debian (closes: #776357)
+  * debian/rules:
+    - suggest gstreamer1.0-libav instead of gstreamer1.0-ffmpeg
+      (closes: #776593) 
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 09 Feb 2015 22:14:43 +0100
+
+libreoffice (1:4.4.0~rc3-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/rules:
+    - move /var/spool/libreoffice into -core, not -common (closes: #775150)
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 22 Jan 2015 23:45:29 +0100
+
+libreoffice (1:4.4.0~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/rules:
+    - use internal libmwaw and libcmis for jessie-backports
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 10 Jan 2015 19:10:11 +0100
+
+libreoffice (1:4.4.0~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 17 Dec 2014 23:38:37 +0100
+
+libreoffice (1:4.4.0~beta2-1) experimental; urgency=medium
+
+  * New upstream beta release
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 06 Dec 2014 15:10:37 +0100
+
+libreoffice (1:4.4.0~beta1-2) experimental; urgency=medium
+
+  * debian/patches/aarch64-bridges-add-missing-include-osl-mutex.hxx.diff: as
+    name says
+  * debian/patches/powerpc64-bridges-assert-static_assert-to-fix-build.diff: as
+    name says 
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 25 Nov 2014 17:40:37 +0100
+
+libreoffice (1:4.4.0~beta1-1) experimental; urgency=medium
+
+  * new upstream beta release
+    - fixes postgresql-sdbc-impl install (closes: #769156)
+
+  * debian/rules:
+    - remove --disable-opengl as it's gone upstream; keep OGLTrans.so in
+      -ogltrans
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 21 Nov 2014 21:55:03 +0100
+
+libreoffice (1:4.4.0~alpha2-1) experimental; urgency=medium
+
+  * new upstream alpha release
+
+  * debian/rules:
+    - add conditional/includes/libs for system-opencollada
+    - use libmariadb-client-lgpl-dev instead of libmariadbclient-dev
+      when USE_MARIADB=y
+    - bump build-dependency on icu to >= 52 (see
+      https://bugs.freedesktop.org/show_bug.cgi?id=82229#c38)
+  * debian/shlibs.override.icu:
+    - update to actual cuurent SOVERSION...
+  * debian/rules, debian/shlibs.local.libc: revert libc 2.19 hack
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 07 Nov 2014 00:05:22 +0100
+
+libreoffice (1:4.4.0~alpha1-3) experimental; urgency=low
+
+  * debian/patches/oox-fix-bigendian-build.diff: one more fix from master
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 27 Oct 2014 23:10:49 +0100
+
+libreoffice (1:4.4.0~alpha1-2) experimental; urgency=low
+
+  * debian/patches/oox-fix-bigendian-build.diff: as name says 
+  * debian/patches/LibreOfficeKitInit-kfreebsd.diff: fix LibreOfficeKitInit.h
+    on kFreeBSD
+ 
+ -- Rene Engelhard <rene@debian.org>  Wed, 22 Oct 2014 10:20:18 +0200
+
+libreoffice (1:4.4.0~alpha1-1) experimental; urgency=low
+
+  * new upstream alpha release
+
+  * debian/rules, debian/patches/wheezy-backports-python.diff,
+    debian/patches/series: remove wheezy-backports support (making loads
+    of stuff easier/safer) and add (unused yet) jessie-backports support
+  * debian/rules, debian/control.in: remove python2/python-uno support
+  * debian/rules, debian/control.transitionals.in: remove wheezy->jessie
+    transitional packages
+  * debian/rules, debian/control.mozilla.in, patches/install-fixes.diff,
+    debian/scripts/gid2pkgdirs.sh: remove nsplugin stuff; removed
+    upstream...
+
+  * debian/rules:
+    - install tango_testing (if built, RELEASE_BUILD=n) into -tango
+    - add new coinor-libcoinutils-dev build-dependency
+    - bump boost build-dep to >= 1.55, build-depend on libpagemaker-dev
+    - remove deprecated "default" from IMAGES
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 19 Oct 2014 23:15:33 +0200
+
+libreoffice (1:4.3.3~rc2~git20141011-1) unstable; urgency=low
+
+  * new upstream snapshot
+    - disables sdremote per default (closes: #749770)
+
+  * debian/rules:
+    - enable coinmp, evoab2 and vlc also on arm64 now, now available
+  * debian/shlibs.override.libc, debian/rules:
+    - go sure and make the package depend on libc6/libc6.1/libc0.1 >= 2.19,
+      see https://bugs.freedesktop.org/show_bug.cgi?id=82229
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 11 Oct 2014 15:36:58 +0200
+
+libreoffice (1:4.3.2-2) unstable; urgency=medium
+
+  * debian/patches/sdk-use-sh-to-call-config-guess.diff: as name says;
+    backported from master to cope with non-+x-config.guess after
+    debian/patches/config-sub-guess-update.diff
+
+  * debian/rules:
+    - libnss3-1d-dbg -> libnss3-dbg in DBG_DBG_SUGGESTS
+    - enable coinmp (except on arm64 where it's BD-Uninstallable right now)
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 01 Oct 2014 21:37:10 +0200
+
+libreoffice (1:4.3.2-1) unstable; urgency=medium
+
+  * LibreOffice 4.3.2 final release (identical to rc2)
+
+  * upload to unstable
+
+  * debian/rules:
+    - remove arm64 internal vigra workaround again; now built
+    - remove obsolete libxml-parser-perl build-dep
+    - fix technical.dic install for kmr-Latn and debian-presentation.otp
+      install for kmr-Latn and ca-valencia so they end up in the correct
+      package and don't survive clean
+    - enable -kde on arm64; kde-runtime is now available
+
+  * merge from Ubuntu:
+    - adding build-essential to subsequentcheckbase should fix autopkgtest
+      issues 
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 28 Sep 2014 19:41:26 +0200
+
+libreoffice (1:4.3.2~rc2-1) experimental; urgency=low
+
+  * new upstream release candidate
+    - fixes crashes with e.g. "(1)(2)(3)aa" and brainfuck code
+      (closes: #761226)
+
+  * debian/rules:
+    - bump libgltf build-dep to >= 0.0.1
+  * debian/control*in, debian/rules:
+    - improve kde,vlc,evo2 disabling on arm64, remove actually also
+      from Architecture: of those packages
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 19 Sep 2014 18:03:44 +0200
+
+libreoffice (1:4.3.1-2) unstable; urgency=medium
+
+  * debian/patches/ppc64el.diff: backport ppc64el port from upstream
+    libreoffice-4-3 branch
+  * debian/patches/config-sub-guess-update.diff, debian/patches/aarch64.diff:
+    backport aarch64/arm64 port from Fedora/upstream master
+  * debian/patches/ttranslation-merge-fix: add translation fix from upstream
+    master fixing lower case greek letters in math and uppercase "enumeration"
+    letters
+
+  * debian/rules, debian/vars.ppc64el: add ppc64el support and enable
+  * debian/rules, debian/vars.arm64: add arm64 support and enable
+  * debian/rules:
+    - help arm64 by working around (yet) BD-Uninstallable packages:
+      - disabling kde, vlc and evolution
+      - using internal vigra
+    - fix duplicate BOOST_MINVER setting causing a too lax build-dep
+      (>= 1.49.0-4 instead of >= 1.53) for gcc >= 4.8...
+    - fix system-npapi-headers setting, npapi is also needed for the
+      browser-plugins-inside-LO non-feature.
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 14 Sep 2014 23:28:45 +0200
+
+libreoffice (1:4.3.1-1) unstable; urgency=low
+
+  * new upstream release
+
+  * debian/patches/system-libgltf.diff: add patch to implement
+    --with-system-libgltf
+  * debian/patches/handle-collada-seperately.diff: as name says,
+    from upstream master
+
+  * debian/rules:
+    - add conditional for system-libgltf and add ENABLE/DISABLE_COLLADA
+    - enable gltf
+  * debian/python-uno.NEWS: retroactively add a entry about python-unos
+    removal in jessie+1 for 1:4.0.0-1
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 28 Aug 2014 10:03:11 -0700
+
+libreoffice (1:4.3.0-3) unstable; urgency=medium
+
+  * debian/libreoffice-base.postrm.in: missing \ and broken if check...
+  * debian/rules:
+    - USE_UCPP=y (closes: #748004)
+    - cleanup some OpenGL-related (build-)depends/compile options:
+      + unconditionally build-depend on libgl1-mesa-dev, libgl1-mesa-dev -
+        there is now more than OGLTrans needing it (and libglew-dev pulls it
+        in anyway)
+      + add OOO_GLTF_ARCHS as for OOO_OGLTRANS_ARCHS
+    - stop trying to split libavmediaogl.so into -avmedia-backend-opengl.
+      The (maybe) also used COLLADA libs get (statically) linked into
+      libavmedialo.so (core) anyway and the file types for "Insert 3D Model"
+      are handled in libsd (draw) anyway...
+  * debian/control.ogltrans.in: clarify a bit: s/transitions/slide &/
+
+  * merge from Ubuntu:
+    - suggest Caladea and Carlito from Writer for metric compatibility
+    - move ${java-common-depends} and ${java-runtime-depends} from Recommends
+      to Suggests for -writer
+    - move db drivers back from -base to -base-drivers, even when not building
+      firebird
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 18 Aug 2014 16:43:40 +0200
+
+libreoffice (1:4.3.0-2) unstable; urgency=low
+
+  * upload to unstable
+
+  * debian/patches/system-coinmp.diff: add patch to implement
+    --with-system-coinmp
+
+  * debian/rules:
+    - disable firebird on BE-archs as per upstream advice. Experimental
+      feature anyway - and fails the dbacccess_firebird_test test
+    - add conditional for system-coinmp, don't enable yet
+  * debian/libreoffice-sdbc-firebird.bug-script.in: add, as for -gtk3
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 06 Aug 2014 18:42:03 +0200
+
+libreoffice (1:4.3.0-1) experimental; urgency=low
+
+  * LibreOffice 4.3.0 release
+
+  * debian/libreoffice-base.postrm.in: fix again..
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 30 Jul 2014 08:03:29 +0200
+
+libreoffice (1:4.3.0~rc3-2) experimental; urgency=low
+
+  * Brown paper bag release
+
+  * debian/patches/handle-symlinks-to-icon-themes-correctly.diff: as name says;
+    from upstream
+
+  * debian/rules:
+    - fix typo so export DISABLE_CVE_TESTS=TRUE is actually set
+    - add symlinks for images*.zip again
+    - s/iceweasel-dev/npapi-sdk-dev/. Re-enable system-npapi-headers
+    - ENABLE_AVAHI=n (closes: #749770, #755309)
+  * debian/libreoffice-base.preinst.in: fix version check (closes: #755290)
+  * debian/libreoffice-base.postrm.in: add more checks for the
+    Access2Base diversions; add forgotten recommended abort-upgrade step
+    from policy manual
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 19 Jul 2014 09:57:19 +0200
+
+libreoffice (1:4.3.0~rc3-1) experimental; urgency=low
+
+  * new upstream release candidate
+    - packages galaxy icon as the icon scanner expects
+
+  * debian/rules, debian/control.in: revert images.zip Depends: workaround,
+    symlink still seems to be broken somehow, keep that
+  * debian/rules: remove unused (and buggy?) manual --with-images= when not
+    building kde and/or gtk. Obsolete as upstream builds with all images
+    per default anyway. Sync IMAGES with upstream configure.ac (split galaxy
+    and default)
+  * debian/rules: move new images_galaxy.zip into -galaxy
+  * debian/rules: export DISABLE_CVE_TESTS=TRUE on arm*,powerpc*/ppc*,s390*
+    to work around CppunitTest_filter_psd_test hang. Results are ignored
+    anyway, and if it was a real issue it would fail on i386/amd64, too
+    most probably
+  * debian/control.ure.in: add Breaks: libreoffice-core (<< 1:4.3.0~) to
+    uno-libs3 (closes: #754535) 
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 17 Jul 2014 18:13:15 +0200
+
+libreoffice (1:4.3.0~rc2-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/rules:
+    - update webdav conditionals to specify --with-webdav=
+  * debian/vars.alpha: re-add.. (closes: #752284)
+  * debian/*.bug-script.in: remove
+    {pdfimport,presentation-minimizer,presenter-console} bug-scripts
+    as they are not extensions since long
+  * debian/rules:
+    - stop adding vars.$(DEB_HOST_ARCH) content into the maintscripts; unused 
+    - don't uselessly rebuild sdext - it's not a extension anymore and thus in
+      "proper" langpacks
+  * debian/control.debug.in: suggest python-six (used by the gdb helpers) 
+  * debian/scripts/gid2pkgdirs.sh:
+    install gid_Module_Filters (oox-drawingml-{adj-names,cs-presets})
+  * debian/control.in, debian/rules: specify -b in Vcs-Git:
+  * debian/control.in, debian/rules:
+    - stop moving images*zip to /usr/share and creating symlinks. hardlinks
+      would work but cross-directory hardlinks are frowned upon...
+    - WORKAROUND: make -common depend on all styles as otherwise right now
+      the icon selection breaks badly
+    (closes: #752531)
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 02 Jul 2014 07:39:39 +0200
+
+libreoffice (1:4.3.0~rc1-1) experimental; urgency=low
+
+  * new upstream release candidate 
+
+  * debian/rules:
+    - use internal np_sdk because the "NPAPI plugins inside LO" part doesn't
+      build (uses a internal/external header mix even with
+      --with-system-npapi-headers) with iceweasel 30.0...
+    - actually add -Npython-uno if ENABLE_PYTHON2=n
+    - install pyuno.rdb for python-uno...
+    - rework python-uno build.
+      Don't build py2uno.so etc but build pyuno.so etc. from the start (as on
+      wheezy-backports where it works as python-only is the "default" build...)
+      also for the python2 build...
+    - remove liborbit2-dev build-dep, not needed since some time
+  * debian/control.in: fix override disparity, add Priority: extra for python-uno
+
+ -- Rene Engelhard <rene@debian.org>  Tue, 17 Jun 2014 21:27:01 +0200
+
+libreoffice (1:4.3.0~beta2-2) experimental; urgency=low
+
+  * debian/rules:
+    - re-enable system-libwpd?, -libcdr, -libmspub, -libvisio, -libodfgen 
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 06 Jun 2014 23:34:02 +0200
+
+libreoffice (1:4.3.0~beta2-1) experimental; urgency=low
+
+  * new upstream beta release 
+    - fixes recalculation of cells when deleting a row/column (closes: #749847)
+    - fixes pyuno.so install in scp2 in system-python case (closes: #749998)
+
+  * external/tarballs: fix orcus and zlib again
+
+  * debian/patches/fix-system-glm.diff: backport patch to fix system-glm build
+    from master
+  * debian/patches/make-package-modules-not-suck.diff: fix Repository.mk
+    to install libvclplug_kde* (and kdefilepicker for KDE3) into -kde
+    (closes: #749751)
+  * debian/patches/fix-mysqlc-remote-connections.diff: as name says; from
+    upstream master (closes: #749592) and (hopefully) also closes:  #745101
+  * debian/patches/javadoc-optional.diff: disable odk_javadoc tests when JAVADOC
+    is empty
+
+  * debian/rules:
+    - remove | belocs-locales-data alternative from some -l10n-*, removed in
+      2009
+    - enable system-glm
+    - use internal boost on wheezy-backports, libcmis' internal (not
+      "standard",though) fails with wheezys boost
+    - actually specify --without-doxygen if PACKAGE_SDK_DOCS=n, as on
+      wheezy-backports
+    - fix python dependencies: run dh_python(2|3) as described in the manpage as
+      "Private libraries" to find the stuff in /usr/lib/libreoffice/program and
+      consider it for the dependencies (thus tighten it). Build-depend on
+      dh-python for wheezy-backports
+      Remove (now) unneeded manual hack
+    - cleanup python build-deps: PYTHON_FOR_BUILD is python3 in "standard"
+      builds, so build-depend on that (and on python only when we build python2)
+    - fix install targets for debuild -A:
+      + move gengal and librpt* move to install-common
+      + remove -wiki-publishers LICENSE in install-indep
+    - micro-optimization: use --without-javadoc for build-arch and
+      PACKAGE_SDK_DOCS=n
+    - temporarily disable system-libwpd?, -libcdr, -libmspub, -libvisio,
+      -libodfgen as the needed versions are only in NEW yet...
+  * debian/control.*.in:
+    - add Replaces: libreoffice-core (= 1:4.3.0~beta1-1) for above file move
+      fixes
+  * debian/shlibs.override.lib{wps,odfgen,mwaw}: fix dh_shlibdeps with those
+    libs internal as they are .so.X's (add empty shlibs entry)
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 06 Jun 2014 20:13:59 +0200
+
+libreoffice (1:4.3.0~beta1-1) experimental; urgency=low
+
+  * new upstream beta release
+    - fixes unconditional execution of VBA macros (CVE-2014-0247)
+
+  * debian/patches/odk-no-dot.diff: HAVE_DOT=NO in Doxyfiles to prevent loads
+    of error: " Problems running dot: exit code=127, command='dot'" 
+  * debian/patches/disable-ftp-nohost-test.diff: remove, seems to work now
+
+  * debian/rules:
+    - move /usr/lib/libreoffice/share/basic/Access2Base from -common to -base, 
+      as it clearly is Base-specific
+  * debian/control.in:
+    - add Replaces: for the Access2Base move
+  * debian/libreoffice-base.{preinst,postrm}.in: dpkg-divert dialog.xlc
+    and script.xlc... FIXME: Better, scalable solution..
+  * debian/control.help.in:
+    - make -help-* depend on -style-default (closes: #748434)
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 23 May 2014 07:31:12 +0200
+
+libreoffice (1:4.2.4-3) unstable; urgency=low
+
+  * debian/patches/i18npool-icu53.diff: add patches to work with ICU 53
+  * debian/patches/javadoc-generated-dynamic-package.diff: backport fro
+    master: don't use hardcoded filelist for SDK Javadocs (fixes build with
+    OpenJDK8) (closes: #748046)
+  * debian/patches/doxygen-1.8.7.diff: backport from upstream master, fix for
+    build with doxygen 1.8.7 (explicitly specify HTML output...)
+
+  * debian/rules:
+    - add a rm -f $(PKGDIR)-core/$(OODIR)/program/librpt* if
+      ENABLE_REPORTDESIGN=n. Looks hacky and probably is but this
+      (closes: #748075)
+    - enable the junit4 tests only on amd64/i386. slows down other builds and
+      might hang (results ignored on !i386/amd64 anyways.)
+  * debian/control.in:
+     - make -core conflict against -report-builder-bin for
+       kfreebsd-i386 kfreebsd-amd64
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 15 May 2014 13:54:55 +0200
+
+libreoffice (1:4.2.4-2) unstable; urgency=low
+
+  * debian/patches/series: re-enable gcj-safe-jni-h-include.diff, now for sid
+    it doesn't find jni.h (worked on falla. sigh.)
+
+  * debian/rules:
+    - actually add kfreebsd-* as GCJ_JDK_ARCHS again 
+    - use gcc 4.9 on GCJ_JDK_ARCHS
+    - re-add ENABLE_TEST_PACKAGE=y
+    - use new fonts-* packages for indic fonts where not already done
+      (closes: #747692)
+
+ -- Rene Engelhard <rene@debian.org>  Sat, 10 May 2014 18:52:17 +0200
+
+libreoffice (1:4.2.4-1) unstable; urgency=low
+
+  * LibreOffice 4.2.4 release (identical to rc2)
+
+  * upload to unstable
+
+  * debian/patches/fix-wizards.diff: fix fax, letter etc. wizards. backported
+    from libreoffice-4-2 branch...
+  * debian/patches/series: disable gcj-safe-jni-h-include.diff as it adds a 
+    -I/usr/lib/gcc/$(DEB_HOST_ARCH)/4.9/include and that doesn't work at least
+    on kfreebsd-* with the current gcc 4.8 + gcc libs 4.9 + gcj 4.9 combo
+ 
+ -- Rene Engelhard <rene@debian.org>  Wed, 07 May 2014 23:07:02 +0200
+
+libreoffice (1:4.2.4~rc2-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/patches/kde4-fixes.diff: add patch to "prevent KDE/Qt from
+    interfering with the session manager" from libreoffice-4-2. Remove obsolete
+    rest which was never applied anyway
+  * debian/patches/fix-kfileficker-crashes.diff: as name says, backported from
+    libreoffice-4-2, really - or again? - closes: #743221)
+
+  * debian/rules:
+    - fix HELP_L10N_VIRTUAL_VERSION
+    - re-enable system-libmwaw, -odfgen, -etonyek, -freehand, -libebook, 
+      -libabw, -libeot
+  * debian/libreoffice-kde.NEWS:
+    - adapt version, the de-facto disabling of the File Picker only happens
+      now...
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 05 May 2014 19:04:05 +0200
+
+libreoffice (1:4.2.4~rc1-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/patches/hppa-call.diff: blind fix for hppa build
+  * debian/patches/no-restart-on-empty-buildid.diff: Backport from master;
+    Avoid soffice.bin restarting ad inf when version ini-file buildid is empty
+    - as when we're using the source tarballs...
+
+  * debian/rules, debian/vars.alpha: readd alpha, rumours say it works again
+    (doesn't really matter anyway, but...) (closes: #738157)
+  * debian/rules:
+    - re-enable make check and junit checks (disable flaky checkBookmarks, though
+      as per upstream advice)
+  * debian/control.in: s/connectvity/connectivity/ (closes: #745138)
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 18 Apr 2014 13:26:10 +0200
+
+libreoffice (1:4.2.3~rc3-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/patches/debian/patches/kde4-fixes-from-libreoffice-4-2.diff: as name
+    says. backport KDE4 fixes from libreoffice-4-2 branch:
+    e.g. "Add a runtime check and configure warning to disable KDE4
+    native file pickers, if the Qt4 glib dispatcher doesn't honor the
+    QEventLoop::ExcludeSocketNotifiers flag." (closes: #743221)
+    This effectively disables the KDE4 File Picker until Qt is fixed.
+
+  * debian/rules, debian/patches/build-connectivitytools.diff: fix
+    -subsequentcheckbase install
+  * debian/tests/*: sync with Ubuntu
+  * debian/rules, debian/lo-*ref.in: lo-common-ref -> lo-idl-ref...
+  * debian/lo-idl-ref.in: .. and fix Index:
+  * debian/control.in: break libreoffice-accessodf (<= 0.1-4) due to changed
+    MessageBox API
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 04 Apr 2014 15:14:53 +0200
+
+libreoffice (1:4.2.2~rc1-1) experimental; urgency=low
+
+  * new upstream release candidate
+
+  * debian/patches/sparc-asm-syntax-fix.diff: fix syntax in sparc bridges'
+    asm 
+
+  * debian/control.mysql.in:
+    - suggest mariadb-server | mysql-server instead of just mysql-server 
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 05 Mar 2014 18:10:12 +0100
+
 libreoffice (1:4.2.1-1blankon1) tambora; urgency=low
 
   * New Upstream Release 

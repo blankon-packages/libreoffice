@@ -1,8 +1,7 @@
 Source: libreoffice
 Section: editors
 Priority: optional
-Maintainer: BlankOn Developers <blankon-dev@googlegroups.com>
-XSBC-Original-Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
+Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
 Uploaders: Rene Engelhard <rene@debian.org>
 Build-Depends: %BUILD_DEPS%,
 Build-Depends-Indep: fdupes, imagemagick, xml-core, %BUILD_DEPS_INDEP%
@@ -28,9 +27,8 @@ Build-Conflicts: ant (= 1.8.0-1) [%OOO_GCJ_JDK_ARCHS%],
                  amd-libopencl1,
                  nvidia-libopencl1
 Standards-Version: 3.9.4
-XS-Python-Version: @PYTHON2_VERSION@
 XS-Python3-Version: @PYTHON_VERSION_CONTROL@
-Vcs-Git: https://alioth.debian.org/anonscm/git/pkg-openoffice/libreoffice.git
+Vcs-Git: https://alioth.debian.org/anonscm/git/pkg-openoffice/libreoffice.git -b debian-experimental-4.4
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-openoffice/libreoffice.git
 Bugs: @BUGS@
 Homepage: http://www.libreoffice.org
@@ -253,7 +251,7 @@ Breaks: cli-uno-bridge (<< 1:3.0.0~dev300m22),
         myspell-sw (<< 1:3.1.0-3),
         myspell-th (<< 1:3.1.0-3),
         myspell-tl (<< 0.4-0-5)
-Conflicts: cacao-oj6-jre, libreoffice-filter-binfilter, libreoffice-unbundled
+Conflicts: cacao-oj6-jre, libreoffice-filter-binfilter, libreoffice-unbundled, libreoffice-report-builder-bin [kfreebsd-i386 kfreebsd-amd64]
 Provides: libreoffice-bundled
 Replaces: libreoffice-calc (<< 1:3.3.2-5),
           libreoffice-common (<= 1:4.0.0~beta2-1),
@@ -319,7 +317,7 @@ Description: office productivity suite -- arch-independent files
 Package: libreoffice-java-common
 Architecture: all
 Depends: libreoffice-common, ${java:Depends}, ${misc:Depends}
-Breaks: libjaxe-java (<= 3.5-2)
+Breaks: libjaxe-java (<= 3.5-2), libreoffice-accessodf (<= 0.1-4)
 Description: office productivity suite -- arch-independent Java support files
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -334,10 +332,13 @@ Depends: libreoffice-base-core (= ${binary:Version})%OOO_NO_BASE_ARCHS%,
          ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libreoffice-math,
-            ${java-common-depends},
-            ${java-runtime-depends}
 Replaces: libreoffice-core (<< 1:3.3.2-5)
-Suggests: libreoffice-base, libreoffice-gcj
+Suggests: fonts-crosextra-caladea,
+          fonts-crosextra-carlito,
+          libreoffice-base,
+          libreoffice-gcj,
+          ${java-common-depends},
+          ${java-runtime-depends}
 Description: office productivity suite -- word processor
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -423,6 +424,7 @@ Suggests: libreoffice-gcj,
           libreoffice-report-builder,
           unixodbc
 Recommends: libreoffice-writer, ${java-common-depends}, ${java-runtime-depends}
+Replaces: libreoffice-common (<< 1:4.3.0~beta1)
 Description: office productivity suite -- database
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -461,7 +463,7 @@ Enhances: libreoffice-core
 Depends: ${misc:Depends}
 Suggests: tango-icon-theme
 Provides: libreoffice-style
-Replaces: libreoffice-common (<< 1:3.3.0~rc4-2)
+Replaces: libreoffice-common (<= 1:4.3.0~beta2-2)
 Description: office productivity suite -- Tango symbol style
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -563,29 +565,6 @@ Description: office productivity suite -- GNOME integration
   * libreoffice-evolution: Evolution addressbook support
   * evolution
 
-Package: python-uno
-Provides: ${python:Provides}
-XB-Python-Version: ${python:Versions}
-Section: oldlibs
-Architecture: %OOO_ARCHS%
-Enhances: libreoffice
-Depends: libreoffice-core (= ${binary:Version}),
-         ${misc:Depends},
-         ${python:Depends},
-         ${shlibs:Depends}
-Breaks: libreoffice-common (<< 1:3.5~), libreoffice-core (<< 1:3.5~)
-Conflicts: python3-uno, python3.3-uno
-Description: Python-UNO bridge (support for old python 2)
- The Python-UNO bridge allows use of the standard LibreOffice API
- with the Python scripting language. It additionally allows
- others to develop UNO components in Python, thus Python UNO components
- may be run within the LibreOffice process and can be called from C++
- or the built in StarBasic scripting language.
- .
- This package is for compatibility with applications/libraries not ported
- to python 3 yet. Prefer python3-uno over this.
-Homepage: http://udk.openoffice.org/python/python-bridge.html
-
 Package: python3-uno
 Section: python
 Architecture: %OOO_ARCHS%
@@ -595,7 +574,7 @@ Depends: libreoffice-core (= ${binary:Version}),
          ${python3:Depends},
          ${shlibs:Depends}
 Conflicts: python-uno, python3-uno (<< 1:4.0.2~rc2), python3.3-uno
-Replaces: python3-uno (<< 1:4.0.2~rc2), python3.3-uno
+Replaces: python3-uno (<< 1:4.0.2~rc2), python3.3-uno, libreoffice-core (= 1:4.3.0~beta1-1), libreoffice-common (<< 1:4.4.0~beta2)
 Description: Python-UNO bridge
  The Python-UNO bridge allows use of the standard LibreOffice API
  with the Python scripting language. It additionally allows
@@ -739,7 +718,7 @@ Description: VLC backend for LibreOffice
 
 Package: libreoffice-sdbc-firebird
 Depends: libreoffice-core, ${shlibs:Depends}
-Architecture: %OOO_BASE_ARCHS%
+Architecture: %OOO_LE_ARCHS%
 Section: database
 Enhances: libreoffice-base-drivers
 Description: Firebird SDBC driver for LibreOffice
@@ -771,8 +750,9 @@ Suggests: libreoffice-sdbc-postgresql | odbc-postgresql | libpg-java,
           libsqliteodbc | tdsodbc | mdbtools,
           libjtds-java,
 Recommends: libreoffice-sdbc-hsqldb [%OOO_JAVA_ARCHS%], libreoffice-sdbc-firebird
-Replaces: libreoffice-core (<< 1:4.2~), libreoffice-base (<< 1:4.2~)
-Description: Database connectvity drivers for LibreOffice
+Replaces: libreoffice-core (<< 1:4.2~), libreoffice-base (<< 1:4.3.0-3)
+Breaks: libreoffice-base (<< 1:4.3.0-3)
+Description: Database connectivity drivers for LibreOffice
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .

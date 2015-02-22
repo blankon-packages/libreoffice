@@ -1,21 +1,22 @@
 Gemeinsame Unterverzeichnisse: odk-old/config und odk/config.
 Gemeinsame Unterverzeichnisse: odk-old/docs und odk/docs.
 Gemeinsame Unterverzeichnisse: odk-old/examples und odk/examples.
-diff -u odk-old/Module_odk.mk odk/Module_odk.mk
---- a/odk-old/Module_odk.mk	2013-05-22 16:12:06.000000000 +0200
-+++ b/odk/Module_odk.mk	2013-05-27 18:25:34.811316443 +0200
-@@ -52,11 +52,13 @@ ifneq ($(ENABLE_JAVA),)
+diff --git a/odk/Module_odk.mk b/odk/Module_odk.mk
+index 32bdfc1..a174932 100644
+--- a/odk/Module_odk.mk
++++ b/odk/Module_odk.mk
+@@ -43,11 +43,13 @@ ifneq ($(ENABLE_JAVA),)
  $(eval $(call gb_Module_add_targets,odk,\
- 	$(if $(filter YESGCC,$(BUILD_UNOWINREG)$(COM)),CustomTarget_unowinreg) \
+ 	$(if $(and $(BUILD_UNOWINREG),$(filter GCC,$(COM))),CustomTarget_unowinreg)\
  	CustomTarget_classes \
 -	CustomTarget_javadoc \
+-	GeneratedPackage_odk_javadoc \
  	GeneratedPackage_uno_loader_classes \
  	$(if $(filter WNT,$(OS)),Library_unowinreg) \
--	Package_javadoc \
  	Package_unowinreg \
 +	$(if $(JAVADOC),\
 +		CustomTarget_javadoc \
-+		Package_javadoc \
++		GeneratedPackage_odk_javadoc \
 +	) \
  ))
  endif
@@ -44,9 +45,9 @@ Gemeinsame Unterverzeichnisse: odk-old/util und odk/util.
 +    [with_javadoc=yes])
 +
  AC_ARG_WITH(visual-studio,
-     AS_HELP_STRING([--with-visual-studio=<2012/2010/2013>],
+     AS_HELP_STRING([--with-visual-studio=<2013/2012>],
          [Specify which Visual Studio version to use in case several are
-@@ -6290,35 +6302,45 @@
+@@ -6290,34 +6302,44 @@
  dnl ===================================================================
  dnl Checks for javadoc
  dnl ===================================================================
@@ -70,8 +71,7 @@ Gemeinsame Unterverzeichnisse: odk-old/util und odk/util.
 -        if test x`echo "$JAVADOC" | $GREP -i '\.exe$'` = x; then
 -            JAVADOC="${JAVADOC}.exe"
 -        fi
--        JAVADOC=`cygpath -d "$JAVADOC"`
--        JAVADOC=`cygpath -u "$JAVADOC"`
+-        JAVADOC=`win_short_path_for_make "$JAVADOC"`
 -    fi
 +        if test "$with_javadoc" = "yes"; then
 +            _javadoc_path="$with_jdk_home/bin/javadoc"
@@ -88,8 +88,7 @@ Gemeinsame Unterverzeichnisse: odk-old/util und odk/util.
 +                if test x`echo "$JAVADOC" | $GREP -i '\.exe$'` = x; then
 +                    JAVADOC="${JAVADOC}.exe"
 +                fi
-+                JAVADOC=`cygpath -d "$JAVADOC"`
-+                JAVADOC=`cygpath -u "$JAVADOC"`
++                JAVADOC=`win_short_path_for_make "$JAVADOC"`
 +            fi
  
 -    if test `$JAVADOC --version 2>&1 | $GREP -c "gjdoc"` -gt 0; then
@@ -146,3 +145,29 @@ Gemeinsame Unterverzeichnisse: odk-old/util und odk/util.
  $(eval $(call gb_InstallModule_add_scpfiles,scp2/sdkoo,\
      scp2/source/sdkoo/sdkoo \
  ))
+diff --git a/odk/CustomTarget_check.mk b/odk/CustomTarget_check.mk
+index a9b542d..707829a 100644
+--- a/odk/CustomTarget_check.mk
++++ b/odk/CustomTarget_check.mk
+@@ -35,7 +35,7 @@ $(call gb_CustomTarget_get_workdir,odk/check)/checkbin : \
+ 		$(if $(filter WNT,$(OS)),$(call gb_Package_get_target,odk_config_win)) \
+ 		$(call gb_Package_get_target,odk_docs) \
+ 		$(call gb_Package_get_target,odk_html) \
+-		$(if $(ENABLE_JAVA),$(call gb_GeneratedPackage_get_target,odk_javadoc)) \
++		$(if $(JAVADOC),$(call gb_GeneratedPackage_get_target,odk_javadoc)) \
+ 		$(call gb_Package_get_target,odk_lib) \
+ 		$(call gb_Package_get_target,odk_settings) \
+ 		$(call gb_Package_get_target,odk_settings_generated) \
+diff --git a/odk/util/check.pl b/odk/util/check.pl
+index 899b42c..2c7a780 100644
+--- a/odk/util/check.pl
++++ b/odk/util/check.pl
+@@ -188,7 +188,7 @@ if (-d "$SdkDir") {
+     # improvement required
+     my $solar_java = $ENV{"ENABLE_JAVA"};
+     my $JDK = $ENV{"JDK"};
+-    if (defined($solar_java) && $solar_java ne "" && (!defined($JDK) || $JDK ne "gcj")) {
++    if (defined($solar_java) && $solar_java ne "" && $ENV{"JAVADOC"} ne "") {
+     print "check java docu: ";
+     if (check_dir("docs/java/ref")) {
+         if (!check_file("docs/java/ref/index.html")) {

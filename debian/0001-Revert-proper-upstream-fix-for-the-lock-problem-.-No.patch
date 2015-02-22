@@ -1,0 +1,73 @@
+From 3730f7c604bb8c57327df2a984fecbb7eb5306e4 Mon Sep 17 00:00:00 2001
+From: Rene Engelhard <rene@debian.org>
+Date: Tue, 28 Oct 2014 09:57:10 +0100
+Subject: [PATCH] Revert "proper upstream fix for the lock problem". Now
+ creates a modified .odb :/
+
+This reverts commit dfa9ee391ea977329a83e8654fdc7c9aafc8b8f0.
+
+Conflicts:
+	patches/series
+---
+ patches/close-dbaccess-test-lockfile.diff |   22 ----------------------
+ patches/series                            |    1 -
+ rules                                     |    3 +++
+ 3 files changed, 3 insertions(+), 23 deletions(-)
+ delete mode 100644 patches/close-dbaccess-test-lockfile.diff
+
+diff --git a/patches/close-dbaccess-test-lockfile.diff b/patches/close-dbaccess-test-lockfile.diff
+deleted file mode 100644
+index 8a187b9..0000000
+--- a/patches/close-dbaccess-test-lockfile.diff
++++ /dev/null
+@@ -1,22 +0,0 @@
+-From 0796b3041231063c3594e85a8f2ea2b15602d46d Mon Sep 17 00:00:00 2001
+-From: Miklos Vajna <vmiklos@collabora.co.uk>
+-Date: Tue, 21 Oct 2014 16:27:42 +0200
+-Subject: dbaccess: make sure fdo84315.odb.lck is removed after the test passed
+-
+-Change-Id: I6c9a42625f10a3a30e2636a2a2be2b9bcba8f6af
+-
+-diff --git a/dbaccess/qa/python/fdo84315.py b/dbaccess/qa/python/fdo84315.py
+-index 0670f66..bf13e1b 100644
+---- a/dbaccess/qa/python/fdo84315.py
+-+++ b/dbaccess/qa/python/fdo84315.py
+-@@ -66,6 +66,7 @@ class Fdo84315(unittest.TestCase):
+-         while xResultset.next():
+-             self.assertEqual(xResultset.getInt(1), expected_values.popleft())
+-         self.assertEqual(len(expected_values), 0)
+-+        xCon.dispose()
+- 
+- if __name__ == '__main__':
+-     unittest.main()
+--- 
+-cgit v0.10.2
+-
+diff --git a/patches/series b/patches/series
+index f6da012..c066dc1 100644
+--- a/patches/series
++++ b/patches/series
+@@ -27,6 +27,5 @@ lo-xlate-lang-update-kurdish.diff
+ build-connectivitytools.diff
+ odk-no-dot.diff
+ disable-icontest-build.diff
+-close-dbaccess-test-lockfile.diff
+ oox-fix-bigendian-build.diff
+ LibreOfficeKitInit-kfreebsd.diff
+diff --git a/rules b/rules
+index de208d1..b0a74a6 100755
+--- a/rules
++++ b/rules
+@@ -1522,6 +1522,9 @@ endif
+ 
+ 	rm -f download.list
+ 
++	# obsolete lock file not cleaned up....
++	rm -f dbaccess/qa/extras/testdocuments/fdo84315.odb.lck
++
+ 	# Files created in debian directory
+ 	$(MAKE) -f debian/rules clean-debdir
+ 
+-- 
+1.7.10.4
+
