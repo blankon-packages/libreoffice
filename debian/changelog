@@ -1,3 +1,38 @@
+libreoffice (1:4.4.2~rc2-1blankon1) tambora; urgency=low
+
+  * New Upstream Release
+  * Merge Whit Experimental
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Mon, 20 Apr 2015 06:26:42 +0700
+
+libreoffice (1:4.4.2~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 27 Mar 2015 07:07:59 +0100
+
+libreoffice (1:4.4.2~rc1-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * debian/control.ogltrans.in:
+    - capitalize "impress" in description (closes: #779479)
+  * debian/rules:
+    - fix logic to not install sound files (closes: #780497)
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 15 Mar 2015 09:42:20 +0100
+
+libreoffice (1:4.4.1~rc2-1) experimental; urgency=medium
+
+  * New upstream release candidate
+
+  * merge from Ubuntu:
+    - adapt/kill ure-link for upstream changes (LP: #1419836)
+  * debian/patches/gcj-no-bitness-check.diff: fix gcj builds, --version
+    doesn't return bitness so it fails on any gcj/64bit platform
+
+ -- Rene Engelhard <rene@debian.org>  Fri, 20 Feb 2015 20:01:07 +0100
+
 libreoffice (1:4.4.1~rc1-1blankon1) tambora; urgency=medium
 
   * New Upstream Release

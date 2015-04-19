@@ -1,7 +1,7 @@
 Source: libreoffice
 Section: editors
 Priority: optional
-Maintainer: BlankOn Developers <blankon-dev@googlegroups.com>
+Maintainer: BlankOn Developers <Blankon-dev@googlegroups.com>
 XSBC-Original-Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
 Uploaders: Rene Engelhard <rene@debian.org>
 Build-Depends: ant (>= 1.7.0),
@@ -4103,7 +4103,7 @@ Description: LibreOffice Impress extension for slide transitions using OpenGL
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the extension making LibreOffice able to use
- OpenGL for impress slide transitions.
+ OpenGL for slide transitions in Impress.
 
 Package: libreoffice-wiki-publisher
 Section: misc
