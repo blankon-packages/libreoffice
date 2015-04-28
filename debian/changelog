@@ -1,3 +1,21 @@
+libreoffice (1:4.4.2-1blankon1) tambora; urgency=low
+
+  * New Upstream Release
+  * Merge Whit Sid
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Tue, 28 Apr 2015 16:12:52 +0700
+
+libreoffice (1:4.4.2-1) unstable; urgency=low
+
+  * LibreOffice 4.4.2 final release (identical to rc2)
+
+  * upload to unstable
+
+  * debian/patches/icu-icudata-link-fix-armhf.diff: fix internal icu build
+    on armhf ("stolen" from icu package)
+
+ -- Rene Engelhard <rene@debian.org>  Sun, 12 Apr 2015 12:11:31 +0200
+
 libreoffice (1:4.4.2~rc2-1blankon1) tambora; urgency=low
 
   * New Upstream Release
