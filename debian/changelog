@@ -1,3 +1,19 @@
+libreoffice (1:4.4.3-1blankon1) tambora; urgency=low
+
+  * New Upstream Updates
+  * Merge Whit Sid
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Mon, 11 May 2015 05:27:56 +0700
+
+libreoffice (1:4.4.3-1) unstable; urgency=medium
+
+  * New upstream release
+
+  * merge from Ubuntu:
+    - add missing Replaces: (LP: #1443667)
+
+ -- Rene Engelhard <rene@debian.org>  Mon, 04 May 2015 12:23:05 +0200
+
 libreoffice (1:4.4.2-1blankon1) tambora; urgency=low
 
   * New Upstream Release

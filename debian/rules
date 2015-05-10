@@ -71,7 +71,7 @@ lo_sources_ver=$(shell grep AC_INIT $(SOURCE_TREE)/configure.ac | grep documentf
 # NOT in proper libreoffice-3-6 branch
 # use ./g checkout -b tag-libreoffice-3.6.2.1 libreoffice-3.6.2.1
 GIT_TAG=libreoffice-$(lo_sources_ver)
-GIT_BRANCH=libreoffice-4-4-2
+GIT_BRANCH=libreoffice-4-4-3
 endif
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 lo_sources_ver=$(shell cat $(CURDIR)/sources.ver | cut -d= -f2)
@@ -629,7 +629,7 @@ endif
 # Debian Jessie
 ifeq "$(shell dpkg-parsechangelog | grep Distribution | awk '{ print $$2 }')" "jessie-backports"
   BUGS=mailto:debian-backports@lists.debian.org
-  SYSTEM_STUFF := $(filter-out opencollada collada2gltf libmwaw libcmis,$(SYSTEM_STUFF))
+  SYSTEM_STUFF := $(filter-out opencollada collada2gltf libmwaw libcmis mdds,$(SYSTEM_STUFF))
   JESSIE_BACKPORT=y
 endif
 ifeq "$(shell dpkg-parsechangelog | grep Distribution | awk '{ print $$2 }')" "UNRELEASED"
@@ -1053,7 +1053,7 @@ ifneq (,$(filter boost, $(SYSTEM_STUFF)))
 endif
 
 ifneq (,$(filter mdds, $(SYSTEM_STUFF)))
-	BUILD_DEPS += , libmdds-dev (>= 0.10.3)
+	BUILD_DEPS += , libmdds-dev (>= 0.11.2)
 endif
 
 ifeq "$(ENABLE_ORCUS)" "y"
