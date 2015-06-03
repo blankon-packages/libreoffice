@@ -28,5 +28,7 @@ odk-no-dot.diff
 disable-icontest-build.diff
 hppa-is-32bit.diff
 gcj-no-bitness-check.diff
-g_strdup_printf_format.diff
 icu-icudata-link-fix-armhf.diff
+system-collada2gltf.diff
+libebook-1.2.so.16.diff
+rsc-no-error-about-unknown-switch.diff
