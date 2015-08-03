@@ -325,12 +325,12 @@ ifeq "$(ENABLE_GLTF)" "y"
   ENABLE_COLLADA=n
   # enable COLLADA (if any) only on i386/amd64 for now, rapidjson does seem
   # to have alignment problems on other archs (e.g. arm*)
-#  ifeq "$(DEB_HOST_ARCH)" "amd64"
-#    ENABLE_COLLADA=y
-#  endif
-#  ifeq "$(DEB_HOST_ARCH)" "i386"
-#    ENABLE_COLLADA=y
-#  endif
+  ifeq "$(DEB_HOST_ARCH)" "amd64"
+    ENABLE_COLLADA=y
+  endif
+  ifeq "$(DEB_HOST_ARCH)" "i386"
+    ENABLE_COLLADA=y
+  endif
   ifeq "$(ENABLE_COLLADA)" "y"
     SYSTEM_STUFF += opencollada
     OPENCOLLADA_CFLAGS="-I/usr/include/opencollada/COLLADABaseUtils -I/usr/include/opencollada/COLLADAFramework -I/usr/include/opencollada/COLLADASaxFrameworkLoader -I/usr/include/opencollada/GeneratedSaxParser -I/usr/include/opencollada"
@@ -415,7 +415,9 @@ USE_UCPP=y
 ifeq "$(USE_UCPP)" "y"
   SYSTEM_STUFF += ucpp
 endif
+ifeq (,$(findstring kfreebsd,$(DEB_HOST_ARCH)))
 ENABLE_MERGELIBS=y
+endif
 USE_OPENCL=y
 #10:15 <@_rene_> ahunt: I remember you wanted to do some endian things? did it 
 #                ever get done?
@@ -1180,7 +1182,11 @@ ifeq "$(BUILD_KDE)" "n"
 else
 	CONFIGURE_FLAGS += --disable-kde
 	CONFIGURE_FLAGS += --enable-kde4
+ifneq "$(JESSIE_BACKPORT)" "y"
+	KDE_ICONSET_DEP=libreoffice-style-breeze
+else
 	KDE_ICONSET_DEP=libreoffice-style-oxygen
+endif
 	BUILD_DEPS += , kdelibs5-dev $(KDELIBS_MINVER)
 	BUILD_DEPS += , libqt4-dev $(QT_MINVER)
 	DBG_DBG_SUGGESTS+= , kdelibs5-dbg, libqt4-dbg
