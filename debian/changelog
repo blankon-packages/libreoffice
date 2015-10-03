@@ -1,3 +1,55 @@
+libreoffice (1:5.0.2-1blankon1) tambora; urgency=medium
+
+  * New Upstream Release 
+
+ -- Rahman Yusri Aftian <aftian@di.blankon.in>  Sat, 03 Oct 2015 11:59:22 +0700
+
+libreoffice (1:5.0.2-1) unstable; urgency=medium
+
+  * New upstream release
+    - fixes crash on gestureLongPress (closes: #798591)
+
+  * debian/*.menu: remove, as per TC resolution
+  * debian/control.in:
+    - remove imagemagick from B-D-I:
+    - mention liblibreofficekitgtk.so in -gtks description
+    - various lintian fixes
+      + add ${misc:Depends}, remove duplicated Priority:
+      + make fonts-opensymbol Multi-Arch: foreign
+      + don't add unneeded XS-Python3-Version:
+  * debian/rules:
+    - stop calling dh_installmenus and stop using convert to convert the icons
+      to xpm
+    - move liblibreofficekitgtk.so into -gtk
+    - lintian fixes:
+      + don't add XS-Testsuite; it defaults to autopkgtest anyway
+        if idebian/tests/control exists
+      + move dh_fixperms after gdb helper install to fix permissions of the
+        gdb stuff
+    - re-enable coinmp; build-dependencies now installable again; bump
+      build-dependencies to the gcc 5 versions
+  * debian/control.{,gtk3.in}, debian/rules: move disabled -gtk3 into extra
+    file so tha it doesn't appear in control when disabled, makes dak think
+    it's NEW.
+
+ -- Rene Engelhard <rene@debian.org>  Wed, 23 Sep 2015 13:03:10 +0200
+
+libreoffice (1:5.0.1-2) unstable; urgency=medium
+
+  * debian/patches/series, debian/patches/disable-mediaembedding-test.diff:
+    remove, GTK3 is now disabled
+
+  * debian/rules:
+    - disable gtk3 for now again, too shaky
+      (closes: #799251, #799049, #795131)
+  * debian/control.in, debian/rules:
+    - make -gnome depend on -gtk when gtk3 is disabled
+      (reopens: #681180)
+  * debian/control.in:
+    - add Chris Halls <halls@debian.org> back to Uploaders:
+
+ -- Rene Engelhard <rene@debian.org>  Thu, 17 Sep 2015 13:52:16 +0200
+
 libreoffice (1:5.0.1-1blankon1) tambora; urgency=medium
 
   * New Upstream Release 

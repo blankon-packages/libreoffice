@@ -2,9 +2,9 @@ Source: libreoffice
 Section: editors
 Priority: optional
 Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
-Uploaders: Rene Engelhard <rene@debian.org>
+Uploaders: Rene Engelhard <rene@debian.org>, Chris Halls <halls@debian.org>
 Build-Depends: %BUILD_DEPS%,
-Build-Depends-Indep: fdupes, imagemagick, %BUILD_DEPS_INDEP%
+Build-Depends-Indep: fdupes, %BUILD_DEPS_INDEP%
 Build-Conflicts: ant (= 1.8.0-1) [%OOO_GCJ_JDK_ARCHS%],
                  ant (= 1.8.0-2) [%OOO_GCJ_JDK_ARCHS%],
                  ant (= 1.8.0-3) [%OOO_GCJ_JDK_ARCHS%],
@@ -14,7 +14,6 @@ Build-Conflicts: ant (= 1.8.0-1) [%OOO_GCJ_JDK_ARCHS%],
                  g++-4.7 (<< 4.7.1-3),
                  gcj-4.2 (= 4.2.2-6),
                  gjdoc (= 0.7.8-2),
-                 graphicsmagick-imagemagick-compat (<< 1.3.9~),
                  libboost1.39-dev (<< 1.39.0-2),
                  libc0.1-dev (= 2.13-26) [kfreebsd-i386 kfreebsd-amd64],
                  libc6-dev (= 2.6.1-3) [i386 amd64],
@@ -27,8 +26,7 @@ Build-Conflicts: ant (= 1.8.0-1) [%OOO_GCJ_JDK_ARCHS%],
                  amd-libopencl1,
                  nvidia-libopencl1
 Standards-Version: 3.9.4
-XS-Python3-Version: @PYTHON_VERSION_CONTROL@
-Vcs-Git: https://alioth.debian.org/anonscm/git/pkg-openoffice/libreoffice.git
+Vcs-Git: https://alioth.debian.org/anonscm/git/pkg-openoffice/libreoffice.git -b debian-experimental-5.0
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-openoffice/libreoffice.git
 Bugs: @BUGS@
 Homepage: http://www.libreoffice.org
@@ -519,34 +517,21 @@ Recommends: libreoffice-style-tango
 Section: gnome
 Enhances: libreoffice
 Conflicts: libgtk2.0-0 (= 2.12.10-1) [amd64]
+Replaces: libreoffice-core (<< 1:5.0.2~rc1)
 Description: office productivity suite -- GTK+ integration
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the Gtk plugin for drawing LibreOffices widgets
  with Gtk+ and a Gtk/GNOMEish File Picker and print dialog when running
- under GNOME. It also contains a QuickStarter for the "notification area".
-
-Package: libreoffice-gtk3
-Architecture: %OOO_ARCHS%
-Depends: libreoffice-core (= ${binary:Version}),
-         ${misc:Depends},
-         ${shlibs:Depends}
-Recommends: libreoffice-style-tango
-Section: gnome
-Enhances: libreoffice
-Description: office productivity suite -- GTK+ 3.0 integration
- LibreOffice is a full-featured office productivity suite that provides
- a near drop-in replacement for Microsoft(R) Office.
- .
- This package contains the Gtk plugin for drawing LibreOffices widgets
- with Gtk+ 3.0 and Gtk/GNOMEish print dialog when running under GNOME.
+ under GNOME. It also contains a QuickStarter for the "notification area"
+ and a (basic) GTK+ document viewer widget.
 
 Package: libreoffice-gnome
 Architecture: %OOO_ARCHS%
 Depends: gconf2,
          libreoffice-core (= ${binary:Version}),
-         libreoffice-gtk3,
+         ${gnome-gtk-depends},
          ${misc:Depends},
          ${shlibs:Depends}
 Suggests: libreoffice-evolution
@@ -676,7 +661,6 @@ Description: PDF Import component for LibreOffice
 
 Package: libreoffice-avmedia-backend-gstreamer
 Section: misc
-Priority: optional
 Architecture: %OOO_ARCHS%
 Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Replaces: libreoffice-core (<< 1:4.2~)
@@ -690,7 +674,6 @@ Description: GStreamer backend for LibreOffice
 
 Package: libreoffice-avmedia-backend-vlc
 Section: misc
-Priority: optional
 Architecture: %OOO_ARCHS%
 Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}, ${libvlc-dep} (>= 2.0.8)
 Provides: libreoffice-avmedia-backend
@@ -702,7 +685,7 @@ Description: VLC backend for LibreOffice
  to play audio/video.
 
 Package: libreoffice-sdbc-firebird
-Depends: libreoffice-core, ${shlibs:Depends}
+Depends: libreoffice-core, ${shlibs:Depends}, ${misc:Depends}
 Architecture: %OOO_LE_ARCHS%
 Section: database
 Enhances: libreoffice-base-drivers
@@ -714,7 +697,7 @@ Description: Firebird SDBC driver for LibreOffice
  LibreOffice without any wrapper layer such as ODBC or JDBC.
 
 Package: libreoffice-sdbc-hsqldb
-Depends: libreoffice-core, ${java-common-depends}, ${java:Depends}, ${shlibs:Depends}
+Depends: libreoffice-core, ${java-common-depends}, ${java:Depends}, ${shlibs:Depends}, ${misc:Depends}
 Replaces: libreoffice-base (<< 1:4.2~)
 Architecture: %OOO_JAVA_ARCHS%
 Section: database
@@ -727,7 +710,7 @@ Description: HSQLDB SDBC driver for LibreOffice
  LibreOffice without any wrapper layer such as ODBC or JDBC.
 
 Package: libreoffice-base-drivers
-Depends: libreoffice-core, ${shlibs:Depends}
+Depends: libreoffice-core, ${shlibs:Depends}, ${misc:Depends}
 Architecture: %OOO_BASE_ARCHS%
 Section: database
 Suggests: libreoffice-sdbc-postgresql | odbc-postgresql | libpg-java,

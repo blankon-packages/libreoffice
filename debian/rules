@@ -73,7 +73,7 @@ lo_sources_ver=$(shell grep AC_INIT $(SOURCE_TREE)/configure.ac | grep documentf
 # NOT in proper libreoffice-3-6 branch
 # use ./g checkout -b tag-libreoffice-3.6.2.1 libreoffice-3.6.2.1
 GIT_TAG=libreoffice-$(lo_sources_ver)
-GIT_BRANCH=libreoffice-5-0-1
+GIT_BRANCH=libreoffice-5-0-2
 endif
 ifeq "$(USE_SOURCE_TARBALLS)" "y"
 lo_sources_ver=$(shell cat $(CURDIR)/sources.ver | cut -d= -f2)
@@ -223,8 +223,15 @@ endif
 SYSTEM_STUFF += lpsolve
 USE_SHARED_LPSOLVE=y
 LPSOLVE_MIN_VERSION= (>= 5.5.0.13-5+b1)
-ENABLE_COINMP=n
+ENABLE_COINMP=y
 SYSTEM_STUFF += coinmp
+ifeq "$(shell dpkg --compare-versions $(SYSTEM_GCC_VERSION) ge 5 && echo true)" "true"
+COINMP_MINVER=(>= 1.7.6+dfsg1-2)
+COINUTILS_MINVER=(>= 2.9.15-3.1)
+else
+COINMP_MINVER=
+COINUTILS_MINVER=
+endif
 USE_DBUS=y
 ifeq "$(USE_DBUS)" "y"
   ifneq (,$(findstring kfreebsd,$(DEB_HOST_ARCH)))
@@ -374,7 +381,7 @@ endif
 ENABLE_SDBC_POSTGRESQL=y
 BUILD_GTK=y
 #ifeq "$(DEB_DISTRIBUTION)" "experimental"
-BUILD_GTK3=y
+BUILD_GTK3=n
 #endif
 ENABLE_EVO2=y
 ENABLE_GVFS=n
@@ -805,7 +812,7 @@ endif
 ifneq ($(ENABLE_COINMP),y)
 	CONFIGURE_FLAGS += --disable-coinmp
 else
-	BUILD_DEPS += , coinor-libcoinmp-dev, coinor-libcoinutils-dev
+	BUILD_DEPS += , coinor-libcoinmp-dev $(COINMP_MINVER), coinor-libcoinutils-dev $(COINUTILS_MINVER)
 endif
 
 ifneq (,$(filter openssl, $(SYSTEM_STUFF)))
@@ -847,12 +854,6 @@ PYMAJOR:=$(shell $(PYTHON) -c "import sys; print (sys.version_info[0])")
 PYMINOR:=$(shell $(PYTHON) -c "import sys; print (sys.version_info[1])")
 PYMINORPLUS1:=$(shell $(PYTHON) -c "import sys; print (sys.version_info[1]+1)")
 PYTHON_SITE:=debian/python3-uno/$(shell $(PYTHON) -c 'from distutils import sysconfig; print(sysconfig.get_python_lib())')
-
-ifeq "$(PYTHON_VERSION)" "current"
-	PYTHON_VERSION_CONTROL := $(PYMAJOR).$(PYMINOR)
-else
-	PYTHON_VERSION_CONTROL := $(PYTHON_VERSION)
-endif
 
 ifeq "$(ENABLE_PYTHON)" "y"
 	BUILD_DEPS += , $(PYTHON)
@@ -1294,8 +1295,9 @@ ifeq "$(BUILD_GTK3)" "y"
   ifneq (cairo,$(findstring cairo,$(SYSTEM_STUFF)))
   $(error GTK3 build fails without system-cairo!!)
   endif
+       GNOME_GTK_DEPENDS += libreoffice-gtk3
 else
-       DEBHELPER_OPTIONS+= -Nlibreoffice-gtk3
+       GNOME_GTK_DEPENDS += libreoffice-gtk
 endif
 
 ifeq "$(ENABLE_EVO2)" "n"
@@ -1612,7 +1614,6 @@ debian/control: $(wildcard debian/control*in) $(SOURCE_TREE)/bin/lo-xlate-lang  
 	sed -e "s#%$(DEB_VENDOR)=\([^%]*\)%#, \1#g#" \
 	    -e "s#%[A-Za-z]*=[^%]*%##g#" \
 	    -e "s#%BUILD_DEPS_INDEP%#$(strip $(BUILD_DEPS_INDEP))#g" \
-	    -e "s#@PYTHON_VERSION_CONTROL@#$(PYTHON_VERSION_CONTROL)#g" \
 	    -e "s#@BUGS@#$(BUGS)#g" \
 	    < debian/control.in > debian/control
 
@@ -1741,6 +1742,9 @@ endif
 ifeq "$(PACKAGE_LOKIT)" "y"
 	cat debian/control.lokit.in >> debian/control
 endif
+ifeq "$(BUILD_GTK3)" "y"
+	cat debian/control.gtk3.in >> debian/control
+endif
 ifeq "$(BUILD_KDE)" "y"
 	cat debian/control.kde.in >> debian/control
 endif
@@ -1813,10 +1817,6 @@ endif
 
 ifeq (4.4,$(SYSTEM_GCC_VERSION))
 	perl -pi -e 's/flex \|/flex (>= 2.5.25-7) |/' debian/control
-endif
-
-ifeq "$(BUILD_TEST_PACKAGE)" "y"
-	perl -pi -e 's/Vcs-Git:/XS-Testsuite: autopkgtest\nVcs-Git:/' debian/control
 endif
 
 	python debian/scripts/joinctrl.py < debian/control > debian/control.tmp
@@ -1948,11 +1948,12 @@ $(STAMP_DIR)/build-indep:
 
 	rm -f config.status autogen.lastrun
 
+ifneq "$(BUILD_ISOS)" "en-US"
 ifneq "$(JESSIE_BACKPORT)" "y"
-	# FIXME: I have no f* ideal what breaks here. Maybe gcc5/libstdc++6 transition related?
+ifeq "$(ENABLE_HELP)" "y"
+	# FIXME: I have no f* idea what breaks here. Maybe gcc5/libstdc++6 transition related?
 	# Without this helpex gives loads of "parser errors" and the localized help is broken. Interestingly one needs
 	# all the three internally to fi^Wworkaround this
-ifeq "$(ENABLE_HELP)" "y"
 	$(MAKE) l10ntools.clean
 	PATH=$(BUILD_PATH) LD_LIBRARY_PATH=$(BUILD_LD_LIBRARY_PATH) \
 	./autogen.sh $(filter-out --with-system-boost,$(filter-out --with-system-icu,$(filter-out --with-system-expat,$(CONFIGURE_FLAGS)))) --disable-ccache --disable-collada --disable-ext-mariadb-connector --disable-firebird-sdbc
@@ -1966,6 +1967,7 @@ ifeq "$(ENABLE_HELP)" "y"
 	cd external/expat && $(MAKE)
   endif
 	$(MAKE) l10ntools
+endif
 endif
 endif
 
@@ -1985,6 +1987,7 @@ ifeq "$(BUILD_TEST_PACKAGE)" "y"
   endif
 endif
 
+ifneq "$(BUILD_ISOS)" "en-US"
 ifneq "$(JESSIE_BACKPORT)" "y"
 ifeq "$(ENABLE_HELP)" "y"
 	# cleanup...
@@ -1999,6 +2002,7 @@ ifeq "$(ENABLE_HELP)" "y"
 	# picks up a dependency on internal icu, rebuild
 	$(MAKE) i18nutil.clean && $(MAKE) i18nutil
   endif
+endif
 endif
 endif
 
@@ -2567,6 +2571,7 @@ endif
 ifeq "$(BUILD_GTK)" "y"
 	mkdir -p -m755 $(PKGDIR)-gtk/$(OODIR)/share
 	mv $(PKGDIR)-gnome/$(OODIR)/share/xdg $(PKGDIR)-gtk/$(OODIR)/share
+	mv $(PKGDIR)-core/$(OODIR)/program/liblibreofficekitgtk.so $(PKGDIR)-gtk/$(OODIR)/program/
   ifeq "$(ENABLE_GIO)" "y"
 	mv $(PKGDIR)-gtk/$(OODIR)/program/libucpgio1lo.so \
 		$(PKGDIR)-gnome/$(OODIR)/program/
@@ -2919,10 +2924,6 @@ else
 	rm -f $(PKGDIR)-common/$(OODIR)/share/fonts/truetype/opens___.ttf
 endif
 
-	# convert icons to xpm; we need them for the Debian menu policy...
-	cd $(PKGDIR)-common/usr/share/icons/hicolor/32x32/apps && \
-	  for x in *.png; do convert $$x `basename $$x .png`.xpm; done
-
 	# remove extra license files
 	rm -rf $(PKGDIR)-common/$(OODIR)/licenses
 	rm -f $(PKGDIR)-common/$(OODIR)/share/readme/LICENSE*
@@ -3168,7 +3169,6 @@ $(STAMP_DIR)/binary-arch: $(STAMP_DIR)/install-arch debian/control $(STAMP_DIR)/
 	done
 	dh_installchangelogs -s -k
 	dh_installmime -s
-	dh_installmenu -s
 ifeq "$(ENABLE_JAVA)" "y"
   ifeq "$(BUILD_JARS_NATIVE)" "y"
 	dh_nativejava -plibreoffice-gcj -o
@@ -3179,7 +3179,6 @@ endif
 	dh_lintian -s
 	dh_bugfiles -s -A
 	dh_link -s -X.desktop
-	dh_fixperms -s
 ifeq "$(BUILD_DBG_PACKAGE)" "y"
 	dh_strip -s -Nure -Nuno-libs3 --dbg-package=libreoffice-dbg
 	dh_strip -pure --dbg-package=ure-dbg
@@ -3212,6 +3211,7 @@ endif
 else
 	dh_strip -s
 endif
+	dh_fixperms -s
 	dh_icons -s
 	dh_compress -s -X.py -X.mk -X.sxd
 	dh_makeshlibs -puno-libs3 -V"uno-libs3 (>= $(shell grep UREPACKAGEVERSION $(SOURCE_TREE)/instsetoo_native/util/openoffice.lst | awk '{ print $$2 }' | cut -d. -f1-3)~), ure" -- -c0 -d -V -v`echo $(BINARY_VERSION) | cut -d: -f2`
@@ -3326,6 +3326,7 @@ endif
 		-V'avmedia-be-depends=$(AVMEDIA_BE_DEPENDS)' \
 		-V'dejavu-depends=$(DEJAVU_DEPENDS)' \
 		-V'opencl-sug=$(OPENCL_SUGGESTS)' \
+		-V'gnome-gtk-depends=$(GNOME_GTK_DEPENDS)' \
 		-V'dbg-dbg-suggests=$(DBG_DBG_SUGGESTS)' \
 		-v$(BINARY_VERSION)
 ifeq "$(ENABLE_JAVA)" "y"
