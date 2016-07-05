@@ -28,3 +28,4 @@
 debian/pom.juh.xml --no-parent --has-package-version
 debian/pom.jurt.xml --no-parent --has-package-version
 debian/pom.ridl.xml --no-parent --has-package-version
+debian/pom.unoloader.xml --no-parent --has-package-version
