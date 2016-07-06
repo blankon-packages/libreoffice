@@ -1,6 +1,7 @@
 libreoffice (1:5.1.4~rc2-2blankon1) tambora; urgency=medium
 
   * New Upstream Release. 
+  & Add 100_blankon_menus.diff
 
  -- Rahman Yusri Aftian <aftian@di.blankon.in>  Wed, 06 Jul 2016 00:35:33 +0700
 

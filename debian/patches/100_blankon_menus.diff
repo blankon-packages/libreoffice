@@ -1,0 +1,24 @@
+diff -Naur libreoffice-5.1.4~rc2.orig/sysui/desktop/menus/draw.desktop libreoffice-5.1.4~rc2/sysui/desktop/menus/draw.desktop
+--- libreoffice-5.1.4~rc2.orig/sysui/desktop/menus/draw.desktop	2016-07-05 22:53:03.817196618 +0700
++++ libreoffice-5.1.4~rc2/sysui/desktop/menus/draw.desktop	2016-07-06 11:28:35.464736589 +0700
+@@ -20,7 +20,7 @@
+ Terminal=false
+ Icon=draw
+ Type=Application
+-Categories=Office;FlowChart;Graphics;2DGraphics;VectorGraphics;X-Red-Hat-Base;X-MandrivaLinux-Office-Drawing;
++Categories=FlowChart;Graphics;2DGraphics;VectorGraphics;X-Red-Hat-Base;X-MandrivaLinux-Office-Drawing;
+ Exec=${UNIXBASISROOTNAME} --draw %%FILE%%
+ MimeType=application/vnd.oasis.opendocument.graphics;application/vnd.oasis.opendocument.graphics-flat-xml;application/vnd.oasis.opendocument.graphics-template;application/vnd.sun.xml.draw;application/vnd.sun.xml.draw.template;application/vnd.visio;application/x-wpg;application/vnd.corel-draw;application/vnd.ms-publisher;image/x-freehand;application/clarisworks;application/x-pagemaker;
+ Name=%PRODUCTNAME Draw
+diff -Naur libreoffice-5.1.4~rc2.orig/sysui/desktop/menus/math.desktop libreoffice-5.1.4~rc2/sysui/desktop/menus/math.desktop
+--- libreoffice-5.1.4~rc2.orig/sysui/desktop/menus/math.desktop	2016-07-05 22:53:03.817196618 +0700
++++ libreoffice-5.1.4~rc2/sysui/desktop/menus/math.desktop	2016-07-06 11:29:05.343370954 +0700
+@@ -21,7 +21,7 @@
+ NoDisplay=false
+ Icon=math
+ Type=Application
+-Categories=Office;Spreadsheet;Education;Science;Math;X-Red-Hat-Base;X-MandrivaLinux-Office-Other;
++Categories=Spreadsheet;Education;Science;Math;X-Red-Hat-Base;X-MandrivaLinux-Office-Other;
+ Exec=${UNIXBASISROOTNAME} --math %%FILE%%
+ MimeType=application/vnd.oasis.opendocument.formula;application/vnd.sun.xml.math;application/vnd.oasis.opendocument.formula-template;text/mathml;application/mathml+xml;
+ Name=%PRODUCTNAME Math
