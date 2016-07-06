@@ -35,4 +35,4 @@ bash-completion-dir.diff
 OPENCL_DLL_NAME.diff
 no-packagekit-per-default.diff
 kde4-cflags-no-usr-include.diff
-mdds-1.2.0.diff
+#mdds-1.2.0.diff
