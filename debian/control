@@ -4,41 +4,31 @@ Priority: optional
 Maintainer: BlankOn Developers <blankon-dev@googlegroups.com>
 XSBC-Original-Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
 Uploaders: Rene Engelhard <rene@debian.org>, Chris Halls <halls@debian.org>
-Build-Depends: ant (>= 1.7.0) [!mips64],
-               ant-optional (>= 1.7.0) [!mips64],
+Build-Depends: ant (>= 1.7.0),
+               ant-optional (>= 1.7.0),
                autoconf,
                automake,
                bc,
-               binutils (>= 2.23) [mips mipsel],
                bison,
                bzip2,
                chromium (>= 39.0.2171.71-1) [i386 amd64],
                coinor-libcoinmp-dev (>= 1.7.6+dfsg1-2),
                coinor-libcoinutils-dev (>= 2.9.15-3.1),
                debhelper (>= 9.20160114),
-               default-jdk (>= 1:1.7-48) [ia64],
-               default-jdk (>= 2:1.7-52.1) [kfreebsd-any],
-               default-jdk [!mips64],
                dh-python,
                dpkg-dev (>= 1.18.2~),
                fastjar,
-               firebird-dev (>= 2.5.2.26540.ds4-2) [!hppa !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc],
                flex (>= 2.3.35),
                fontconfig,
                fonts-crosextra-carlito,
                fonts-liberation,
-               g++-5 [hppa ia64 s390 sparc],
-               g++-mingw-w64-i686 [i386 amd64],
-               gcc-5 [hppa ia64 s390 sparc],
-               gcj-jdk [hppa ia64 s390 sparc],
-               gcj-native-helper [hppa ia64 s390 sparc],
-               gdb [!kfreebsd-any],
+               gdb,
                gettext,
                gobject-introspection (>= 1.32.0),
                gperf,
                java-common (>= 0.49),
                javahelper (>= 0.37~),
-               junit4 (>= 4.8.2-2) [!kfreebsd-any],
+               junit4 (>= 4.8.2-2),
                kdelibs5-dev (>= 4:4.3.4),
                libabw-dev (>= 0.1),
                libarchive-zip-perl,
@@ -49,14 +39,13 @@ Build-Depends: ant (>= 1.7.0) [!mips64],
                libboost-filesystem-dev (>= 1.58),
                libboost-iostreams-dev (>= 1.58),
                libboost-system-dev (>= 1.58),
-               libc0.1 (>= 2.10.2-7) [kfreebsd-any],
-               libc6 (>= 2.17-6) [mips mipsel],
+               libbz2-dev,
                libcairo2-dev,
                libcdr-dev (>= 0.1),
                libclucene-dev (>= 2.3.3.4-4.1),
                libcmis-dev (>= 0.5.0-3),
                libcollada2gltfconvert-dev (>= 20140924-2)[amd64 i386],
-               libcppunit-dev (>= 1.13.2-2.1),
+ \              libcppunit-dev (>= 1.13.2-2.1),
                libcups2-dev,
                libcurl4-gnutls-dev,
                libdbus-glib-1-dev (>= 0.70),
@@ -70,7 +59,6 @@ Build-Depends: ant (>= 1.7.0) [!mips64],
                libfontconfig1-dev,
                libfreehand-dev (>= 0.1),
                libfreetype6-dev (>= 2.2.0),
-               libgcj-common (>= 1:4.4.1) [hppa ia64 s390 sparc],
                libgirepository1.0-dev (>= 1.32),
                libglew-dev,
                libglib2.0-dev (>= 2.15.0),
@@ -82,7 +70,7 @@ Build-Depends: ant (>= 1.7.0) [!mips64],
                libgtk-3-dev (>= 3.8~),
                libgtk2.0-dev (>= 2.10),
                libharfbuzz-dev (>= 0.9.18),
-               libhsqldb1.8.0-java (>> 1.8.0.10) [!mips64],
+               libhsqldb1.8.0-java (>> 1.8.0.10),
                libhunspell-dev (>= 1.1.5-2),
                libhyphen-dev (>= 2.4),
                libice-dev,
@@ -95,8 +83,6 @@ Build-Depends: ant (>= 1.7.0) [!mips64],
                libmdds-dev (>= 1.2),
                libmspub-dev (>= 0.1),
                libmwaw-dev (>= 0.3.1),
-               libmysqlclient-dev,
-               libmysqlcppconn-dev (>= 1.1.3-7),
                libmythes-dev (>= 2:1.2),
                libneon27-gnutls-dev,
                libnss3-dev (>= 3.12.3),
@@ -117,7 +103,6 @@ Build-Depends: ant (>= 1.7.0) [!mips64],
                libsm-dev,
                libssl-dev (>= 0.9.8),
                libsuitesparse-dev (>= 1:3.4.0),
-               libvigraimpex-dev,
                libvisio-dev (>= 0.1),
                libvlc5,
                libwpd-dev (>= 0.10),
@@ -152,24 +137,24 @@ Build-Depends: ant (>= 1.7.0) [!mips64],
                zlib1g-dev
 Build-Depends-Indep: doxygen (>= 1.8.4),
                      fdupes,
-                     libbase-java [!hppa !ia64 !mips64 !s390 !sparc],
+                     g++-mingw-w64-i686,
+                     libbase-java,
                      libbsh-java,
                      libcommons-logging-java [!mips64],
-                     libflute-java (>= 1.1.6) [!hppa !ia64 !mips64 !s390 !sparc],
-                     libfonts-java (>= 1.1.6) [!hppa !ia64 !mips64 !s390 !sparc],
-                     libformula-java (>= 1.1.7) [!hppa !ia64 !mips64 !s390 !sparc],
-                     liblayout-java (>= 0.2.10) [!hppa !ia64 !mips64 !s390 !sparc],
-                     libloader-java (>= 1.1.6) [!hppa !ia64 !mips64 !s390 !sparc],
-                     libpentaho-reporting-flow-engine-java (>= 0.9.4) [!hppa !ia64 !mips64 !s390 !sparc],
-                     librepository-java (>= 1.1.6) [!hppa !ia64 !mips64 !s390 !sparc],
-                     libsac-java [!hppa !ia64 !mips64 !s390 !sparc],
-                     libserializer-java (>= 1.1.6) [!hppa !ia64 !mips64 !s390 !sparc],
-                     libxml-java (>= 1.1.6) [!hppa !ia64 !mips64 !s390 !sparc]
+                     libflute-java (>= 1.1.6),
+                     libfonts-java (>= 1.1.6),
+                     libformula-java (>= 1.1.7),
+                     liblayout-java (>= 0.2.10),
+                     libloader-java (>= 1.1.6),
+                     libpentaho-reporting-flow-engine-java (>= 0.9.4),
+                     librepository-java (>= 1.1.6),
+                     libsac-java,
+                     libserializer-java (>= 1.1.6),
+                     libxml-java (>= 1.1.6) 
 Build-Conflicts: amd-libopencl1,
                  ant (= 1.8.0-1) [hppa ia64 s390 sparc],
                  ant (= 1.8.0-2) [hppa ia64 s390 sparc],
                  ant (= 1.8.0-3) [hppa ia64 s390 sparc],
-                 firebird-dev (>= 3.0),
                  flex (= 2.5.34-1) [amd64],
                  g++-4.6 (= 4.6.1-10),
                  g++-4.6 (= 4.6.1-11),
@@ -181,7 +166,6 @@ Build-Conflicts: amd-libopencl1,
                  libc6-dev (= 2.6.1-3) [i386 amd64],
                  libc6-dev (= 2.6.1-4) [i386 amd64],
                  libcairo2 (= 1.4.8-1),
-                 libmariadbclient-dev,
                  libxul-dev (= 1.8.0.13~pre070720-0etch1),
                  nvidia-glx-dev,
                  nvidia-glx-legacy-dev,
@@ -194,11 +178,10 @@ Bugs:
 Homepage: http://www.libreoffice.org
 
 Package: libreoffice
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Section: metapackages
 Pre-Depends: ${misc:Pre-Depends}
-Depends: fonts-sil-gentium-basic,
-         libreoffice-base [!mips64],
+Depends: libreoffice-base [!mips64],
          libreoffice-calc,
          libreoffice-core (= ${binary:Version}),
          libreoffice-draw,
@@ -211,7 +194,20 @@ Depends: fonts-sil-gentium-basic,
          ${java-common-depends},
          ${misc:Depends},
          ${pyuno-depends}
-Recommends: fonts-liberation | ttf-mscorefonts-installer, libpaper-utils
+Recommends: fonts-crosextra-caladea,
+            fonts-crosextra-carlito,
+            fonts-linuxlibertine,
+            fonts-sil-gentium-basic,
+            libreoffice-librelogo,
+            libreoffice-nlpsolver,
+            libreoffice-ogltrans,
+            libreoffice-pdfimport,
+            libreoffice-report-builder [!hppa !ia64 !mips64 !s390 !sparc],
+            libreoffice-script-provider-bsh,
+            libreoffice-script-provider-js,
+            libreoffice-script-provider-python,
+            libreoffice-sdbc-postgresql,
+            libreoffice-wiki-publisher
 Suggests: cups-bsd,
           hunspell-dictionary,
           hyphen-hyphenation-patterns,
@@ -245,6 +241,8 @@ Description: office productivity suite (metapackage)
   * libreoffice-draw: Drawing
   * libreoffice-base: Database
   * libreoffice-math: Equation editor
+ It also recommends additional packages (e.g. fonts) in order to match an
+ upstream LibreOffice install as closely as possible.
  .
  You can extend the functionality of LibreOffice by installing these
  packages:
@@ -254,8 +252,7 @@ Description: office productivity suite (metapackage)
   * libreoffice-help-*: User help
   * mythes-*: Thesauri for the use with LibreOffice
   * hyphen-*: Hyphenation patterns for LibreOffice
-  * libreoffice-gtk: Gtk UI Plugin, GNOME File Picker support,
-    QuickStarter for GNOMEs notification area
+  * libreoffice-gtk(2|3): Gtk UI Plugin, GNOME File Picker support
   * libreoffice-gnome: GIO backend
   * unixodbc: ODBC database support
   * cups-bsd: Allows LibreOffice to detect your CUPS printer queues
@@ -322,13 +319,14 @@ Description: office productivity suite -- Indic language packages
  indic languages.
 
 Package: libreoffice-core
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Depends: fontconfig,
          fonts-opensymbol,
          libreoffice-common (>> ${base-version}),
          ure (>= 4.2~),
          ${misc:Depends},
          ${shlibs:Depends}
+Recommends: libpaper-utils
 Breaks: cli-uno-bridge (<< 1:3.0.0~dev300m22),
         hunspell-ar (<< 0.0.0+20080110-1.1),
         hunspell-da (<< 1:3.1.0-3),
@@ -358,7 +356,8 @@ Breaks: cli-uno-bridge (<< 1:3.0.0~dev300m22),
         libreoffice-evolution (<< ${binary:Version}),
         libreoffice-evolution (<< 1:3.4.1~),
         libreoffice-gnome (<< ${binary:Version}),
-        libreoffice-gtk (<< ${binary:Version}),
+        libreoffice-gtk2 (<< ${binary:Version}),
+        libreoffice-gtk3 (<< ${binary:Version}),
         libreoffice-impress (<< ${binary:Version}),
         libreoffice-kab (<< 1:3.4.1~),
         libreoffice-kde (<< ${binary:Version}),
@@ -417,10 +416,7 @@ Breaks: cli-uno-bridge (<< 1:3.0.0~dev300m22),
         myspell-sw (<< 1:3.1.0-3),
         myspell-th (<< 1:3.1.0-3),
         myspell-tl (<< 0.4-0-5)
-Conflicts: cacao-oj6-jre,
-           libreoffice-filter-binfilter,
-           libreoffice-report-builder-bin [kfreebsd-i386 kfreebsd-amd64],
-           libreoffice-unbundled
+Conflicts: cacao-oj6-jre, libreoffice-filter-binfilter, libreoffice-unbundled
 Provides: libreoffice-bundled
 Replaces: libreoffice-calc (<< 1:3.3.2-5),
           libreoffice-common (<< 1:4.4.0~rc3-1),
@@ -442,7 +438,9 @@ Suggests: libreoffice-style-breeze,
           libreoffice-style-oxygen,
           libreoffice-style-sifr,
           libreoffice-style-tango
-Recommends: ${pyuno-depends}, ${textcat-data-recommends}
+Recommends: fonts-liberation | ttf-mscorefonts-installer,
+            ${pyuno-depends},
+            ${textcat-data-recommends}
 Conflicts: broffice,
            libreoffice-filter-mobiledev,
            libreoffice-l10n-4.3,
@@ -498,7 +496,7 @@ Description: office productivity suite -- arch-independent Java support files
  the Java support for LibreOffice (Java classes, scripts, config snippets).
 
 Package: libreoffice-writer
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-base-core (= ${binary:Version}) [!mips64],
          libreoffice-core (= ${binary:Version}),
@@ -519,7 +517,7 @@ Description: office productivity suite -- word processor
  This package contains the wordprocessor component for LibreOffice.
 
 Package: libreoffice-calc
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-base-core (= ${binary:Version}) [!mips64],
          libreoffice-core (= ${binary:Version}),
@@ -534,7 +532,7 @@ Description: office productivity suite -- spreadsheet
  This package contains the spreadsheet component for LibreOffice.
 
 Package: libreoffice-impress
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core (= ${binary:Version}),
          libreoffice-draw (= ${binary:Version}),
@@ -549,11 +547,13 @@ Description: office productivity suite -- presentation
  This package contains the presentation component for LibreOffice.
 
 Package: libreoffice-draw
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
+Replaces: libreoffice-impress (<< 1:5.2.0-2)
+Breaks: libreoffice-impress (<< 1:5.2.0-2)
 Description: office productivity suite -- drawing
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
@@ -561,7 +561,7 @@ Description: office productivity suite -- drawing
  This package contains the drawing component for LibreOffice.
 
 Package: libreoffice-math
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: fonts-opensymbol,
          libreoffice-core (= ${binary:Version}),
@@ -574,7 +574,7 @@ Description: office productivity suite -- equation editor
  This package contains the equation editor component for LibreOffice.
 
 Package: libreoffice-base-core
-Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
+Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x sparc64 kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -592,7 +592,7 @@ Description: office productivity suite -- shared library
  install libreoffice-base.
 
 Package: libreoffice-base
-Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
+Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x sparc64 kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
 Pre-Depends: ${misc:Pre-Depends}
 Section: database
 Depends: libreoffice-base-core (= ${binary:Version}),
@@ -694,26 +694,8 @@ Description: office productivity suite -- Galaxy (Default) symbol style
  MS Windows (tm) and when not using GNOME or KDE, needs to be manually
  enabled in the LibreOffice option menu.
 
-Package: libreoffice-gtk
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
-Pre-Depends: ${misc:Pre-Depends}
-Depends: libreoffice-core (= ${binary:Version}),
-         ${misc:Depends},
-         ${shlibs:Depends}
-Recommends: libreoffice-style-tango
-Section: gnome
-Enhances: libreoffice
-Conflicts: libgtk2.0-0 (= 2.12.10-1) [amd64]
-Description: office productivity suite -- GTK+ integration
- LibreOffice is a full-featured office productivity suite that provides
- a near drop-in replacement for Microsoft(R) Office.
- .
- This package contains the Gtk plugin for drawing LibreOffices widgets
- with Gtk+ and a Gtk/GNOMEish File Picker and print dialog when running
- under GNOME. It also contains a QuickStarter for the "notification area".
-
 Package: libreoffice-gnome
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -737,7 +719,7 @@ Description: office productivity suite -- GNOME integration
 
 Package: python3-uno
 Section: python
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Enhances: libreoffice
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -757,7 +739,7 @@ Description: Python-UNO bridge
 Homepage: http://udk.openoffice.org/python/python-bridge.html
 
 Package: libreoffice-officebean
-Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
+Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x sparc64 kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
 Section: java
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core (= ${binary:Version}),
@@ -840,7 +822,7 @@ Description: JavaScript script support provider for LibreOffice scripting framew
 Package: libreoffice-pdfimport
 Section: misc
 Priority: extra
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Breaks: libreoffice-common (<< 1:3.5~), libreoffice-core (<< 1:3.5~)
@@ -853,7 +835,7 @@ Description: PDF Import component for LibreOffice
 
 Package: libreoffice-avmedia-backend-gstreamer
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Replaces: libreoffice-core (<< 1:4.2~)
@@ -867,7 +849,7 @@ Description: GStreamer backend for LibreOffice
 
 Package: libreoffice-avmedia-backend-vlc
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core,
          ${libvlc-dep} (>= 2.0.8),
@@ -881,19 +863,6 @@ Description: VLC backend for LibreOffice
  This package contains a VLC backend for LibreOffices avmedia component
  to play audio/video.
 
-Package: libreoffice-sdbc-firebird
-Pre-Depends: ${misc:Pre-Depends}
-Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel armhf i386 ia64 kfreebsd-amd64 kfreebsd-i386 mipsel mips64el ppc64el
-Section: database
-Enhances: libreoffice-base-drivers
-Description: Firebird SDBC driver for LibreOffice
- LibreOffice is a full-featured office productivity suite that provides
- a near drop-in replacement for Microsoft(R) Office.
- .
- The Firebird SDBC Driver allows one to use the Firebird database from
- LibreOffice without any wrapper layer such as ODBC or JDBC.
-
 Package: libreoffice-sdbc-hsqldb
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core,
@@ -903,7 +872,7 @@ Depends: libreoffice-core,
          ${misc:Depends},
          ${shlibs:Depends}
 Replaces: libreoffice-base (<< 1:4.2~)
-Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
+Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x sparc64 kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
 Section: database
 Enhances: libreoffice-base-drivers
 Description: HSQLDB SDBC driver for LibreOffice
@@ -916,14 +885,14 @@ Description: HSQLDB SDBC driver for LibreOffice
 Package: libreoffice-base-drivers
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
-Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
+Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x sparc64 kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
 Section: database
 Suggests: libjtds-java,
           libreoffice-mysql-connector | libmyodbc | libmysql-java,
           libreoffice-sdbc-postgresql | odbc-postgresql | libpg-java,
           libsqliteodbc | tdsodbc | mdbtools
 Recommends: libreoffice-sdbc-firebird,
-            libreoffice-sdbc-hsqldb [alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc]
+            libreoffice-sdbc-hsqldb [alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x sparc64 kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc]
 Replaces: libreoffice-base (<< 1:4.3.0-3), libreoffice-core (<< 1:4.2~)
 Breaks: libreoffice-base (<< 1:4.3.0-3)
 Description: Database connectivity drivers for LibreOffice
@@ -1693,7 +1662,7 @@ Depends: libreoffice-common, locales | locales-all, ${misc:Depends}
 Recommends: libreoffice-core (>> ${base-version}) | language-support-translations-fi
 Provides: libreoffice-l10n-${help-l10n-virtual-version}
 Suggests: hunspell-dictionary-fi | myspell-dictionary-fi | libreoffice-spellcheck-fi,
-          hyphen-fi,
+          hyphen-fi | libreoffice-hyphenation-fi,
           libreoffice-grammarcheck-fi,
           libreoffice-help-fi,
           mythes-fi
@@ -4227,7 +4196,7 @@ Description: office productivity suite -- Chinese_traditional help
 
 Package: uno-libs3
 Section: libs
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Replaces: ure (<< 1:5.0.0~rc2-1)
 Breaks: libreoffice-core (<< 1:4.3.0~), ure (<< 4.1.2~)
@@ -4250,7 +4219,7 @@ Description: LibreOffice UNO runtime environment -- public shared libraries
 
 Package: ure
 Section: libs
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Depends: uno-libs3 (= ${ure:Version}), ${misc:Depends}, ${shlibs:Depends}
 Suggests: java5-runtime
 Conflicts: cli-uno-bridge (<< 1:3.0.0~dev300m22)
@@ -4272,7 +4241,7 @@ Description: LibreOffice UNO runtime environment
 Package: libreoffice-ogltrans
 Section: graphics
 Priority: extra
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-common,
          libreoffice-core,
@@ -4336,7 +4305,7 @@ Description: LibreOffice component for building database reports
 
 Package: libreoffice-report-builder-bin
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386
+Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x sparc64 kfreebsd-amd64 kfreebsd-i386
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-base, libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
 Description: LibreOffice component for building database reports -- libraries
@@ -4345,6 +4314,25 @@ Description: LibreOffice component for building database reports -- libraries
  .
  This package contains some architecture-dependent support libraries
  (librpt*.so) for the report builder component.
+
+Package: libreoffice-nlpsolver
+Architecture: all
+Depends: libreoffice-calc (>= 1:3.0~),
+         libreoffice-core (>= 1:3.3~),
+         libreoffice-java-common,
+         ${java-runtime-depends},
+         ${misc:Depends}
+Section: math
+Priority: extra
+Description: "Solver for Nonlinear Programming" extension for LibreOffice
+ By default LibreOffice Calc ships with a solver engine for linear
+ programming only. This allows the optimization of models to a certain degree.
+ However, if the formulas or constraints become more complex,
+ nonlinear programming is required. That missing gap is now filled by the
+ Solver for Nonlinear Programming extension.
+ .
+ Currently it incorporates two Evolutionary Algorithms which are able to
+ handle floating point and integer variables as well as nonlinear constraints.
 
 Package: fonts-opensymbol
 Section: fonts
@@ -4361,9 +4349,10 @@ Description: OpenSymbol TrueType font
 
 Package: libreoffice-dev
 Section: devel
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core (= ${binary:Version}),
+         libreoffice-dev-common (= ${source:Version}),
          ${idlc-cpp-depends},
          ${misc:Depends},
          ${shlibs:Depends}
@@ -4372,14 +4361,28 @@ Suggests: libmythes-dev, libreoffice-dev-doc, libreofficekit-dev
 Replaces: libreoffice-common (<< 1:4.1.0~beta1),
           libreoffice-core (<< 1:4.1.0~beta1)
 Conflicts: libreoffice-dev-doc (<= 1:5.0.3~rc1-2)
-Description: office productivity suite -- SDK
+Description: office productivity suite -- SDK -- architecture-dependent parts
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains the files needed to build plugins/add-ons for
- LibreOffice (includes, IDL files, build tools, ...).
+ This package contains the (architecture-dependent) files needed to build
+ plugins/add-ons for LibreOffice (build tools, libraries, arch-dependent
+ includes, ...).
  .
  It also contains the gengal and ui-previewer utilities.
+
+Package: libreoffice-dev-common
+Section: devel
+Architecture: all
+Depends: ${misc:Depends}
+Replaces: libreoffice-dev (<< 1:5.2.0~)
+Breaks: libreoffice-dev (<< 1:5.2.0~)
+Description: office productivity suite -- SDK -- architecture-independent parts
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the (architecture-independent) files needed to build
+ plugins/add-ons for LibreOffice (includes, IDL files, ...)
 
 Package: libreoffice-dev-doc
 Section: doc
@@ -4402,7 +4405,7 @@ Section: libdevel
 Architecture: all
 Depends: ${misc:Depends}
 Suggests: gir1.2-lokdocview-0.1, libgtk-3-dev
-Recommends: libreoffice-core
+Recommends: libreoffice-core, libreofficekit-data
 Description: LibreOfficeKit -- headers
  LibreOfficeKit can be used for accessing LibreOffice functionality through
  C/C++, without any need to use UNO.
@@ -4412,8 +4415,8 @@ Description: LibreOfficeKit -- headers
  .
  This package contains the headers needed for using LibreOfficeKit.
 
-Package: libreoffice-gtk3
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Package: libreoffice-gtk2
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -4421,26 +4424,98 @@ Depends: libreoffice-core (= ${binary:Version}),
 Recommends: libreoffice-style-tango
 Section: gnome
 Enhances: libreoffice
-Description: office productivity suite -- GTK+ 3.0 integration
+Replaces: libreoffice-gtk (<< 1:5.2.0~)
+Breaks: libreoffice-gtk (<< 1:5.2.0~)
+Conflicts: libgtk2.0-0 (= 2.12.10-1) [amd64]
+Description: office productivity suite -- GTK+ 2 integration
  LibreOffice is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
  This package contains the Gtk plugin for drawing LibreOffices widgets
- with Gtk+ 3.0 and Gtk/GNOMEish print dialog when running under GNOME.
- It also contains a (basic) GTK+ document viewer widget.
+ with Gtk+ 2 and a Gtk/GNOMEish File Picker and print dialog when running
+ under GNOME.
+
+Package: libreoffice-gtk
+Architecture: all
+Section: oldlibs
+Priority: extra
+Pre-Depends: ${misc:Pre-Depends}
+Depends: libreoffice-gtk2, libreoffice-systray, ${misc:Depends}
+Description: transitional package to upgrade to libreoffice-gtk2/-systray
+ This package used to contain the Gtk2 integration (and the systray
+ "Quickstarter") for LibreOffice.
+ .
+ It has been renamed to libreoffice-gtk2 (and the systray "Quickstarter"
+ split out to libreoffice-systray).
+ .
+ You can safely remove this package.
+
+Package: libreoffice-systray
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Section: misc
+Priority: extra
+Replaces: libreoffice-common (<< 1:5.1.2-3), libreoffice-gtk (<< 1:5.1.2-3)
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: LibreOffice "Quickstarter" for the desktop notification area
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package provides a "QuickStarter" for the notification area of desktops.
+
+Package: libreoffice-gtk3
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Pre-Depends: ${misc:Pre-Depends}
+Depends: libreoffice-core (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: libreoffice-style-tango
+Suggests: libreofficekit-data
+Section: gnome
+Enhances: libreoffice
+Description: office productivity suite -- GTK+ 3 integration
+ LibreOffice is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains the Gtk plugin for drawing LibreOffices widgets
+ with Gtk+ 3 and Gtk/GNOMEish print dialog when running under GNOME.
 
 Package: gir1.2-lokdocview-0.1
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Section: introspection
-Depends: libreoffice-gtk3 (= ${binary:Version}), ${gir:Depends}, ${misc:Depends}
+Depends: liblibreofficekitgtk (= ${binary:Version}),
+         ${gir:Depends},
+         ${misc:Depends}
 Description: GTK3 widget wrapping LibreOffice functionality - introspection
  LOKDocView is the GTK3 widget that wraps the libreoffice functionality and
  exposes a simple API for applications to use this widget.
  .
  This package contains the Introspection data.
 
+Package: liblibreofficekitgtk
+Section: gnome
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
+Depends: libreofficekit-data, ${misc:Depends}, ${shlibs:Depends}
+Replaces: libreoffice-gtk3 (<< 1:5.2.0~)
+Breaks: libreoffice-gtk3 (<< 1:5.2.0~)
+Recommends: libreoffice-gtk3
+Description: GTK3 widget wrapping LibreOffice functionality
+ This package contains a (basic) GTK+ document viewer widget (used
+ by e.g. LOKDocView)
+
+Package: libreofficekit-data
+Architecture: all
+Section: web
+Depends: ${misc:Depends}
+Recommends: gir1.2-lokdocview-0.1
+Description: common data for LOKDocView
+ LOKDocView is the GTK3 widget that wraps the libreoffice functionality and
+ exposes a simple API for applications to use this widget.
+ .
+ This package contains architecture-independent data (e.g. the selection
+ handlers).
+
 Package: libreoffice-kde
-Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core (= ${binary:Version}),
          ${misc:Depends},
@@ -4464,7 +4539,7 @@ Description: office productivity suite -- KDE integration
 
 Package: libreoffice-sdbc-postgresql
 Section: misc
-Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
+Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x sparc64 kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-core (>= 1:3.5.0~beta), ${misc:Depends}, ${shlibs:Depends}
 Suggests: postgresql (>= 8.4)
@@ -4478,24 +4553,8 @@ Description: PostgreSQL SDBC driver for LibreOffice
  LibreOffice without any wrapper layer such as ODBC or JDBC.
 Homepage: http://wiki.documentfoundation.org/PostgreSQL-SDBC
 
-Package: libreoffice-mysql-connector
-Section: misc
-Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
-Depends: libreoffice-core, ${misc:Depends}, ${shlibs:Depends}
-Suggests: mariadb-server | mysql-server (>= 5.1)
-Conflicts: libreoffice-common (<< 1:3.5~),
-           libreoffice-core (<< 1:3.5~),
-           ure (<< 1.5.1+OOo3.1.1-15)
-Homepage: http://extensions.services.openoffice.org/en/project/mysql_connector
-Description: MariaDB/MySQL Connector extension for LibreOffice
- LibreOffice is a full-featured office productivity suite that provides
- a near drop-in replacement for Microsoft(R) Office.
- .
- The MariaDB/MySQL Connector extension allows one to use the MariaDB or MySQL
- database from LibreOffice without any wrapper layer such as ODBC or JDBC.
-
 Package: libreoffice-evolution
-Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
+Architecture: alpha amd64 arm64 armel armhf i386 m68k mips mipsel mips64el powerpc powerpcspe ppc64 ppc64el s390x sparc64 kfreebsd-amd64 kfreebsd-i386 hppa ia64 s390 sparc
 Section: gnome
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libreoffice-base,
